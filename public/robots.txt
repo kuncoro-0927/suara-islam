@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /jadwal-sholat
+Disallow: /alquranwidget
+Disallow: /widgets/
+
+Sitemap: https://islam.suara.com/sitemap.xml

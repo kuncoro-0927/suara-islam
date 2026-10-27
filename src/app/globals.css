@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .primary1 {
+    background-color: #f0fdf4;
+  }
+
+  .primary2 {
+    background-color: #059669;
+  }
+
+  .primary3 {
+    background-color: #047857;
+  }
+
+  .primary4 {
+    background-color: #065f46;
+  }
+
+  .primary5 {
+    background-color: #064e3b;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f9fafb;
+  }
+
+  .custom-select {
+    @apply py-2 px-4 border border-gray-200 rounded-xl;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23059669' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+  }
+}
+
+body {
+  background-color: #fafaf9;
+  color: #1c1917;
+}
+
+.efek-hover {
+  @apply hover:bg-emerald-50 hover:text-emerald-700 cursor-pointer transition duration-200;
+}
+
+.efek-click {
+  @apply transition duration-200 active:scale-[0.98] hover:shadow-lg cursor-pointer;
+}
+
+.efek-opacity {
+  @apply hover:opacity-80 active:opacity-60 cursor-pointer transition duration-200;
+}
