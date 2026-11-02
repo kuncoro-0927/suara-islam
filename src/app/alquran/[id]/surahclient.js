@@ -327,10 +327,10 @@ export default function SurahClient({
                 </span>
               </div>
 
-              <div className="text-[28px] flex items-center gap-2 font-semibold text-emerald-800 mt-6">
+              <div className="text-[24px] lg:text-[28px] flex items-center gap-2 font-semibold text-emerald-800 mt-6">
                 <span>{suratDetail.name_id}</span> -
                 {/* <span>{suratDetail.translation_id}</span> */}
-                <span className=" text-[34px]  leading-none">
+                <span className="text-[28px] lg:text-[34px]  leading-none">
                   {" "}
                   {suratDetail.name_short}
                 </span>
@@ -341,14 +341,14 @@ export default function SurahClient({
                   <span className="font-medium text-[rgb(108,108,108)]">
                     Golongan
                   </span>
-                  <span className="text-emerald-800 font-medium text-lg">
+                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
                     {suratDetail.revelation_id}
                   </span>
                 </div>
 
                 <div className="flex flex-col items-center justify-center">
                   <span className="font-medium text-[#6c6c6c]">Arti surah</span>
-                  <span className="text-emerald-800 font-medium text-lg">
+                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
                     {suratDetail.translation_id}
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export default function SurahClient({
                   <span className="font-medium text-[#6c6c6c]">
                     Jumlah ayat
                   </span>
-                  <span className="text-emerald-800 font-medium text-lg">
+                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
                     {suratDetail.number_of_verses}
                   </span>
                 </div>
@@ -368,7 +368,7 @@ export default function SurahClient({
                     <div className="bg-emerald-600 w-fit p-2.5 rounded-full">
                       <BookOpenLightIcon className="text-white" />
                     </div>
-                    <span className="flex md:hidden text-emerald-800 font-medium">
+                    <span className="flex text-sm md:hidden text-emerald-800 font-medium">
                       Tafsir Surah {suratDetail.name_id}
                     </span>
                   </div>
@@ -396,7 +396,7 @@ export default function SurahClient({
               <article
                 id={`ayat-${ayat.ayah}`}
                 key={ayat.ayah || index}
-                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-2 lg:my-3 p-8 transition-colors duration-200 ${
+                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-2 lg:my-3 p-6 lg:p-8 transition-colors duration-200 ${
                   isActive
                     ? "bg-emerald-100/40 backdrop-blur-md border-emerald-600"
                     : "bg-white/40 backdrop-blur-md border-black/10"
