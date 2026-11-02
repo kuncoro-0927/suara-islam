@@ -271,7 +271,7 @@ export default function HadisPerawi() {
                 <button
                   className="s duration-200 
                           flex items-center gap-1 
-                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-800 cursor-pointer
+                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
                 >
                   <IoIosArrowRoundBack className="text-xl" />
@@ -284,27 +284,27 @@ export default function HadisPerawi() {
             <div className="relative ">
               <button
                 onClick={() => setShowPerawiDropdown(!showPerawiDropdown)}
-                className={`pl-5 pr-4 py-2.5 bg-white/40 backdrop-blur-md transition-colors duration-200 flex items-center gap-2 border shadow-xs rounded-full justify-between text-sm cursor-pointer
-                   ${showPerawiDropdown ? "border-emerald-600 text-emerald-800 bg-emerald-100/40" : "border-black/10 text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800"}`}
+                className={`pl-5 pr-4 py-2.5  backdrop-blur-md transition-colors duration-200 flex items-center gap-2 border shadow-xs rounded-full justify-between text-sm cursor-pointer
+                   ${showPerawiDropdown ? "border-emerald-600 text-emerald-700 bg-emerald-100/40" : "border-black/10 text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700"}`}
               >
                 <span>{perawiCategories[selectedPerawi]?.name}</span>
                 {showPerawiDropdown ? (
-                  <IoIosArrowUp className="text-emerald-600" />
+                  <IoIosArrowUp className="text-emerald-700" />
                 ) : (
                   <IoIosArrowDown />
                 )}
               </button>
 
               {showPerawiDropdown && (
-                <div className="absolute top-full space-y-1 right-0 mt-2 p-4 w-[200px] bg-white/40 backdrop-blur-md rounded-xl border border-black/10 shadow-lg z-50 max-h-60 overflow-y-auto no-scrollbar">
+                <div className="absolute top-full space-y-1 right-0 mt-2 p-4 w-[200px] bg-white backdrop-blur-2xl rounded-xl border border-black/10 shadow-lg z-40 max-h-60 overflow-y-auto no-scrollbar">
                   {Object.entries(perawiCategories).map(([slug, info]) => (
                     <button
                       key={slug}
                       onClick={() => handlePerawiChange(slug)}
                       className={`block w-full text-left px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 text-sm  transition-colors cursor-pointer ${
                         selectedPerawi === slug
-                          ? "bg-emerald-600 text-white rounded-lg "
-                          : "hover:bg-emerald-600 hover:text-white rounded-lg text-[#6c6c6c] "
+                          ? "bg-emerald-700 text-white rounded-lg "
+                          : "hover:bg-emerald-700 hover:text-white rounded-lg text-[#6c6c6c] "
                       }`}
                     >
                       {info.name}
@@ -359,7 +359,7 @@ export default function HadisPerawi() {
                               No. {hadis.no}
                             </p>
                           )}
-                          <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
+                          <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
                             {hadis.judul || `${hadis.category} No.${hadis.no}`}
                           </h1>
                         </div>
@@ -383,7 +383,7 @@ export default function HadisPerawi() {
                     className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
                       currentPage === 1
                         ? "text-gray-500 cursor-not-allowed"
-                        : "text-emerald-800 cursor-pointer"
+                        : "text-emerald-700 cursor-pointer"
                     }`}
                   >
                     <IoIosArrowBack
@@ -400,8 +400,8 @@ export default function HadisPerawi() {
                       onClick={() => handlePageChange(page)}
                       className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
                         page === currentPage
-                          ? "bg-emerald-600 text-white ring-4 ring-emerald-100/70"
-                          : "text-[#6c6c6c] hover:bg-emerald-600 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
+                          ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
+                          : "text-[#6c6c6c] hover:bg-emerald-700 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
                       }`}
                     >
                       <span className="-translate-y-px">{page}</span>
@@ -414,7 +414,7 @@ export default function HadisPerawi() {
                     className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
                       currentPage === totalPages
                         ? " text-gray-500 cursor-not-allowed"
-                        : "text-emerald-800 cursor-pointer"
+                        : "text-emerald-700 cursor-pointer"
                     }`}
                   >
                     Next

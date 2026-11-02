@@ -120,8 +120,8 @@ export default function CityPopup({
           <div className="flex items-center gap-1 rounded-xl px-6 py-3">
             <span className="text-sm font-medium">Kota saat ini: </span>
             <div className="flex items-center">
-              <IconMapMarker size={12} className="text-emerald-600" />
-              <span className="ml-1 text-sm font-semibold text-emerald-800">
+              <IconMapMarker size={12} className="text-emerald-700" />
+              <span className="ml-1 text-sm font-semibold text-emerald-700">
                 {toTitleCase(currentCity)}
               </span>
             </div>
@@ -187,10 +187,10 @@ export default function CityPopup({
                       <div className="flex items-center">
                         <IconMapMarker
                           size={14}
-                          className="mr-3 text-emerald-600 transition-colors"
+                          className="mr-3 text-emerald-700 transition-colors"
                         />
                         <div className="flex w-full flex-row items-center justify-between">
-                          <p className="text-sm font-medium text-[#6c6c6c] transition-colors group-hover:text-emerald-800">
+                          <p className="text-sm font-medium text-[#6c6c6c] transition-colors group-hover:text-emerald-700">
                             {toTitleCase(city.lokasi)}
                           </p>
                           <p className="text-xs text-gray-500">ID: {city.id}</p>

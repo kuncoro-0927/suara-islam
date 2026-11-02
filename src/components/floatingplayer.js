@@ -147,7 +147,7 @@ export default function FloatingPlayer({
       {/* kiri: info + kontrol + progress (mengisi sisa lebar) */}
       <div className="flex min-w-0 flex-1 items-center gap-4">
         <div className="w-32 shrink-0">
-          <p className="truncate text-base font-semibold text-emerald-800 leading-tight mb-1">
+          <p className="truncate text-base font-semibold text-emerald-700 leading-tight mb-1">
             {surahName}
           </p>
           <p className="text-xs text-[#6c6c6c] font-medium">
@@ -157,7 +157,7 @@ export default function FloatingPlayer({
         </div>
 
         {/* kontrol utama */}
-        <div className="flex shrink-0 items-center gap-1 text-emerald-600 sm:gap-2">
+        <div className="flex shrink-0 items-center gap-1 text-emerald-700 sm:gap-2">
           <button
             onClick={onPrev}
             disabled={!hasPrev}
@@ -170,7 +170,7 @@ export default function FloatingPlayer({
           <button
             onClick={onToggle}
             aria-label={isPlaying ? "Jeda" : "Putar"}
-            className="rounded-full bg-emerald-600 p-2.5 text-white hover:bg-emerald-700 cursor-pointer"
+            className="rounded-full bg-emerald-700 p-2.5 text-white hover:bg-emerald-700 cursor-pointer"
           >
             {isPlaying ? (
               <TbPlayerPauseFilled size={18} />
@@ -206,8 +206,8 @@ export default function FloatingPlayer({
               background: `linear-gradient(to right, #059669 ${progress}%, #d1fae5 ${progress}%)`,
             }}
             className="h-1 min-w-0 flex-1 cursor-pointer appearance-none rounded-full outline-none
-          [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-600
-          [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-600"
+          [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
+          [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700"
           />
           <span className="w-9 shrink-0 text-[11px] tabular-nums text-gray-500">
             {formatTime(duration)}
@@ -216,7 +216,7 @@ export default function FloatingPlayer({
       </div>
 
       {/* kanan: skip 10 detik, volume, tutup (lebar tetap) */}
-      <div className="flex shrink-0 items-center gap-1  text-emerald-600">
+      <div className="flex shrink-0 items-center gap-1  text-emerald-700">
         <div className="flex items-center gap-1">
           <button
             onClick={() => skip(-SKIP_SECONDS)}
@@ -252,8 +252,8 @@ export default function FloatingPlayer({
             background: `linear-gradient(to right, #059669 ${volumePercent}%, #d1fae5 ${volumePercent}%)`,
           }}
           className="hidden h-1 w-20 cursor-pointer appearance-none rounded-full outline-none sm:block
-        [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-600
-        [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-600"
+        [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
+        [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700"
         />
 
         <button

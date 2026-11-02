@@ -14,7 +14,6 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-
 export default function AlQuranClient({ initialData }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [shareUrl, setShareUrl] = useState("");
@@ -76,7 +75,7 @@ export default function AlQuranClient({ initialData }) {
               <ShareEmbedButton
                 url={shareUrl}
                 embedUrl={embedCode}
-                OverrideStyle="py-2.5 bg-emerald-600 w-fit text-white border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-emerald-700 hover:border-emerald-700"
+                OverrideStyle="py-2.5 bg-emerald-700 w-fit text-white border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-emerald-700 hover:border-emerald-600"
               />
             </div>
           </Header>
@@ -92,9 +91,9 @@ export default function AlQuranClient({ initialData }) {
                 className="no-underline"
               >
                 <article className="flex h-full w-full items-start gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
-                  <div className="flex justify-center border border-emerald-800  leading-none rounded-full shrink-0 w-6 h-6">
+                  <div className="flex justify-center border border-emerald-600  leading-none rounded-full shrink-0 w-6 h-6">
                     <div
-                      className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-800 `}
+                      className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-700 `}
                     >
                       {surat.number}
                     </div>
@@ -104,7 +103,7 @@ export default function AlQuranClient({ initialData }) {
                     <div
                       className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                     >
-                      <h2 className="text-[14px] font-semibold text-emerald-800">
+                      <h2 className="text-[14px] font-semibold text-emerald-700">
                         {surat.name_id}
                       </h2>
 

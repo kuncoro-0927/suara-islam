@@ -132,18 +132,21 @@ export default function JadwalSholatCard({
           className={`${jakarta.className}  font-normal flex flex-col md:flex-row md:justify-between items-start md:items-center w-full h-auto  rounded-xl gap-2 md:gap-3`}
         >
           <button
-            className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 hover:shadow-sm duration-200 w-fit"
+            className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 hover:shadow-sm duration-200 w-fit"
             onClick={() => setIsPopupOpen(true)}
             aria-label={`Pilih kota, saat ini ${selectedCity.lokasi}`}
           >
-            <IconMapMarker size={14} className="text-emerald-600 group-hover:scale-110 duration-200" />
+            <IconMapMarker
+              size={14}
+              className="text-emerald-700 group-hover:scale-110 duration-200"
+            />
             <span className="text-xs font-medium">{selectedCity.lokasi}</span>
 
-            <IoChevronDown className="text-slate-400 group-hover:text-emerald-800" />
+            <IoChevronDown className="text-slate-400 group-hover:text-emerald-700" />
           </button>
 
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-black/10">
-            <IconCalendar size={14} className="text-emerald-600" />
+            <IconCalendar size={14} className="text-emerald-700" />
             <span className="text-[13px] md:text-[12px] font-medium text-[#6c6c6c]">
               {tanggalHijri &&
                 `${tanggalHijri.hari}, ${tanggalHijri.hijri} | ${formatMasehiFull()}`}
@@ -176,7 +179,7 @@ export default function JadwalSholatCard({
                 aria-label={`${item.name} ${item.value || "belum tersedia"}${isNext ? ", berikutnya" : ""}`}
               >
                 {isNext && (
-                  <span className="absolute bg-emerald-600 -top-2.5 left-1/2 -translate-x-1/2 px-2.5 h-5 inline-flex items-center text-white text-[10px]  rounded-xl whitespace-nowrap">
+                  <span className="absolute bg-emerald-700 -top-2.5 left-1/2 -translate-x-1/2 px-2.5 h-5 inline-flex items-center text-white text-[10px]  rounded-xl whitespace-nowrap">
                     Berikutnya
                   </span>
                 )}
@@ -217,7 +220,7 @@ export default function JadwalSholatCard({
           <ShareEmbedButton
             url={shareUrl}
             embedUrl={embedCode}
-            OverrideStyle="bg-emerald-600 px-4 py-2.5 text-white drop-shadow-sm drop-shadow-emerald-100 hover:bg-emerald-700 "
+            OverrideStyle="bg-emerald-700 px-4 py-2.5 text-white drop-shadow-sm drop-shadow-emerald-100 hover:bg-emerald-700 "
           />
         </div>
       </div>

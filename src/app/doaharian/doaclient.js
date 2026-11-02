@@ -13,7 +13,6 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-
 export default function DoaHarianClient({ initialData }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -62,7 +61,7 @@ export default function DoaHarianClient({ initialData }) {
                     <p className="text-[12px] text-[#6c6c6c] font-medium">
                       Doa Harian
                     </p>
-                    <span className="font-semibold text-[14px]  text-emerald-800">
+                    <span className="font-semibold text-[14px]  text-emerald-700">
                       {doa.judul}
                     </span>
                   </div>

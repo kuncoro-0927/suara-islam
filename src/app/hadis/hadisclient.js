@@ -78,32 +78,32 @@ export default function Hadis({ initialHadis = [] }) {
             <div className="flex my-2 py-3 gap-3 md:justify-start items-center overflow-x-auto whitespace-nowrap no-scrollbar">
               <Link href="/hadis/arbain">
                 <button
-                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 cursor-pointer transition-colors duration-200"
                   aria-label="Hadits Arbain"
                 >
-                  <FaScroll className="text-emerald-600" />
+                  <FaScroll className="text-emerald-700" />
                   Hadits Arbain
                 </button>
               </Link>
 
               <Link href="/hadis/bulughul-maram">
                 <button
-                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 cursor-pointer transition-colors duration-200"
                   aria-label="Bulughul Maram"
                 >
                   {" "}
-                  <FaScroll className="text-emerald-600" />
+                  <FaScroll className="text-emerald-700" />
                   Bulughul Maram
                 </button>
               </Link>
 
               <Link href="/hadis/perawi">
                 <button
-                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 cursor-pointer transition-colors duration-200"
                   aria-label="9 Perawi"
                 >
                   {" "}
-                  <FaScroll className="text-emerald-600" />9 Perawi
+                  <FaScroll className="text-emerald-700" />9 Perawi
                 </button>
               </Link>
             </div>

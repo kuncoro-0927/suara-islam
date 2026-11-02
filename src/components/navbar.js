@@ -90,7 +90,7 @@ export default function Navbar() {
 
         <button
           onClick={toggleMenu}
-          className="w-10 h-10 flex items-center justify-center text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
+          className="w-10 h-10 flex items-center justify-center text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
           aria-label="Buka menu navigasi"
           aria-expanded={isMenuOpen}
         >
@@ -117,12 +117,12 @@ export default function Navbar() {
         >
           <div className="px-6">
             <div className="flex h-16 w-full items-center justify-between border-b border-black/10">
-              <div className="flex items-center text-lg font-medium text-emerald-800">
+              <div className="flex items-center text-lg font-medium text-emerald-700">
                 <span>Menu</span>
               </div>
               <button
                 onClick={toggleMenu}
-                className="translate-x-2 text-emerald-600 transition-colors hover:bg-emerald-50"
+                className="translate-x-2 text-emerald-700 transition-colors hover:bg-emerald-50"
                 aria-label="Tutup menu navigasi"
               >
                 <IoIosClose size={34} />
@@ -142,8 +142,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center w-full h-[54px] cursor-pointer rounded-xl transition-colors ${
                     active
-                      ? "bg-emerald-600 text-white"
-                      : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-800"
+                      ? "bg-emerald-700 text-white"
+                      : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-700"
                   }`}
                   onClick={toggleMenu}
                   aria-current={active ? "page" : undefined}
@@ -204,14 +204,14 @@ export default function Navbar() {
                 href={item.href}
                 className={`group flex items-center transition-all rounded-lg duration-200 py-3 ${
                   active
-                    ? "bg-emerald-600 text-white border border-emerald-200"
-                    : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-800"
+                    ? "bg-emerald-700 text-white border border-emerald-200"
+                    : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-700"
                 }`}
 
                 aria-current={active ? "page" : undefined}
               >
                 <div
-                  className={`w-[48px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-600"}`}
+                  className={`w-[48px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-700"}`}
                 >
                   {item.icon}
                 </div>

@@ -32,7 +32,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
               </p>
               <Link
                 href="/doaharian"
-                className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-[14px] hover:bg-emerald-700 transition-colors"
+                className="px-4 py-2 bg-emerald-700 text-white rounded-lg text-[14px] hover:bg-emerald-700 transition-colors"
               >
                 Kembali ke Doa Harian
               </Link>
@@ -62,7 +62,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
               <Link
                 href="/doaharian"
                 aria-label="Kembali ke daftar doa"
-                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-800`}
+                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
               >
                 <IoIosArrowRoundBack
                   size={22}
@@ -77,7 +77,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
                 <Link
                   href={`/doaharian/${currentId + 1}`}
                   aria-label={`Doa selanjutnya, No.${currentId + 1}`}
-                  className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-800`}
+                  className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
                 >
                   <span className="text-[12px] md:text-[14px]">
                     Selanjutnya
@@ -104,11 +104,11 @@ export default function DoaContent({ initialData: doa, doaId }) {
             {/* Konten Doa */}
             <div className="flex w-full justify-center items-center flex-col text-center my-12 ">
               <p
-                className={`${jakarta.className} text-[14px] font-semibold text-emerald-800`}
+                className={`${jakarta.className} text-[14px] font-semibold text-emerald-700`}
               >
                 Doa Harian No.{currentId}
               </p>
-              <h1 className="text-emerald-800 text-[24px] lg:text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
+              <h1 className="text-emerald-700 text-[24px] lg:text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
                 {doa.judul}
               </h1>
             </div>
@@ -116,7 +116,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
             <div
               className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-6 lg:p-8 border border-black/10 shadow-xs rounded-xl`}
             >
-              <span className="text-emerald-800 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
+              <span className="text-emerald-700 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
                 {doa.judul}
               </span>
               <p

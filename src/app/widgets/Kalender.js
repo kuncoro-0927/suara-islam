@@ -409,8 +409,8 @@ export default function KalenderEmbed() {
             <button
               className={`py-2 px-4 rounded-lg border efek-hover hover:text-white ${
                 mode === "masehi"
-                  ? "bg-emerald-600 text-white"
-                  : "bg-white text-emerald-600 border-emerald-600"
+                  ? "bg-emerald-700 text-white"
+                  : "bg-white text-emerald-700 border-emerald-600"
               }`}
               onClick={() => setMode("masehi")}
               aria-label="Kalender Masehi"
@@ -420,8 +420,8 @@ export default function KalenderEmbed() {
             <button
               className={`py-2 px-4 rounded-lg border efek-hover hover:text-white ${
                 mode === "hijriyah"
-                  ? "bg-emerald-600 text-white"
-                  : "bg-white text-emerald-600 border-emerald-600"
+                  ? "bg-emerald-700 text-white"
+                  : "bg-white text-emerald-700 border-emerald-600"
               }`}
               onClick={() => setMode("hijriyah")}
               aria-label="Kalender Hijriyah"
@@ -453,7 +453,7 @@ export default function KalenderEmbed() {
                         ].map((head) => (
                           <th
                             key={head}
-                            className="bg-emerald-600 text-white border border-emerald-600 px-3 py-2"
+                            className="bg-emerald-700 text-white border border-emerald-600 px-3 py-2"
                           >
                             {head}
                           </th>
@@ -507,7 +507,7 @@ export default function KalenderEmbed() {
                       ].map((head) => (
                         <th
                           key={head}
-                          className="bg-emerald-600 text-white border border-emerald-600 px-3 py-2"
+                          className="bg-emerald-700 text-white border border-emerald-600 px-3 py-2"
                         >
                           {head}
                         </th>

@@ -64,7 +64,7 @@ export default function TahlilClient({ initialData }) {
                   {/* Title */}
                   {ayat.title && (
                     <div
-                      className={`${openSans.className} text-left text-[16px] text-emerald-800 font-semibold mb-3`}
+                      className={`${openSans.className} text-left text-[16px] text-emerald-700 font-semibold mb-3`}
                     >
                       {ayat.title}
                     </div>

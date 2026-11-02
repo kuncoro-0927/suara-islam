@@ -188,7 +188,7 @@ export default function HadisArbain() {
                 <button
                   className="s duration-200 
                           flex items-center gap-1 
-                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-800 cursor-pointer
+                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
                 >
                   <IoIosArrowRoundBack className="text-xl" />
@@ -244,13 +244,13 @@ export default function HadisArbain() {
                         href={`/hadis/${hadis.no}?category=Arbain`}
                       >
                         <div className={`${jakarta.className} flex h-full`}>
-                          <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:border-emerald-600 transition-all duration-200">
+                          <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
                             {hadis.no && (
                               <p className="text-[12px] text-[#6c6c6c] font-medium">
                                 No. {hadis.no}
                               </p>
                             )}
-                            <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
+                            <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
                               {hadis.judul || `Arbain No.${hadis.no}`}
                             </h1>
                           </div>
@@ -260,9 +260,7 @@ export default function HadisArbain() {
                   ) : (
                     <div className="col-span-full text-center py-10">
                       <p className="text-gray-600">
-                        {searchQuery
-                          ? ""
-                          : "Tidak ada hadis ditemukan"}
+                        {searchQuery ? "" : "Tidak ada hadis ditemukan"}
                       </p>
                     </div>
                   )}
@@ -278,7 +276,7 @@ export default function HadisArbain() {
                       className={`px-3 py-2 rounded-md flex items-center gap-1 ${
                         currentPage === 1
                           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-600 text-white hover:bg-emerald-800"
+                          : "bg-emerald-700 text-white hover:bg-emerald-700"
                       }`}
                     >
                       <FaChevronLeft size={12} />
@@ -292,8 +290,8 @@ export default function HadisArbain() {
                         onClick={() => handlePageChange(page)}
                         className={`px-4 py-2 rounded-md font-semibold ${
                           page === currentPage
-                            ? "bg-emerald-800 text-white"
-                            : "bg-emerald-600 text-white hover:bg-emerald-800"
+                            ? "bg-emerald-700 text-white"
+                            : "bg-emerald-700 text-white hover:bg-emerald-700"
                         }`}
                       >
                         {page}
@@ -307,7 +305,7 @@ export default function HadisArbain() {
                       className={`px-3 py-2 rounded-md flex items-center gap-1 ${
                         currentPage === totalPages
                           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-600 text-white hover:bg-emerald-800"
+                          : "bg-emerald-700 text-white hover:bg-emerald-700"
                       }`}
                     >
                       Next

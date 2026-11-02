@@ -19,15 +19,11 @@ const CityPopup = lazy(() => import("../../components/citypopup"));
 const HijriMonthPopup = lazy(() => import("../../components/hijripopup"));
 const MonthPopup = lazy(() => import("../../components/monthpopup"));
 
-
-
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
 });
-
-
 
 export default function Beranda({
   initialJadwal = [],
@@ -428,8 +424,8 @@ export default function Beranda({
               <button
                 className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
                   mode === "masehi"
-                    ? "text-white bg-emerald-600"
-                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-800"
+                    ? "text-white bg-emerald-700"
+                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
                 }`}
                 onClick={() => setMode("masehi")}
               >
@@ -440,8 +436,8 @@ export default function Beranda({
               <button
                 className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
                   mode === "hijriyah"
-                    ? "text-white  bg-emerald-600 "
-                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-800"
+                    ? "text-white  bg-emerald-700 "
+                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
                 }`}
                 onClick={() => setMode("hijriyah")}
               >
@@ -472,7 +468,7 @@ export default function Beranda({
                         ? handleDownloadPDF
                         : handleDownloadPDFHijri
                     }
-                    className="flex items-center gap-2 px-3 text-xs py-1 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                    className="flex items-center gap-2 px-3 text-xs py-1 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                     disabled={
                       loading ||
                       (mode === "masehi"
@@ -487,7 +483,7 @@ export default function Beranda({
                   <ShareEmbedButton
                     url={shareUrl}
                     embedUrl={embedCode}
-                    OverrideStyle="bg-white/40 border border-emerald-600 text-emerald-800 shadow-sm hover:bg-white/80"
+                    OverrideStyle="bg-white/40 border border-emerald-600 text-emerald-700 shadow-sm hover:bg-white/80"
                   />
                 </div>
               </div>
@@ -503,7 +499,7 @@ export default function Beranda({
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsPopupOpen(true)}
-                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
                   <BsSearch size={12} />
                   <span> Pilih Kota</span>
@@ -515,7 +511,7 @@ export default function Beranda({
                       ? setIsMonthPopupOpen(true)
                       : setIsHijriPopupOpen(true)
                   }
-                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
                   <IconCalendar size={12} />
                   <span> Pilih Bulan</span>
@@ -545,7 +541,7 @@ export default function Beranda({
                         ].map((head) => (
                           <th
                             key={head}
-                            className="bg-emerald-600 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
+                            className="bg-emerald-700 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
                           >
                             {head}
                           </th>
@@ -556,7 +552,7 @@ export default function Beranda({
                       {jadwal.map((day, index) => {
                         const isTodayRow = isToday(day.tanggal);
                         const cellClass = isTodayRow
-                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100/60 font-semibold text-emerald-800 text-sm"
+                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100/60 font-semibold text-emerald-700 text-sm"
                           : index % 2
                             ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
                             : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";
@@ -599,7 +595,7 @@ export default function Beranda({
                       ].map((head) => (
                         <th
                           key={head}
-                          className="bg-emerald-600 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
+                          className="bg-emerald-700 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
                         >
                           {head}
                         </th>
@@ -610,7 +606,7 @@ export default function Beranda({
                     {jadwalHijri.map((day, index) => {
                       const isTodayRow = isToday(day.tanggal);
                       const cellClass = isTodayRow
-                        ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100 font-semibold text-emerald-800 text-sm"
+                        ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100 font-semibold text-emerald-700 text-sm"
                         : index % 2
                           ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
                           : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";

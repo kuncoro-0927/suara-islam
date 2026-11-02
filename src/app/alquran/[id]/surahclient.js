@@ -262,7 +262,7 @@ export default function SurahClient({
     <main className="min-h-screen">
       <div className="flex">
         <Navbar />
-        <div className="flex-1 m-2 lg:mx-0 p-4 mt-[90px] lg:mt-0 lg:p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl">
+        <div className="flex-1 m-2 lg:m-0 p-4 mt-[90px]  lg:p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl">
           {/* Error Display */}
           {error && (
             <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
@@ -284,7 +284,7 @@ export default function SurahClient({
             <div className=" w-full flex justify-between items-center">
               <Link href="/alquran" aria-label="Kembali ke daftar surah">
                 <div
-                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-800 duration-200`}
+                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
                 >
                   <IoIosArrowRoundBack
                     size={22}
@@ -303,7 +303,7 @@ export default function SurahClient({
                 aria-label="Surah selanjutnya"
               >
                 <div
-                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-800 duration-200`}
+                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
                 >
                   <span className="text-[12px] md:text-[14px]">
                     Selanjutnya
@@ -322,12 +322,12 @@ export default function SurahClient({
               <div
                 className={`${jakarta.className} flex justify-center items-center `}
               >
-                <span className="font-semibold text-[14px] md:text-[14px] leading-tight text-emerald-800">
+                <span className="font-semibold text-[14px] md:text-[14px] leading-tight text-emerald-700">
                   Surah ke {suratDetail.number}
                 </span>
               </div>
 
-              <div className="text-[24px] lg:text-[28px] flex items-center gap-2 font-semibold text-emerald-800 mt-6">
+              <div className="text-[24px] lg:text-[28px] flex items-center gap-2 font-semibold text-emerald-700 mt-6">
                 <span>{suratDetail.name_id}</span> -
                 {/* <span>{suratDetail.translation_id}</span> */}
                 <span className="text-[28px] lg:text-[34px]  leading-none">
@@ -341,14 +341,14 @@ export default function SurahClient({
                   <span className="font-medium text-[rgb(108,108,108)]">
                     Golongan
                   </span>
-                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
+                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
                     {suratDetail.revelation_id}
                   </span>
                 </div>
 
                 <div className="flex flex-col items-center justify-center">
                   <span className="font-medium text-[#6c6c6c]">Arti surah</span>
-                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
+                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
                     {suratDetail.translation_id}
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export default function SurahClient({
                   <span className="font-medium text-[#6c6c6c]">
                     Jumlah ayat
                   </span>
-                  <span className="text-emerald-800 font-medium text-base lg:text-lg">
+                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
                     {suratDetail.number_of_verses}
                   </span>
                 </div>
@@ -365,20 +365,20 @@ export default function SurahClient({
               <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
                 <div className="flex flex-col lg:flex-row items-start gap-4">
                   <div className=" flex items-center gap-3">
-                    <div className="bg-emerald-600 w-fit p-2.5 rounded-full">
+                    <div className="bg-emerald-700 w-fit p-2.5 rounded-full">
                       <BookOpenLightIcon className="text-white" />
                     </div>
-                    <span className="flex text-sm md:hidden text-emerald-800 font-medium">
+                    <span className="flex text-sm md:hidden text-emerald-700 font-medium">
                       Tafsir Surah {suratDetail.name_id}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="hidden md:flex text-emerald-800 font-medium">
+                    <span className="hidden md:flex text-emerald-700 font-medium">
                       Tafsir Surah {suratDetail.name_id}
                     </span>
 
                     <p
-                      className={`${openSans.className} font-normal  text-[14px] md:text-[14px] text-emerald-800 leading-relaxed`}
+                      className={`${openSans.className} font-normal  text-[14px] md:text-[14px] text-emerald-700 leading-relaxed`}
                     >
                       {suratDetail.tafsir}
                     </p>
@@ -411,7 +411,7 @@ export default function SurahClient({
                           ? `Jeda audio ayat ${ayat.ayah}`
                           : `Putar audio ayat ${ayat.ayah}`
                       }
-                      className="p-1 rounded-full bg-emerald-600 hover:ring-5 hover:ring-emerald-50 cursor-pointer transition-colors"
+                      className="p-1 rounded-full bg-emerald-700 hover:ring-5 hover:ring-emerald-50 cursor-pointer transition-colors"
                     >
                       {isActive ? (
                         <TbPlayerPauseFilled size={18} className="text-white" />
@@ -449,8 +449,8 @@ export default function SurahClient({
                     >
                       <polygon
                         points={ayatBadgePoints}
-                        className={`stroke-emerald-600 transition-colors duration-200 ${
-                          isActive ? "fill-emerald-600" : "fill-white"
+                        className={`stroke-emerald-700 transition-colors duration-200 ${
+                          isActive ? "fill-emerald-700" : "fill-white"
                         }`}
                         strokeWidth="3"
                         strokeLinejoin="round"

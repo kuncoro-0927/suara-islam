@@ -10,8 +10,8 @@ export default function Header({ Title, subtitle, Description, children }) {
   return (
     <div className={`${jakarta.className} w-full`}>
       <div className="flex items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-emerald-100/40 text-emerald-800 border border-emerald-600">
-          <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-emerald-100/40 text-emerald-700 border border-emerald-600">
+          <span className="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
           {subtitle}
         </span>
       </div>

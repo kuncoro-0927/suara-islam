@@ -32,7 +32,7 @@ export default function Search({
             onClick={() => onSearchModeChange("title")}
             className={`px-3 py-1 rounded-full transition-colors ${
               searchMode === "title"
-                ? "bg-emerald-600 text-white"
+                ? "bg-emerald-700 text-white"
                 : "bg-gray-200 text-gray-600 hover:bg-gray-300"
             }`}
           >
@@ -42,7 +42,7 @@ export default function Search({
             onClick={() => onSearchModeChange("content")}
             className={`px-3 py-1 rounded-full transition-colors ${
               searchMode === "content"
-                ? "bg-emerald-600 text-white"
+                ? "bg-emerald-700 text-white"
                 : "bg-gray-200 text-gray-600 hover:bg-gray-300"
             }`}
           >

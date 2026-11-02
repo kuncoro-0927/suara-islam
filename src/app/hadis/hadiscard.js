@@ -48,11 +48,13 @@ export default function HadisCard({
       href={`/hadis/${hadis.no || index + 1}?category=${encodeURIComponent(hadis.category)}&from=${encodeURIComponent(fromPath)}`}
     >
       <div className={`${jakarta.className} flex h-full`}>
-        <div className="flex flex-col gap-1 text-left justify-center items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:border-emerald-600 transition-all duration-200">
+        <div className="flex flex-col gap-1 text-left justify-center items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
           {hadis.no && (
-            <p className="text-[12px] text-[#6c6c6c] font-medium">No. {hadis.no}</p>
+            <p className="text-[12px] text-[#6c6c6c] font-medium">
+              No. {hadis.no}
+            </p>
           )}
-          <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
+          <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
             {searchQuery ? (
               <span
                 dangerouslySetInnerHTML={{

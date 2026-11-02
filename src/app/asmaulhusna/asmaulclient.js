@@ -60,9 +60,9 @@ export default function AsmaulhusnaClient({ initialData }) {
                 <div key={asmaul.id} className="h-full">
                   <div className="flex h-full w-full items-stretch gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
                     {/* Nomor: selalu di atas */}
-                    <div className="self-start flex justify-center items-center border border-emerald-800 leading-none rounded-full shrink-0 w-6 h-6">
+                    <div className="self-start flex justify-center items-center border border-emerald-600 leading-none rounded-full shrink-0 w-6 h-6">
                       <span
-                        className={`${jakarta.className} text-[12px] font-medium text-emerald-800`}
+                        className={`${jakarta.className} text-[12px] font-medium text-emerald-700`}
                       >
                         {asmaul.id}
                       </span>
@@ -73,7 +73,7 @@ export default function AsmaulhusnaClient({ initialData }) {
                       className={`${jakarta.className} flex gap-2 justify-between items-center text-center leading-[1.3] flex-1 `}
                     >
                       <div className="flex flex-col items-start text-left">
-                        <span className="font-semibold text-sm text-emerald-800">
+                        <span className="font-semibold text-sm text-emerald-700">
                           {asmaul.latin}
                         </span>
                         <p className="font-medium text-[12px] text-[#6c6c6c]">
@@ -81,7 +81,7 @@ export default function AsmaulhusnaClient({ initialData }) {
                         </p>
                       </div>
 
-                      <span className="font-semibold text-[20px] md:text-[27px] text-emerald-800">
+                      <span className="font-semibold text-[20px] md:text-[27px] text-emerald-700">
                         {asmaul.arab}
                       </span>
                     </div>

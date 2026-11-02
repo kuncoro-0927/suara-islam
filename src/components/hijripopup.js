@@ -45,7 +45,7 @@ export default function HijriMonthPopup({
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
       <div className="bg-white rounded-[10px] w-[90%] md:w-[500px] max-h-[80vh] overflow-y-auto shadow-2xl">
         {/* Header */}
-        <div className="sticky top-0 bg-emerald-600 text-white p-4 rounded-t-[10px] flex justify-between items-center">
+        <div className="sticky top-0 bg-emerald-700 text-white p-4 rounded-t-[10px] flex justify-between items-center">
           <h2 className={`${jakarta.className} text-[18px] font-semibold`}>
             Pilih Bulan Hijriah
           </h2>
@@ -67,7 +67,7 @@ export default function HijriMonthPopup({
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
-            className="w-full border border-gray-300 rounded-[8px] p-2 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+            className="w-full border border-gray-300 rounded-[8px] p-2 focus:outline-none focus:ring-2 focus:ring-emerald-700"
           >
             {years.map((year) => (
               <option key={year} value={year}>
@@ -83,9 +83,9 @@ export default function HijriMonthPopup({
             <button
               key={month.value}
               onClick={() => handleMonthClick(month.value)}
-              className={`${jakarta.className} p-3 rounded-[8px] border border-gray-300 hover:bg-emerald-600 hover:text-white transition-colors text-[14px] font-medium ${
+              className={`${jakarta.className} p-3 rounded-[8px] border border-gray-300 hover:bg-emerald-700 hover:text-white transition-colors text-[14px] font-medium ${
                 currentMonth === month.value && currentYear === selectedYear
-                  ? "bg-emerald-600 text-white"
+                  ? "bg-emerald-700 text-white"
                   : "bg-white text-gray-700"
               }`}
             >

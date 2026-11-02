@@ -55,7 +55,7 @@ function HadisCard({ hadis, index = 0 }) {
               No. {hadis.no}
             </p>
           )}
-          <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
+          <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-700 line-clamp-2">
             {title}
           </h1>
         </div>
@@ -252,7 +252,7 @@ export default function HadisBulughulMaram() {
                 <button
                   className="s duration-200 
                           flex items-center gap-1 
-                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-800 cursor-pointer
+                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
                 >
                   <IoIosArrowRoundBack className="text-xl" />
@@ -318,7 +318,7 @@ export default function HadisBulughulMaram() {
                       className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
                         currentPage === 1
                           ? "text-gray-500 cursor-not-allowed"
-                          : "text-emerald-800 cursor-pointer"
+                          : "text-emerald-700 cursor-pointer"
                       }`}
                     >
                       <IoIosArrowBack
@@ -335,8 +335,8 @@ export default function HadisBulughulMaram() {
                         onClick={() => handlePageChange(page)}
                         className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
                           page === currentPage
-                            ? "bg-emerald-600 text-white ring-4 ring-emerald-100/70"
-                            : "text-[#6c6c6c] hover:bg-emerald-600 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
+                            ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
+                            : "text-[#6c6c6c] hover:bg-emerald-700 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
                         }`}
                       >
                         <span className="-translate-y-px">{page}</span>
@@ -349,7 +349,7 @@ export default function HadisBulughulMaram() {
                       className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
                         currentPage === totalPages
                           ? " text-gray-500 cursor-not-allowed"
-                          : "text-emerald-800 cursor-pointer"
+                          : "text-emerald-700 cursor-pointer"
                       }`}
                     >
                       Next

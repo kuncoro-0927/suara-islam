@@ -71,7 +71,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
               Pilihan Cepat & Surat Populer
             </span>
             <nav
-              className="flex flex-wrap justify-start md:justify-center items-start md:items-center gap-3"
+              className="flex flex-wrap justify-start md:justify-center items-start md:items-center gap-2 lg:gap-3"
               aria-label="Surat pilihan"
             >
               {SuratUtama.map((surat) => (
@@ -81,9 +81,9 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                     surat.isSpecialPage ? surat.route : `/alquran/${surat.id}`
                   }
                 >
-                  <div className="flex justify-center items-center px-5 py-2 rounded-full border bg-white/40 backdrop-blur-md shadow-xs border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-800 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
+                  <div className="flex justify-center items-center px-5 py-2 rounded-full border bg-white/40 backdrop-blur-md shadow-xs border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-700 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
                     <div className="flex items-center gap-2">
-                      <surat.icon size={18} className="text-emerald-600" />
+                      <surat.icon size={18} className="text-emerald-700" />
                       <span
                         className={`${jakarta.className} text-xs font-medium`}
                       >
@@ -110,9 +110,9 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                 className="no-underline "
               >
                 <article className="flex h-full w-full items-start gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
-                  <div className="flex justify-center border border-emerald-800  leading-none rounded-full shrink-0 w-6 h-6">
+                  <div className="flex justify-center border border-emerald-600  leading-none rounded-full shrink-0 w-6 h-6">
                     <div
-                      className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-800 `}
+                      className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-700 `}
                     >
                       {surat.number}
                     </div>
@@ -122,7 +122,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                     <div
                       className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                     >
-                      <h2 className="text-[16px] font-semibold text-emerald-800">
+                      <h2 className="text-[16px] font-semibold text-emerald-700">
                         {surat.name_id}
                       </h2>
 
