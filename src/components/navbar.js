@@ -76,7 +76,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-2 py-3 top-2 z-50 flex items-center justify-between rounded-xl lg:rounded-2xl border border-white shadow-xs bg-white/40 px-4 backdrop-blur-md md:hidden">
+      <header className="fixed inset-x-2 py-3 top-2 z-49 flex items-center justify-between rounded-xl lg:rounded-2xl border border-white shadow-xs bg-white/40 px-4 backdrop-blur-md md:hidden">
         <div className="flex items-center">
           <Image
             src="/suaraislam.png"
@@ -100,49 +100,56 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-40 md:hidden"
+          className="fixed inset-0 bg-black/5 z-50 md:hidden"
           onClick={toggleMenu}
           aria-hidden="true"
         />
       )}
       <Portal>
         <aside
-          className={`${jakarta.className} fixed inset-x-2 top-2 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-2xl bg-white shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
-            isMenuOpen ? "translate-y-0" : "-translate-y-[calc(100%+0.5rem)]"
+          className={`${jakarta.className} fixed inset-x-2 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/60 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden ${
+            isMenuOpen
+              ? "translate-y-0 shadow-2xl"
+              : "-translate-y-[calc(100%+3rem)] shadow-none"
           }`}
           aria-label="Menu navigasi"
           aria-hidden={!isMenuOpen}
         >
-          <div className="flex justify-between h-16 w-full items-center border-b border-black/10 px-4">
-            <div className=" px-3 font-medium text-emerald-800 flex items-center">
-              <span>Menu</span>
+          <div className="px-4">
+            <div className="flex h-16 w-full items-center justify-between border-b border-black/10">
+              <div className="flex items-center text-lg font-medium text-emerald-800">
+                <span>Menu</span>
+              </div>
+              <button
+                onClick={toggleMenu}
+                className="rounded-lg p-1 text-emerald-700 transition-colors hover:bg-emerald-50"
+                aria-label="Tutup menu navigasi"
+              >
+                <IoIosClose size={28} />
+              </button>
             </div>
-            <button
-              onClick={toggleMenu}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-emerald-700 transition-colors hover:bg-emerald-50"
-              aria-label="Tutup menu navigasi"
-            >
-              <IoIosClose size={28} />
-            </button>
           </div>
 
-          <nav className="flex flex-col" aria-label="Menu navigasi mobile">
+          <nav
+            className="flex flex-col p-4 gap-1"
+            aria-label="Menu navigasi mobile"
+          >
             {menuItems.map((item, index) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={index}
                   href={item.href}
-                  className={`flex items-center w-full h-[64px] border-b border-gray-100 cursor-pointer transition-colors ${
+                  className={`flex items-center w-full h-[54px] cursor-pointer rounded-2xl transition-colors ${
                     active
-                      ? "bg-emerald-50 text-emerald-700 border-l-4 border-l-emerald-600"
-                      : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700"
+                      ? "bg-emerald-100/40 text-emerald-700 border border-emerald-600"
+                      : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-700"
                   }`}
                   onClick={toggleMenu}
                   aria-current={active ? "page" : undefined}
                 >
                   <div
-                    className={`w-[56px] flex justify-center items-center ml-3 ${active ? "text-emerald-700" : "text-emerald-600"}`}
+                    className={`w-[56px] flex justify-center items-center ml-3 ${active ? "text-emerald-600" : "text-[#6c6c6c]"}`}
                   >
                     {item.icon}
                   </div>
