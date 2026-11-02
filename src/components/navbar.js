@@ -98,13 +98,15 @@ export default function Navbar() {
         </button>
       </header>
 
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/5 z-50 md:hidden"
-          onClick={toggleMenu}
-          aria-hidden="true"
-        />
-      )}
+      <div
+        className={`fixed inset-0 z-50 bg-black/5 transition-opacity md:hidden ${
+          isMenuOpen
+            ? "opacity-100 duration-200 delay-300"
+            : "pointer-events-none opacity-0 duration-150 delay-0"
+        }`}
+        onClick={toggleMenu}
+        aria-hidden="true"
+      />
       <Portal>
         <aside
           className={`${jakarta.className} fixed inset-x-2 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/60 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden ${
