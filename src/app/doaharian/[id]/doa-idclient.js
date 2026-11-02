@@ -120,7 +120,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
                 {doa.judul}
               </span>
               <p
-                className="text-[30px] lg:text-[34px] mb-4 leading-loose text-right w-[90%] ml-auto"
+                className="text-[30px] lg:text-[34px] mb-4 leading-loose text-right w-full"
                 dir="rtl"
                 lang="ar"
               >

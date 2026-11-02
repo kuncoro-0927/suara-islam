@@ -432,7 +432,7 @@ export default function SurahClient({
                 </div>
 
                 <div
-                  className={`${jakarta.className} w-full ml-auto text-right mt-4 text-[30px] md:text-[34px] max-w-[95%] leading-[1.8] text-gray-800`}
+                  className={`${jakarta.className} w-full text-right mt-4 text-[30px] md:text-[34px] leading-loose text-gray-800`}
                   dir="rtl"
                   lang="ar"
                 >
