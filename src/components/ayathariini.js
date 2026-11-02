@@ -62,17 +62,17 @@ export default function AyatHariIni({ className = "" }) {
 
   return (
     <div
-      className={`mx-auto bg-emerald-100/20 p-4 rounded-xl border border-emerald-200 text-center flex flex-col gap-3 items-center ${className}`}
+      className={`mx-auto bg-emerald-100/40 p-4 rounded-xl border border-emerald-600 text-center flex flex-col gap-3 items-center ${className}`}
     >
-      <span className="h-9 w-9 flex items-center justify-center bg-emerald-100/70 rounded-full">
+      <span className="h-9 w-9 flex items-center justify-center bg-emerald-200/40 rounded-full">
         <PiHeartStraightFill className="text-emerald-600" />
       </span>
 
       <span className="font-medium text-sm">Ayat hari ini</span>
-      <span className="italic text-xs text-slate-400">
+      <span className="italic text-xs text-[#6c6c6c]">
         &quot;{ayat.teks}&quot;
       </span>
-      <span className="text-emerald-800 bg-emerald-100/60 text-[11px] px-2 py-1 rounded-full font-semibold">
+      <span className="text-emerald-800 bg-emerald-200/40 text-[11px] px-2 py-1 rounded-full font-semibold">
         {ayat.ref}
       </span>
     </div>

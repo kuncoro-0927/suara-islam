@@ -142,19 +142,19 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center w-full h-[54px] cursor-pointer rounded-xl transition-colors ${
                     active
-                      ? "bg-emerald-100/40 text-emerald-800 border border-emerald-600"
-                      : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-700"
+                      ? "bg-emerald-600 text-white"
+                      : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-800"
                   }`}
                   onClick={toggleMenu}
                   aria-current={active ? "page" : undefined}
                 >
                   <div
-                    className={`w-[56px] flex justify-center items-center ml-1.5 ${active ? "text-emerald-600" : "text-[#6c6c6c]"}`}
+                    className={`w-[56px] flex justify-center items-center ml-1.5 ${active ? "text-white" : "text-[#6c6c6c]"}`}
                   >
                     {item.icon}
                   </div>
                   <span
-                    className={`text-[16px] ${active ? "font-semibold" : "font-medium"} w-full ml-3`}
+                    className={`text-[16px] ${active ? "font-medium" : "font-medium"} w-full ml-1.5`}
                     // style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {item.label}
@@ -205,7 +205,7 @@ export default function Navbar() {
                 className={`group flex items-center transition-all rounded-lg duration-200 py-3 ${
                   active
                     ? "bg-emerald-600 text-white border border-emerald-200"
-                    : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-600"
+                    : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-800"
                 }`}
 
                 aria-current={active ? "page" : undefined}
