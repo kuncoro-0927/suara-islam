@@ -64,15 +64,16 @@ export default function AlQuranClient({ initialData }) {
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen">
       <div className="flex">
         <Navbar />
-        <div className="flex-1 min-h-screen">
+        <div className="flex-1 bg-white/40 backdrop-blur-md border border-white my-4 mr-4 rounded-2xl min-h-screen p-10">
           <Header
             Title="Al - Quran"
+            subtitle="114 surah dan terjemahan"
             Description="Baca Al - Quran dan Terjemahan"
           >
-            <div className="flex items-center gap-3 mt-4">
+            <div className="flex items-center gap-3 mt-8">
               <Search
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -80,13 +81,13 @@ export default function AlQuranClient({ initialData }) {
               <ShareEmbedButton
                 url={shareUrl}
                 embedUrl={embedCode}
-                OverrideStyle="p-[5px] md:p-3"
+                OverrideStyle="py-2.5 bg-emerald-600 w-fit text-white border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-emerald-700 hover:border-emerald-700"
               />
             </div>
           </Header>
 
           <section
-            className="md:ml-10 mt-5 flex flex-wrap justify-center items-start gap-5 pb-6 px-4"
+            className="w-full mt-4 grid grid-cols-2 justify-center items-stretch gap-5 pb-6"
             aria-label="Daftar surah Al-Quran"
           >
             {filteredSurat.map((surat) => (
@@ -95,31 +96,44 @@ export default function AlQuranClient({ initialData }) {
                 key={surat.number}
                 className="no-underline"
               >
-                <article className="bg-white border border-gray-100 w-[350px] md:w-[353px] h-[110px] shadow-sm hover:shadow-md rounded-xl flex efek-click cursor-pointer transition-shadow duration-200">
-                  <div className="flex justify-center mt-4 w-[44px] h-full">
+                <article className="flex h-full w-full items-start gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
+                  <div className="flex justify-center border border-emerald-800  leading-none rounded-full shrink-0 w-6 h-6">
                     <div
-                      className={`${jakarta.className} text-[13px] flex justify-center items-center text-white w-[28px] h-[28px] bg-emerald-600 rounded-full`}
+                      className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-800 `}
                     >
                       {surat.number}
                     </div>
                   </div>
-                  <div
-                    className={`${jakarta.className} flex flex-1 flex-col justify-center items-center md:items-start text-left leading-[1.3] md:w-[180px] h-auto mx-2`}
-                  >
-                    <h2 className="text-[24px] font-semibold text-gray-800">
-                      {surat.name_id}
-                    </h2>
-                    <p
-                      className={`${openSans.className} text-[12px] text-gray-500`}
+
+                  <div className="flex flex-col justify-between items-center leading-tight w-full">
+                    <div
+                      className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                     >
-                      {`${surat.translation_id} · ${surat.revelation_id} · ${surat.number_of_verses}`}
-                    </p>
-                  </div>
-                  <div
-                    className="flex flex-1 flex-col justify-center items-center w-auto h-auto text-[28px] text-emerald-700"
-                    aria-hidden="true"
-                  >
-                    {surat.name_short}
+                      <h2 className="text-[16px] font-semibold text-emerald-800">
+                        {surat.name_id}
+                      </h2>
+
+                      <div
+                        className="text-[24px] text-emerald-700"
+                        aria-hidden="true"
+                      >
+                        {surat.name_short}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between w-full">
+                      <p
+                        className={`${jakarta.className} text-[12px] font-medium text-[#6c6c6c]`}
+                      >
+                        {`${surat.translation_id} - ${surat.revelation_id} `}
+                      </p>
+
+                      <p
+                        className={`${jakarta.className} text-[12px] text-right font-medium text-[#6c6c6c]`}
+                      >
+                        {`${surat.number_of_verses}`} ayat
+                      </p>
+                    </div>
                   </div>
                 </article>
               </Link>

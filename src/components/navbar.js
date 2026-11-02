@@ -74,7 +74,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed md:hidden w-full h-18 bg-white border-b border-gray-100 flex items-center justify-between px-4 top-0 z-50 shadow-sm">
+      <header className="fixed inset-x-2 py-3 top-2 z-50 flex items-center justify-between rounded-xl lg:rounded-2xl border border-white shadow-xs bg-white/40 px-4 backdrop-blur-md md:hidden">
         <div className="flex items-center">
           <Image
             src="/suaraislam.png"
@@ -105,7 +105,7 @@ export default function Navbar() {
       )}
 
       <aside
-        className={`${jakarta.className} fixed top-0 right-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
+        className={`${jakarta.className} fixed top-0 right-0 h-full w-72 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-label="Menu navigasi"
@@ -154,7 +154,7 @@ export default function Navbar() {
 
       <div
         ref={sidebarRef}
-        className={`${jakarta.className} hidden md:flex flex-col w-[290px] shrink-0 self-start h-fit sticky border-r p-6 border-black/10`}
+        className={`${jakarta.className} bg-white/40 backdrop-blur-md hidden md:flex flex-col w-[290px] m-4 shrink-0 self-start h-fit sticky border rounded-2xl p-6 border-white`}
       >
         <div className="w-full flex items-end gap-3">
           <Link href="/home">
@@ -169,8 +169,8 @@ export default function Navbar() {
           </Link>
           <div className="flex flex-col leading-none translate-y-1">
             <span className="font-bold text-xl leading-tight">Suara Islam</span>
-            <span className="text-sm text-slate-400 font-medium">
-              Al-Quran & Doa Harian
+            <span className="text-sm text-[#6c6c6c] font-medium">
+              Al-Quran & Referensi Islami
             </span>
           </div>
         </div>

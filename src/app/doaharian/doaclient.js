@@ -43,8 +43,12 @@ export default function DoaHarianClient({ initialData }) {
             <Navbar />
           </div>
 
-          <div className="w-full">
-            <Header Title="Doa Harian" Description="Doa Harian dan Terjemahan">
+          <div className="h-full p-10 bg-white/40 rounded-2xl my-4 mr-4 backdrop-blur-md border border-white">
+            <Header
+              Title="Doa Harian"
+              subtitle="Doa-doa pilihan sehari-hari"
+              Description="Doa Harian dan Terjemahan"
+            >
               <div className="mt-4">
                 <Search
                   value={searchQuery}
@@ -54,20 +58,18 @@ export default function DoaHarianClient({ initialData }) {
             </Header>
 
             {/* Doa List */}
-            <div className="flex justify-center items-center flex-wrap gap-6 mt-5 mb-10">
+            <div
+              className={`${jakarta.className} grid grid-cols-3 gap-6 items-stretch h-full mt-12`}
+            >
               {filteredDoa.map((doa, index) => (
                 <Link key={index} href={`/doaharian/${index + 1}`}>
-                  <div
-                    className={`${jakarta.className} flex justify-center w-[375px] md:w-[90%] items-center mt-5`}
-                  >
-                    <div className="flex flex-col text-center justify-center items-center w-[65%] md:w-[255px] h-[175px] border-[1px] border-black/20 shadow-xl rounded-[10px] efek-click">
-                      <h1 className="font-semibold text-[18px] mx-3 text-black">
-                        {doa.judul}
-                      </h1>
-                      <p className="text-[13px] text-black/80 mt-3">
-                        Doa Harian
-                      </p>
-                    </div>
+                  <div className="flex flex-col text-left justify-center items-start bg-white/40 backdrop-blur-md rounded-xl shadow-xs h-full px-4 py-2 border-[1px] border-black/20 hover:border-emerald-600 hover:bg-emerald-100/40 duration-200">
+                    <p className="text-[12px] text-[#6c6c6c] font-medium">
+                      Doa Harian
+                    </p>
+                    <h1 className="font-semibold text-[14px]  text-emerald-800">
+                      {doa.judul}
+                    </h1>
                   </div>
                 </Link>
               ))}

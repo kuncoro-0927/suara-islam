@@ -52,9 +52,10 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
       <div className="flex m-0 p-0">
         <Navbar />
 
-        <div className="md:flex-1   min-h-screen p-10">
+        <div className="md:flex-1 mx-2 mb-2 mt-[90px] bg-white/40 backdrop-blur-md border border-white rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4  min-h-screen p-4 lg:p-10">
           <Header
             Title="Suara Islam"
+            subtitle="Waktu Sholat Realtime"
             Description="Al - Quran, Hadis, Doa, dan Lainnya"
           />
 
@@ -64,11 +65,13 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
           />
 
           <div className="flex flex-col items-start gap-3 my-8">
-            <span className="font-medium text-sm text-slate-400">
+            <span
+              className={`${jakarta.className} font-medium text-sm text-[#6c6c6c]`}
+            >
               Pilihan Cepat & Surat Populer
             </span>
             <nav
-              className="flex flex-wrap justify-center items-center gap-3"
+              className="flex flex-wrap justify-start md:justify-center items-start md:items-center gap-3"
               aria-label="Surat pilihan"
             >
               {SuratUtama.map((surat) => (
@@ -78,7 +81,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                     surat.isSpecialPage ? surat.route : `/alquran/${surat.id}`
                   }
                 >
-                  <div className="flex justify-center items-center px-5 py-2 rounded-full border bg-white shadow-sm border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-800 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
+                  <div className="flex justify-center items-center px-5 py-2 rounded-full border bg-white/40 backdrop-blur-md shadow-xs border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-800 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
                     <div className="flex items-center gap-2">
                       <surat.icon size={18} className="text-emerald-600" />
                       <span
@@ -94,7 +97,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
             </nav>
           </div>
           <section
-            className="w-full mt-4 grid grid-cols-2 justify-center items-stretch gap-5 pb-6"
+            className="w-full mt-4 grid grid-cols-1 md:grid-cols-2 justify-center items-stretch gap-3 md:gap-5"
             aria-label="Daftar surat Al-Quran"
           >
             {initialSurahList.length === 0 && (
@@ -106,7 +109,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                 key={surat.number}
                 className="no-underline "
               >
-                <article className="flex h-full w-full items-start gap-4 rounded-xl border border-black/10 shadow-xs bg-white p-4 transition-all duration-200 hover:border-emerald-600 hover:shadow-sm cursor-pointer">
+                <article className="flex h-full w-full items-start gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
                   <div className="flex justify-center border border-emerald-800  leading-none rounded-full shrink-0 w-6 h-6">
                     <div
                       className={`${jakarta.className} text-[12px] font-medium flex justify-center items-center text-emerald-800 `}
@@ -119,7 +122,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                     <div
                       className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                     >
-                      <h2 className="text-[16px] font-medium text-gray-800">
+                      <h2 className="text-[16px] font-semibold text-emerald-800">
                         {surat.name_id}
                       </h2>
 
@@ -133,13 +136,13 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
 
                     <div className="flex justify-between w-full">
                       <p
-                        className={`${openSans.className} text-[13px] text-gray-600`}
+                        className={`${jakarta.className} text-[12px] text-[#6c6c6c] font-medium`}
                       >
                         {`${surat.translation_id} - ${surat.revelation_id} `}
                       </p>
 
                       <p
-                        className={`${openSans.className} text-[13px] text-right text-gray-600`}
+                        className={`${jakarta.className} text-[12px] text-[#6c6c6c] font-medium text-right `}
                       >
                         {`${surat.number_of_verses}`} ayat
                       </p>

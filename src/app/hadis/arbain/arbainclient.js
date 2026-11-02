@@ -6,7 +6,7 @@ import Navbar from "../../../components/navbar";
 import Header from "../../../components/header";
 import Link from "next/link";
 import Search from "../../../components/search";
-
+import { IoIosArrowRoundBack } from "react-icons/io";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -164,16 +164,17 @@ export default function HadisArbain() {
   return (
     <>
       <main>
-        <div className="flex m-0 p-0">
+        <div className={`${jakarta.className} flex m-0 p-0`}>
           <div>
             <Navbar />
           </div>
-          <div className="w-full">
+          <div className="w-full p-10 bg-white/40 backdrop-blur-md rounded-2xl my-4 mr-4 border border-white">
             <Header
               Title="Hadis Arbain"
+              subtitle="Pondasi ajaran Islam"
               Description="Koleksi 42 Hadis Arbain Nawawi"
             >
-              <div className="mt-4">
+              <div className="mt-8">
                 <Search
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -182,18 +183,15 @@ export default function HadisArbain() {
             </Header>
 
             {/* Back Button */}
-            <div className="mx-5 my-3">
-              <Link href="/hadis">
+            <div className=" w-fit mt-8">
+              <Link href="/hadis" className="">
                 <button
-                  className="px-3 sm:px-4 md:px-6 
-                          py-1.5 sm:py-2 md:py-2.5 
-                          bg-emerald-600 text-white rounded-md 
-                          hover:bg-emerald-800 transition-colors duration-200 
-                          flex items-center gap-2 
-                          text-xs sm:text-sm md:text-base
-                           md:ml-5"
+                  className="s duration-200 
+                          flex items-center gap-1 
+                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-800 cursor-pointer
+                          "
                 >
-                  <FaChevronLeft className="text-sm sm:text-base md:text-lg" />
+                  <IoIosArrowRoundBack className="text-xl" />
                   Kembali ke Hadis
                 </button>
               </Link>
@@ -201,8 +199,8 @@ export default function HadisArbain() {
 
             {/* Search Results Info */}
             {searchQuery && !loading && !error && (
-              <div className="mx-5 mb-3">
-                <p className="text-sm text-gray-600 md:ml-5">
+              <div className="mt-8">
+                <p className="text-sm text-[#6c6c6c]">
                   {filteredCount > 0
                     ? `Ditemukan ${filteredCount} hadis untuk pencarian "${searchQuery}"`
                     : `Tidak ada hadis ditemukan untuk pencarian "${searchQuery}"`}
@@ -238,23 +236,23 @@ export default function HadisArbain() {
             {/* Hadis List */}
             {!loading && !error && (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-5 px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-5">
                   {hadisList.length > 0 ? (
                     hadisList.map((hadis, index) => (
                       <Link
                         key={`arbain-${hadis.no}-${index}`}
                         href={`/hadis/${hadis.no}?category=Arbain`}
                       >
-                        <div className={`${jakarta.className} flex`}>
-                          <div className="flex flex-col text-center justify-center items-center w-full h-[175px] border border-black/20 shadow-md rounded-lg efek-click hover:shadow-xl transition-shadow duration-200 bg-white">
-                            <h1 className="font-semibold text-[16px] md:text-[18px] mx-3 mt-3 text-black line-clamp-2">
-                              {hadis.judul || `Arbain No.${hadis.no}`}
-                            </h1>
+                        <div className={`${jakarta.className} flex h-full`}>
+                          <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:border-emerald-600 transition-all duration-200">
                             {hadis.no && (
-                              <p className="text-[12px] text-gray-500 mt-1">
+                              <p className="text-[12px] text-[#6c6c6c] font-medium">
                                 No. {hadis.no}
                               </p>
                             )}
+                            <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
+                              {hadis.judul || `Arbain No.${hadis.no}`}
+                            </h1>
                           </div>
                         </div>
                       </Link>
@@ -263,7 +261,7 @@ export default function HadisArbain() {
                     <div className="col-span-full text-center py-10">
                       <p className="text-gray-600">
                         {searchQuery
-                          ? "Tidak ada hadis ditemukan dengan pencarian tersebut"
+                          ? ""
                           : "Tidak ada hadis ditemukan"}
                       </p>
                     </div>
@@ -319,7 +317,7 @@ export default function HadisArbain() {
                 )}
 
                 {/* Page Info */}
-                <div className="text-center text-gray-500 text-sm mb-8">
+                <div className="text-center text-gray-500 text-sm mt-12">
                   {searchQuery ? (
                     <>
                       Menampilkan hasil pencarian: {hadisList.length} dari{" "}

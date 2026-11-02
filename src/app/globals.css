@@ -43,14 +43,14 @@
     -moz-appearance: none;
     background-image: url("data:image/svg+xml;utf8,<svg fill='%23059669' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
+    background-position: center;
     background-size: 1rem;
-    padding-right: 2.5rem;
+    /* padding-right: 2.5rem; */
   }
 }
 
 body {
-  background-color: #fafaf9;
+  background-color: rgba(236, 236, 236, 0.911);
   color: #1c1917;
 }
 

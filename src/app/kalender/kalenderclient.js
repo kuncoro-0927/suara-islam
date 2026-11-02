@@ -10,9 +10,11 @@ import {
   IconLink,
   IconCheck,
 } from "../../components/icons";
+import { BsSearch } from "react-icons/bs";
 import { fetchTanggalMasehi, fetchJadwalSholat, fetchHijriToday } from "./api";
 import ShareEmbedButton from "../../components/ShareEmbedButton";
-
+import { PiMoonStarsFill } from "react-icons/pi";
+import { PiSunFill } from "react-icons/pi";
 const CityPopup = lazy(() => import("../../components/citypopup"));
 const HijriMonthPopup = lazy(() => import("../../components/hijripopup"));
 const MonthPopup = lazy(() => import("../../components/monthpopup"));
@@ -96,6 +98,8 @@ export default function Beranda({
     id: "1301",
     lokasi: "KOTA JAKARTA",
   });
+  const toTitleCase = (str = "") =>
+    str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
   const isToday = (tanggalString) => {
     const today = new Date();
@@ -420,105 +424,115 @@ export default function Beranda({
           <Navbar />
         </div>
 
-        <div className="w-full overflow-hidden">
+        <div className="w-full p-10 overflow-hidden bg-white/40 backdrop-blur-md my-4 mr-4 rounded-2xl border border-white">
           <Header
             Title="Jadwal Sholat"
+            subtitle="Jadwal Sholat Realtime"
             Description="Jadwal Sholat Selama Satu Bulan"
           />
 
-          <div className="px-5 md:px-10">
-            {/* Info Bar: City + Month */}
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-4">
-              <p
-                className={`${jakarta.className} text-emerald-900 font-semibold text-base md:text-lg mb-3 flex items-center gap-2 flex-wrap`}
+          <div className="mt-8">
+            <div className="flex items-center shadow-xs bg-white/40 backdrop-blur-md gap-0.5 border rounded-lg border-black/10 mb-4 w-fit p-0.5 ">
+              <button
+                className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
+                  mode === "masehi"
+                    ? "text-white bg-emerald-600"
+                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-800"
+                }`}
+                onClick={() => setMode("masehi")}
               >
-                <span>Jadwal Sholat untuk</span>
-                <span className="inline-flex items-center gap-1.5 bg-emerald-700 text-white px-3 py-1 rounded-full text-sm">
-                  <IconMapMarker size={13} />
-                  {selectedCity.lokasi}
+                <PiSunFill />
+                Masehi
+              </button>
+
+              <button
+                className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
+                  mode === "hijriyah"
+                    ? "text-white  bg-emerald-600 "
+                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-800"
+                }`}
+                onClick={() => setMode("hijriyah")}
+              >
+                <PiMoonStarsFill />
+                Hijriyah
+              </button>
+            </div>
+            {/* Info Bar: City + Month */}
+            <div className="flex flex-col  px-8 py-4 border border-emerald-600 shadow-sm bg-emerald-100/40 backdrop-blur-md rounded-xl mb-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  {" "}
+                  <p
+                    className={`${jakarta.className} text-emerald-900 font-semibold text-xl  flex items-center flex-wrap`}
+                  >
+                    <span>
+                      Jadwal Sholat untuk {toTitleCase(selectedCity.lokasi)},{" "}
+                      {mode === "masehi"
+                        ? getFormattedMonth(selectedMonth)
+                        : `${hijriMonths[hijriMonth - 1]} ${hijriYear} H`}
+                    </span>{" "}
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={
+                      mode === "masehi"
+                        ? handleDownloadPDF
+                        : handleDownloadPDFHijri
+                    }
+                    className="flex items-center gap-2 px-3 text-xs py-1 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                    disabled={
+                      loading ||
+                      (mode === "masehi"
+                        ? jadwal.length === 0
+                        : jadwalHijri.length === 0)
+                    }
+                    aria-label="Download PDF"
+                  >
+                    <IconDownload size={12} />
+                    <span className="hidden sm:inline">PDF</span>
+                  </button>
+                  <ShareEmbedButton
+                    url={shareUrl}
+                    embedUrl={embedCode}
+                    OverrideStyle="bg-white/40 border border-emerald-600 text-emerald-800 shadow-sm hover:bg-white/80"
+                  />
+                </div>
+              </div>
+
+              <span className="flex items-center gap-2 text-sm text-gray-600">
+                Lokasi terpilih:
+                <IconMapMarker size={12} />{" "}
+                <span className="-translate-y-px -translate-x-1">
+                  {toTitleCase(selectedCity.lokasi)}
                 </span>
-                <span>
-                  {mode === "masehi"
-                    ? getFormattedMonth(selectedMonth)
-                    : `${hijriMonths[hijriMonth - 1]} ${hijriYear} H`}
-                </span>
-              </p>
+              </span>
 
-              {/* Controls Row */}
-              <div className="flex flex-wrap items-center gap-2">
-                {/* Mode Toggle */}
+              <div className="flex items-center gap-3">
                 <button
-                  className={`py-1.5 px-3 rounded-md border text-xs font-medium transition-colors ${
-                    mode === "masehi"
-                      ? "bg-emerald-600 text-white border-emerald-600"
-                      : "bg-white text-emerald-600 border-emerald-300 hover:bg-emerald-50"
-                  }`}
-                  onClick={() => setMode("masehi")}
-                >
-                  Masehi
-                </button>
-                <button
-                  className={`py-1.5 px-3 rounded-md border text-xs font-medium transition-colors ${
-                    mode === "hijriyah"
-                      ? "bg-emerald-600 text-white border-emerald-600"
-                      : "bg-white text-emerald-600 border-emerald-300 hover:bg-emerald-50"
-                  }`}
-                  onClick={() => setMode("hijriyah")}
-                >
-                  Hijriyah
-                </button>
-
-                <div className="w-px h-6 bg-emerald-200 mx-1 hidden sm:block" />
-
-                {/* City Selector */}
-                <button
-                  className="flex items-center gap-1.5 py-1.5 px-3 rounded-md border border-emerald-300 bg-white text-xs font-medium text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
                   onClick={() => setIsPopupOpen(true)}
+                  className="mt-4 flex items-center gap-2 px-4 text-sm py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
-                  <IconMapMarker size={12} />
-                  Pilih Kota
+                  <BsSearch size={12} />
+                  <span> Pilih Kota</span>
                 </button>
 
-                {/* Month Picker */}
                 <button
-                  className="flex items-center gap-1.5 py-1.5 px-3 rounded-md border border-emerald-300 bg-white text-xs font-medium text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
                   onClick={() =>
                     mode === "masehi"
                       ? setIsMonthPopupOpen(true)
                       : setIsHijriPopupOpen(true)
                   }
+                  className="mt-4 flex items-center gap-2 px-4 text-sm py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
                   <IconCalendar size={12} />
-                  Pilih Bulan
+                  <span> Pilih Bulan</span>
                 </button>
-
-                <div className="w-px h-6 bg-emerald-200 mx-1 hidden sm:block" />
-
-                {/* Download & Share */}
-                <button
-                  onClick={
-                    mode === "masehi"
-                      ? handleDownloadPDF
-                      : handleDownloadPDFHijri
-                  }
-                  className="flex items-center gap-1.5 py-1.5 px-3 rounded-md bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors"
-                  disabled={
-                    loading ||
-                    (mode === "masehi"
-                      ? jadwal.length === 0
-                      : jadwalHijri.length === 0)
-                  }
-                  aria-label="Download PDF"
-                >
-                  <IconDownload size={12} />
-                  <span className="hidden sm:inline">PDF</span>
-                </button>
-                <ShareEmbedButton url={shareUrl} embedUrl={embedCode} />
               </div>
             </div>
 
             {/* Table */}
-            <div className="overflow-x-auto mb-8 rounded-xl shadow-sm border border-gray-200">
+            <div className="overflow-x-auto rounded-xl shadow-sm border border-gray-200">
               {loading ? (
                 <p className="p-4">Loading...</p>
               ) : mode === "masehi" ? (
@@ -550,7 +564,7 @@ export default function Beranda({
                       {jadwal.map((day, index) => {
                         const isTodayRow = isToday(day.tanggal);
                         const cellClass = isTodayRow
-                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100 font-semibold text-emerald-800 text-sm"
+                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100/60 font-semibold text-emerald-800 text-sm"
                           : index % 2
                             ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
                             : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";

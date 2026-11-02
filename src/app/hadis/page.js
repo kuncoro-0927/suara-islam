@@ -99,5 +99,5 @@ export const metadata = {
 
 export default async function HadisPage() {
   const initialHadis = await getRandomHadis();
-  return <HadisClient initialHadis={initialHadis} />
+  return <HadisClient  initialHadis={initialHadis} />
 }

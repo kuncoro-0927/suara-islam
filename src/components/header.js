@@ -6,13 +6,13 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export default function Header({ Title, Description, children }) {
+export default function Header({ Title, subtitle, Description, children }) {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-100/49 text-emerald-700 border border-emerald-200">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Waktu Sholat Realtime
+          {subtitle}
         </span>
       </div>
 
@@ -22,7 +22,7 @@ export default function Header({ Title, Description, children }) {
         {Title}
       </h1>
       <p
-        className={`${jakarta.className} font-medium text-sm lg:text-sm text-slate-400`}
+        className={`${jakarta.className} font-medium text-sm lg:text-sm text-[#6c6c6c]`}
       >
         {Description}
       </p>

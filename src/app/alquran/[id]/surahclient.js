@@ -2,16 +2,13 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Navbar from "@/components/navbar";
-import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconPlay,
-  IconPause,
-  BookOpenLightIcon,
-} from "@/components/icons";
+import { TbPlayerPauseFilled, TbPlayerPlayFilled } from "react-icons/tb";
+import { IconPlay, IconPause, BookOpenLightIcon } from "@/components/icons";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import Link from "next/link";
-
+import FloatingPlayer from "@/components/floatingplayer";
+import Portal from "@/components/portal";
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -24,6 +21,11 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
+const pad = (n) => String(n).padStart(3, "0");
+const audioUrl = (surah, ayah) =>
+  `https://verses.quran.foundation/Alafasy/mp3/${pad(surah)}${pad(ayah)}.mp3`;
+
+const toArabicNumber = (n) => String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 export default function SurahClient({
   initialDetail,
   surahId,
@@ -33,6 +35,8 @@ export default function SurahClient({
   const [suratAyat, setSuratAyat] = useState(initialAyat);
   const [loadingMore, setLoadingMore] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(null);
+  const [autoPlayAfter, setAutoPlayAfter] = useState(null);
+  const [currentAyah, setCurrentAyah] = useState(null);
   const [error, setError] = useState(null);
   const [nextStart, setNextStart] = useState(
     initialAyat.length > 0
@@ -61,16 +65,7 @@ export default function SurahClient({
 
       const res = await fetch(
         `https://api.myquran.com/v2/quran/ayat/${surahId}/${range}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            // PERBAIKAN: Menambahkan User-Agent agar request client-side tidak diblokir Cloudflare
-            "User-Agent":
-              "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-          },
-        },
+        { headers: { Accept: "application/json" } },
       );
 
       if (!res.ok) {
@@ -78,7 +73,6 @@ export default function SurahClient({
       }
 
       const data = await res.json();
-
       if (data.error) {
         throw new Error(data.error);
       }
@@ -132,28 +126,118 @@ export default function SurahClient({
     return () => observer.disconnect();
   }, [fetchAyatBatch]);
 
-  const handlePlayPause = (ayah) => {
+  const playAyah = async (ayah) => {
     const audio = audioRefs.current[ayah];
     if (!audio) return;
 
-    if (audioPlaying === ayah) {
-      audio.pause();
-      setAudioPlaying(null);
-    } else {
-      Object.values(audioRefs.current).forEach((a) => a.pause());
-      audio.play();
+    setCurrentAyah(ayah);
+
+    Object.values(audioRefs.current).forEach((a) => {
+      if (a && a !== audio) {
+        a.pause();
+        a.currentTime = 0;
+      }
+    });
+
+    try {
+      await audio.play();
       setAudioPlaying(ayah);
+    } catch (err) {
+      console.error("Gagal play ayat", ayah, audio.src, err);
+      setAudioPlaying(null);
     }
   };
 
-  const handleAudioEnded = () => {
-    setAudioPlaying(null);
+  const handlePlayPause = (ayah) => {
+    if (audioPlaying === ayah) {
+      audioRefs.current[ayah]?.pause();
+      setAudioPlaying(null);
+      return;
+    }
+    playAyah(ayah);
   };
+
+  const goNext = (fromAyah) => {
+    const i = suratAyat.findIndex((a) => a.ayah === fromAyah);
+    const next = suratAyat[i + 1];
+
+    if (next) {
+      playAyah(next.ayah);
+      return;
+    }
+
+    setAudioPlaying(null);
+    if (nextStart <= Number(suratDetail.number_of_verses)) {
+      setAutoPlayAfter(fromAyah);
+      fetchAyatBatch();
+    }
+  };
+
+  const goPrev = () => {
+    const i = suratAyat.findIndex((a) => a.ayah === currentAyah);
+    const prev = suratAyat[i - 1];
+    if (prev) playAyah(prev.ayah);
+  };
+
+  const closePlayer = () => {
+    audioRefs.current[currentAyah]?.pause();
+    setAudioPlaying(null);
+    setCurrentAyah(null);
+  };
+
+  const handleAudioEnded = (ayah) => goNext(ayah);
+
+  const currentIndex = suratAyat.findIndex((a) => a.ayah === currentAyah);
+  const hasPrev = currentIndex > 0;
+  const hasNext =
+    currentIndex < suratAyat.length - 1 ||
+    nextStart <= Number(suratDetail.number_of_verses);
+
+  // begitu batch baru masuk, putar ayat yang tadi tertunda
+  useEffect(() => {
+    if (autoPlayAfter == null) return;
+    const i = suratAyat.findIndex((a) => a.ayah === autoPlayAfter);
+    const next = suratAyat[i + 1];
+    if (next) {
+      setAutoPlayAfter(null);
+      playAyah(next.ayah);
+    }
+  }, [suratAyat, autoPlayAfter]);
 
   const handleRetry = () => {
     setError(null);
     fetchAyatBatch();
   };
+
+  useEffect(() => {
+    if (audioPlaying == null) return;
+    document
+      .getElementById(`ayat-${audioPlaying}`)
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [audioPlaying]);
+
+  // hentikan semua audio & tutup player saat komponen hilang
+  useEffect(() => {
+    const refs = audioRefs.current;
+    return () => {
+      Object.values(refs).forEach((a) => {
+        if (!a) return;
+        a.pause();
+        a.removeAttribute("src");
+        a.load(); // lepaskan sumber audio supaya benar-benar berhenti
+      });
+    };
+  }, []);
+
+  // kalau pindah ke surah lain tapi komponen dipakai ulang, reset juga
+  useEffect(() => {
+    return () => {
+      Object.values(audioRefs.current).forEach((a) => a?.pause());
+      setAudioPlaying(null);
+      setCurrentAyah(null);
+      setAutoPlayAfter(null);
+    };
+  }, [surahId]);
 
   const ayatBadgePoints = Array.from({ length: 24 }, (_, i) => {
     const r = i % 2 === 0 ? 48 : 40; // ujung luar & lekuk dalam
@@ -175,13 +259,13 @@ export default function SurahClient({
   }
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen">
       <div className="flex">
         <Navbar />
-        <div className="flex-1 min-h-screen flex flex-col justify-center items-center overflow-hidden pb-10 pt-[72px] md:pt-0">
+        <div className="flex-1 p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white my-4 mr-4 rounded-2xl">
           {/* Error Display */}
           {error && (
-            <div className="w-[90%] md:w-[800px] mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
               <p className="text-red-700 text-center mb-3">{error}</p>
               <div className="text-center">
                 <button
@@ -196,25 +280,19 @@ export default function SurahClient({
           )}
 
           {/* Header */}
-          <div className="flex justify-center items-center flex-col h-auto w-[90%] md:w-[800px] px-8 mt-20 md:mt-8 bg-white border border-black/20 shadow-xs rounded-2xl py-8">
-            <div className="bg-emerald-600 w-full h-[48px] rounded-xl flex justify-center items-center">
+          <div className="flex justify-center items-center flex-col w-full rounded-2xl mb-4">
+            <div className=" w-full flex justify-between items-center">
               <Link href="/alquran" aria-label="Kembali ke daftar surah">
                 <div
-                  className={`${jakarta.className} flex justify-center items-center w-auto efek-opacity`}
+                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-800 duration-200`}
                 >
-                  <IconArrowLeft size={14} className="text-white mr-2 ml-3" />
-                  <span className="text-white font-normal text-[11px] md:text-[15px]">
-                    Kembali
-                  </span>
+                  <IoIosArrowRoundBack
+                    size={22}
+                    className="group-hover:scale-110 duration-200"
+                  />
+                  <span className="text-[12px] md:text-[14px]">Kembali</span>
                 </div>
               </Link>
-              <div
-                className={`${jakarta.className} flex justify-center items-center flex-1`}
-              >
-                <span className="font-semibold text-[13px] md:text-[17px] text-white">
-                  Surah - {suratDetail.number}
-                </span>
-              </div>
 
               <Link
                 href={`/alquran/${
@@ -225,37 +303,66 @@ export default function SurahClient({
                 aria-label="Surah selanjutnya"
               >
                 <div
-                  className={`${jakarta.className} flex justify-center items-center w-auto efek-opacity`}
+                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-800 duration-200`}
                 >
-                  <span className="text-white font-normal text-[11px] md:text-[15px]">
+                  <span className="text-[12px] md:text-[14px]">
                     Selanjutnya
                   </span>
-                  <IconArrowRight size={14} className="text-white ml-2 mr-3" />
+                  <IoIosArrowRoundForward
+                    size={22}
+                    className="group-hover:scale-110 duration-200"
+                  />
                 </div>
               </Link>
             </div>
 
             <div
-              className={`${jakarta.className} flex justify-center text-left items-center flex-col  leading-tight mt-8 w-[100%] md:w-[800px]`}
+              className={`${jakarta.className} flex justify-center text-left items-center flex-col  leading-tight mt-8 w-full`}
             >
-              <p
-                className="text-[28px] font-medium text-emerald-800"
-                aria-hidden="true"
+              <div
+                className={`${jakarta.className} flex justify-center items-center `}
               >
-                {suratDetail.arab}
-              </p>
-              <h1 className="text-[28px] font-semibold text-emerald-800 mt-1">
-                {suratDetail.name_id}
-              </h1>
-              <p
-                className={`${openSans.className} font-normal text-[14px] text-gray-500 mt-1`}
-              >
-                {suratDetail.revelation_id} · {suratDetail.number_of_verses}{" "}
-                ayat
-              </p>
+                <span className="font-semibold text-[14px] md:text-[14px] leading-tight text-emerald-800">
+                  Surah ke {suratDetail.number}
+                </span>
+              </div>
 
-              <hr className="border border-gray-200 w-[180px] mt-6 mb-6" />
-              <div className="bg-emerald-100/30 border border-emerald-300 backdrop-blur-md px-4 py-8 mx-8 rounded-2xl">
+              <div className="text-[28px] flex items-center gap-2 font-semibold text-emerald-800 mt-6">
+                <span>{suratDetail.name_id}</span> -
+                {/* <span>{suratDetail.translation_id}</span> */}
+                <span className=" text-[34px]  leading-none">
+                  {" "}
+                  {suratDetail.name_short}
+                </span>
+              </div>
+
+              <div className="flex items-start gap-6 mt-2 text-sm">
+                <div className="flex flex-col items-center justify-center">
+                  <span className="font-medium text-[rgb(108,108,108)]">
+                    Golongan
+                  </span>
+                  <span className="text-emerald-800 font-medium text-lg">
+                    {suratDetail.revelation_id}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-center justify-center">
+                  <span className="font-medium text-[#6c6c6c]">Arti surah</span>
+                  <span className="text-emerald-800 font-medium text-lg">
+                    {suratDetail.translation_id}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-center justify-center">
+                  <span className="font-medium text-[#6c6c6c]">
+                    Jumlah ayat
+                  </span>
+                  <span className="text-emerald-800 font-medium text-lg">
+                    {suratDetail.number_of_verses}
+                  </span>
+                </div>
+              </div>
+              <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-8 mt-8 rounded-2xl">
                 <div className="flex items-start gap-4">
                   <div className="bg-emerald-600 w-fit p-2.5 rounded-full">
                     <BookOpenLightIcon className="text-white" />
@@ -278,86 +385,115 @@ export default function SurahClient({
           </div>
 
           {/* Render ayat */}
-          {suratAyat.map((ayat, index) => (
-            <article
-              key={ayat.ayah || index}
-              className="flex flex-col bg-white border border-black/20 shadow-xs rounded-2xl w-[90%] md:w-[800px] h-auto my-3 p-8"
-            >
-              <div className="flex gap-3 items-center">
-                {/* <div
-                  className={`${jakarta.className} text-[13px] flex justify-center items-center text-white w-[28px] h-[28px] bg-emerald-600 rounded-full`}
-                  aria-label={`Ayat ${ayat.ayah}`}
-                >
-                  {ayat.ayah}
-                </div> */}
-                <div>
-                  <button
-                    onClick={() => handlePlayPause(ayat.ayah)}
-                    aria-label={
-                      audioPlaying === ayat.ayah
-                        ? `Jeda audio ayat ${ayat.ayah}`
-                        : `Putar audio ayat ${ayat.ayah}`
-                    }
-                    className="p-1 rounded-full hover:bg-emerald-50 transition-colors"
-                  >
-                    {audioPlaying === ayat.ayah ? (
-                      <IconPause size={26} className="text-emerald-600" />
-                    ) : (
-                      <IconPlay size={26} className="text-emerald-600" />
-                    )}
-                  </button>
-                  <audio
-                    ref={(el) => (audioRefs.current[ayat.ayah] = el)}
-                    src={ayat.audio}
-                    onEnded={handleAudioEnded}
-                  />
-                </div>
-              </div>
+          {suratAyat.map((ayat, index) => {
+            const isActive = audioPlaying === ayat.ayah;
 
-              <div
-                className={`${jakarta.className} w-full ml-auto text-right mt-2 text-[30px] md:text-[30px]  max-w-[95%] leading-[1.8] text-gray-800`}
-                dir="rtl"
-                lang="ar"
+            return (
+              <article
+                id={`ayat-${ayat.ayah}`}
+                key={ayat.ayah || index}
+                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-3 p-8 transition-colors duration-200 ${
+                  isActive
+                    ? "bg-emerald-100/40 backdrop-blur-md border-emerald-600"
+                    : "bg-white/40 backdrop-blur-md border-black/10"
+                }`}
               >
-                {ayat.arab}
-
-                <span
-                  className="relative mx-4 inline-flex h-[30px] w-[30px] items-center justify-center align-middle"
-                  aria-label={`Ayat ${ayat.ayah}`}
-                >
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="absolute inset-0 h-full w-full"
-                    aria-hidden="true"
-                  >
-                    <polygon
-                      points={ayatBadgePoints}
-                      className="fill-white stroke-emerald-600"
-                      strokeWidth="3"
-                      strokeLinejoin="round"
+                <div className="flex gap-3 items-center">
+                  <div>
+                    <button
+                      onClick={() => handlePlayPause(ayat.ayah)}
+                      aria-label={
+                        isActive
+                          ? `Jeda audio ayat ${ayat.ayah}`
+                          : `Putar audio ayat ${ayat.ayah}`
+                      }
+                      className="p-1 rounded-full bg-emerald-600 hover:ring-5 hover:ring-emerald-50 cursor-pointer transition-colors"
+                    >
+                      {isActive ? (
+                        <TbPlayerPauseFilled size={18} className="text-white" />
+                      ) : (
+                        <TbPlayerPlayFilled size={18} className="text-white" />
+                      )}
+                    </button>
+                    <audio
+                      ref={(el) => (audioRefs.current[ayat.ayah] = el)}
+                      src={audioUrl(surahId, ayat.ayah)}
+                      preload="none"
+                      onEnded={() => handleAudioEnded(ayat.ayah)}
+                      onError={(e) =>
+                        console.error("Audio error:", e.currentTarget.src)
+                      }
                     />
-                  </svg>
+                  </div>
+                </div>
+
+                <div
+                  className={`${jakarta.className} w-full ml-auto text-right mt-4 text-[30px] md:text-[34px] max-w-[95%] leading-[1.8] text-gray-800`}
+                  dir="rtl"
+                  lang="ar"
+                >
+                  {ayat.arab}
+
                   <span
-                    className={`${jakarta.className} mt-0.5 relative text-[11px] font-medium leading-none text-emerald-700`}
+                    className="relative mx-4 inline-flex h-[34px] w-[34px] items-center justify-center align-middle"
+                    aria-label={`Ayat ${ayat.ayah}`}
                   >
-                    {ayat.ayah}
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="absolute inset-0 h-full w-full"
+                      aria-hidden="true"
+                    >
+                      <polygon
+                        points={ayatBadgePoints}
+                        className={`stroke-emerald-600 transition-colors duration-200 ${
+                          isActive ? "fill-emerald-600" : "fill-white"
+                        }`}
+                        strokeWidth="3"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span
+                      className={`${jakarta.className} mt-0.5 relative text-[14px] font-medium leading-none transition-colors duration-200 ${
+                        isActive ? "text-white" : "text-emerald-700"
+                      }`}
+                    >
+                      {toArabicNumber(ayat.ayah)}
+                    </span>
                   </span>
-                </span>
-              </div>
+                </div>
 
-              <div
-                className={`${openSans.className} text-justify flex text-[16px] md:text-[18px] text-emerald-700 font-normal mt-4 italic`}
-              >
-                {ayat.latin}
-              </div>
+                <div
+                  className={`${jakarta.className} text-justify flex text-[16px] md:text-[18px] text-emerald-700 font-normal mt-4 italic`}
+                >
+                  {ayat.latin}
+                </div>
 
-              <div
-                className={`${openSans.className} text-justify flex text-[15px] md:text-[14px] text-gray-600 font-normal mt-3 leading-relaxed`}
-              >
-                {ayat.text}
-              </div>
-            </article>
-          ))}
+                <div
+                  className={`${jakarta.className} text-justify flex text-[16px] text-gray-600 font-normal mt-3 leading-relaxed`}
+                >
+                  {ayat.text}
+                </div>
+              </article>
+            );
+          })}
+
+          {currentAyah != null && (
+            <Portal>
+              <FloatingPlayer
+                audio={audioRefs.current[currentAyah]}
+                surahName={suratDetail.name_id}
+                ayah={currentAyah}
+                totalAyah={suratDetail.number_of_verses}
+                isPlaying={audioPlaying === currentAyah}
+                hasPrev={hasPrev}
+                hasNext={hasNext}
+                onToggle={() => handlePlayPause(currentAyah)}
+                onPrev={goPrev}
+                onNext={() => goNext(currentAyah)}
+                onClose={closePlayer}
+              />
+            </Portal>
+          )}
 
           {/* Infinite Scroll Loader */}
           {nextStart <= suratDetail.number_of_verses && (
@@ -375,8 +511,8 @@ export default function SurahClient({
 
           {/* End Message */}
           {nextStart > suratDetail.number_of_verses && suratAyat.length > 0 && (
-            <div className="py-10 text-gray-400 text-center">
-              <p>— Selesai —</p>
+            <div className="py-10 text-[#6c6c6c] text-center">
+              <p className="text-sm">— Selesai —</p>
               <p className="text-sm mt-2">
                 Surah {suratDetail.name_id} ({suratDetail.number_of_verses}{" "}
                 Ayat)

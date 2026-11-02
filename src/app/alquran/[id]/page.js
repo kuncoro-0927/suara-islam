@@ -3,13 +3,14 @@ import SurahClient from "./surahclient";
 async function getSurahDetail(id) {
   try {
     const res = await fetch(`https://api.myquran.com/v2/quran/surat/${id}`, {
-      method: 'GET',
-      cache: 'no-store', // <--- Memaksa Next.js mengambil data segar dari API, bypass cache build lama
+      method: "GET",
+      cache: "no-store", // <--- Memaksa Next.js mengambil data segar dari API, bypass cache build lama
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
         // Menggunakan User-Agent browser asli agar lolos dari verifikasi bot/Cloudflare API
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       },
     });
 
@@ -32,15 +33,16 @@ async function getFirstAyatBatch(id, totalVerses) {
     const res = await fetch(
       `https://api.myquran.com/v2/quran/ayat/${id}/1-${end}`,
       {
-        method: 'GET',
-        cache: 'no-store', // <--- Memaksa Next.js mengambil data segar dari API, bypass cache build lama
+        method: "GET",
+        cache: "no-store", // <--- Memaksa Next.js mengambil data segar dari API, bypass cache build lama
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
           // Menggunakan User-Agent browser asli agar lolos dari verifikasi bot/Cloudflare API
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
-      }
+      },
     );
 
     if (!res.ok) return [];
@@ -189,7 +191,7 @@ export default async function SurahPage({ params }) {
   const surahDetail = await getSurahDetail(id);
   const initialAyat = await getFirstAyatBatch(
     id,
-    surahDetail?.number_of_verses
+    surahDetail?.number_of_verses,
   );
 
   return (

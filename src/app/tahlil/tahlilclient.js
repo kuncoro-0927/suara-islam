@@ -1,14 +1,8 @@
 "use client";
 
-import { Poppins, Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import { Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "../../components/navbar";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  display: "swap",
-});
-
+import Header from "@/components/header";
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -49,51 +43,50 @@ export default function TahlilClient({ initialData }) {
           </div>
 
           {/* Content */}
-          <div className="w-full flex flex-col justify-center items-center pt-[72px] md:pt-0">
+          <div className="w-full flex flex-col justify-start items-start p-10 bg-white/40 backdrop-blur-md my-4 mr-4 rounded-2xl border border-white">
             {/* Header */}
-            <div className="flex justify-center items-center flex-col h-auto w-[90%] md:w-[1000px] mt-25 md:mt-5 border border-black/20 shadow-xl rounded-[10px] py-5">
-              <div className="primary2 w-[90%] md:w-[975px] h-[52px] rounded-[10px] flex justify-center items-center">
-                <div
-                  className={`${jakarta.className} flex justify-center items-center flex-1`}
-                >
-                  <p className="font-semibold text-[18px] md:text-[24px] text-white">
-                    Tahlil
-                  </p>
-                </div>
-              </div>
+            <div className="mb-8">
+              {" "}
+              <Header
+                Title="Tahlil"
+                subtitle="Tahlil dan Terjemahan"
+                Description="Bacaan tahlil lengkap dan terjemahan"
+              ></Header>
             </div>
 
             {/* Render ayat */}
-            {dataTahlil.map((ayat, index) => (
-              <div
-                key={ayat.id || index}
-                className="flex flex-col border border-black/20 shadow-xl rounded-[10px] w-[90%] md:w-[1000px] h-auto my-3 p-10"
-              >
-                {/* Title */}
-                {ayat.title && (
+            <div className="flex flex-col gap-6">
+              {dataTahlil.map((ayat, index) => (
+                <div
+                  key={ayat.id || index}
+                  className="flex flex-col bg-white/40 backdrop-blur-md border border-black/10 shadow-xs rounded-xl w-full h-auto p-8"
+                >
+                  {/* Title */}
+                  {ayat.title && (
+                    <div
+                      className={`${openSans.className} text-left text-[14px] md:text-[18px] text-emerald-800 font-semibold mb-3`}
+                    >
+                      {ayat.title}
+                    </div>
+                  )}
+
+                  {/* Arabic Text */}
                   <div
-                    className={`${openSans.className} text-left text-[16px] md:text-[20px] text-black font-semibold mb-3`}
+                    className={`${jakarta.className} text-[30px] leading-[1.8] w-full text-right mt-3 mb-5`}
+                    style={{ direction: "rtl" }}
                   >
-                    {ayat.title}
+                    {ayat.arabic}
                   </div>
-                )}
 
-                {/* Arabic Text */}
-                <div
-                  className={`${jakarta.className} text-[33px] md:text-[48px] leading-[1.8] w-full text-right mt-3 mb-5`}
-                  style={{ direction: "rtl" }}
-                >
-                  {ayat.arabic}
+                  {/* Translation */}
+                  <div
+                    className={`${jakarta.className} text-justify text-[14px] text-[#6c6c6c] font-normal`}
+                  >
+                    {ayat.translation}
+                  </div>
                 </div>
-
-                {/* Translation */}
-                <div
-                  className={`${openSans.className} text-justify text-[16px] md:text-[20px] text-black/80 font-normal`}
-                >
-                  {ayat.translation}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </main>

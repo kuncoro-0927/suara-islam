@@ -1,14 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Navbar from "../../../components/navbar";
-import { IconArrowLeft, IconArrowRight } from "../../../components/icons";
-import { Poppins, Plus_Jakarta_Sans } from "next/font/google";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  display: "swap",
-});
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -83,75 +77,71 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
           <Navbar />
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center pt-[72px] md:pt-0">
-          <div className="flex justify-center items-center flex-col h-auto w-[90%] md:w-[950px] mt-25 md:mt-5 border border-black/20 shadow-xl rounded-[10px] py-5 mb-5">
-            <div className="primary2 w-[90%] h-[52px] rounded-[10px] flex justify-center items-center">
+        <div className="w-full flex flex-col justify-start items-center p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+          <div className="w-full flex justify-center items-center flex-col h-auto ">
+            <div className=" w-full flex justify-between items-center">
               <button
                 onClick={goBack}
-                className={`${jakarta.className} flex justify-center items-center w-auto efek-opacity cursor-pointer bg-transparent border-none`}
                 aria-label="Kembali"
+                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] hover:text-emerald-800 duration-200 cursor-pointer`}
               >
-                <IconArrowLeft size={14} className="text-white mr-2 ml-3" />
-                <span className="text-white font-normal text-[12px] md:text-[16px]">
-                  Kembali
-                </span>
+                <IoIosArrowRoundBack
+                  size={22}
+                  className="group-hover:scale-110 duration-200"
+                />
+                <span className="text-[12px] md:text-[14px]">Kembali</span>
               </button>
-
-              <div
-                className={`${jakarta.className} flex justify-center items-center flex-1`}
-              >
-                <p className="font-semibold text-[12px] text-center w-[70%] md:text-[18px] text-white">
-                  {title}
-                </p>
-              </div>
 
               <button
                 onClick={canNext ? () => navigate(currentId + 1) : undefined}
-                className={`${jakarta.className} flex justify-center items-center w-auto bg-transparent border-none ${
-                  canNext
-                    ? "efek-opacity cursor-pointer"
-                    : "opacity-50 cursor-not-allowed"
-                }`}
-                aria-label="Selanjutnya"
                 disabled={!canNext}
+                aria-label="Selanjutnya"
+                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 ${
+                  canNext
+                    ? "cursor-pointer hover:text-emerald-800"
+                    : "cursor-not-allowed opacity-50"
+                }`}
               >
-                <span className="text-white font-normal text-[12px] md:text-[16px]">
-                  Selanjutnya
-                </span>
-                <IconArrowRight size={14} className="text-white ml-2 mr-3" />
+                <span className="text-[12px] md:text-[14px]">Selanjutnya</span>
+                <IoIosArrowRoundForward
+                  size={22}
+                  className={
+                    canNext ? "group-hover:scale-110 duration-200" : ""
+                  }
+                />
               </button>
             </div>
 
             {hadis ? (
               <>
                 <div
-                  className={`${jakarta.className} flex justify-center items-center flex-col text-center px-4`}
+                  className={`${jakarta.className} flex justify-center w-full items-center flex-col text-center px-4 my-12`}
                 >
-                  <h1 className="text-black text-[22px] md:text-[36px] font-semibold w-full md:w-[700px] h-auto mt-6 leading-tight">
+                  <p className="font-semibold text-[14px] text-emerald-800 mb-2">
+                    {title}
+                  </p>
+
+                  <h1 className="text-emerald-800 text-[28px] font-semibold w-full h-auto max-w-lg leading-tight">
                     {hadis.judul || title}
                   </h1>
-                  <p className="text-black/50 text-[16px] md:text-[22px] font-semibold h-auto mt-2">
-                    {hadis.rawi || displayName}
-                  </p>
-                  <hr
-                    className="border border-black/20 w-full md:w-[250px] mt-6 mb-9"
-                    aria-hidden="true"
-                  />
                 </div>
 
                 <div
-                  className={`${jakarta.className} flex flex-col justify-center items-center text-center w-[350px] md:w-[850px] h-auto px-4`}
+                  className={`${jakarta.className} w-full bg-white/40 backdrop-blur-md flex border border-black/10 shadow-xs flex-col items-start p-8 rounded-xl`}
                 >
+                  <p className="text-emerald-800 text-[16px] font-semibold text-left leading-none mb-4">
+                    {hadis.judul || title}
+                  </p>
                   {arabText && (
                     <h2
-                      className="text-[20px] md:text-[28px] mb-6 leading-loose text-right w-[300px] md:w-[90%]"
+                      className="ml-auto text-[30px] md:text-[34px] max-w-[90%] mb-4 leading-loose text-right"
                       dir="rtl"
                     >
                       {arabText}
                     </h2>
                   )}
                   {indoText && (
-                    <p className="text-[15px] md:text-[20px] leading-relaxed text-justify w-[300px] md:w-[90%]">
+                    <p className="text-justify flex text-[16px] text-[#6c6c6c] font-normal  leading-relaxed">
                       {indoText}
                     </p>
                   )}

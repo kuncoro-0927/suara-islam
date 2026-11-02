@@ -6,6 +6,7 @@ import Header from "../../components/header";
 import HadisCard from "../hadis/hadiscard";
 import Link from "next/link";
 import Search from "../../components/search";
+import { FaScroll } from "react-icons/fa";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -58,9 +59,13 @@ export default function Hadis({ initialHadis = [] }) {
           <div>
             <Navbar />
           </div>
-          <div className="w-full">
-            <Header Title="Hadis" Description="Kumpulan Hadis dan terjemahan">
-              <div className="mt-4">
+          <div className="w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+            <Header
+              subtitle="Hadis dan terjemahan"
+              Title="Hadis"
+              Description="Kumpulan Hadis dan terjemahan"
+            >
+              <div className="mt-8">
                 <Search
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -69,39 +74,42 @@ export default function Hadis({ initialHadis = [] }) {
             </Header>
 
             {/* Navigation Buttons */}
-            <div className="relative mx-5 my-3 pt-3">
-              <div className="flex gap-3 md:justify-center items-center overflow-x-auto whitespace-nowrap no-scrollbar">
-                <Link href="/hadis/arbain">
-                  <button
-                    className="md:w-[200px] w-[300px] px-5 py-2 rounded-md font-semibold transition-colors duration-200 bg-emerald-600 text-white hover:bg-emerald-800"
-                    aria-label="Hadits Arbain"
-                  >
-                    Hadits Arbain
-                  </button>
-                </Link>
 
-                <Link href="/hadis/bulughul-maram">
-                  <button
-                    className="md:w-[200px] w-[300px] px-5 py-2 rounded-md font-semibold transition-colors duration-200 bg-emerald-600 text-white hover:bg-emerald-800"
-                    aria-label="Bulughul Maram"
-                  >
-                    Bulughul Maram
-                  </button>
-                </Link>
+            <div className="flex my-2 py-3 gap-3 md:justify-start items-center overflow-x-auto whitespace-nowrap no-scrollbar">
+              <Link href="/hadis/arbain">
+                <button
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  aria-label="Hadits Arbain"
+                >
+                  <FaScroll className="text-emerald-600" />
+                  Hadits Arbain
+                </button>
+              </Link>
 
-                <Link href="/hadis/perawi">
-                  <button
-                    className="md:w-[200px] w-[140px] px-5 py-2 rounded-md font-semibold transition-colors duration-200 bg-emerald-600 text-white hover:bg-emerald-800"
-                    aria-label="9 Perawi"
-                  >
-                    9 Perawi
-                  </button>
-                </Link>
-              </div>
+              <Link href="/hadis/bulughul-maram">
+                <button
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  aria-label="Bulughul Maram"
+                >
+                  {" "}
+                  <FaScroll className="text-emerald-600" />
+                  Bulughul Maram
+                </button>
+              </Link>
+
+              <Link href="/hadis/perawi">
+                <button
+                  className="px-5 flex items-center gap-2 py-2.5 rounded-full border border-black/10 text-sm bg-white/40 backdrop-blur-md text-[#6c6c6c] shadow-xs hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 cursor-pointer transition-colors duration-200"
+                  aria-label="9 Perawi"
+                >
+                  {" "}
+                  <FaScroll className="text-emerald-600" />9 Perawi
+                </button>
+              </Link>
             </div>
 
             {/* Hadis List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-10 px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-stretch gap-6 mb-10">
               {filteredHadis.length > 0 ? (
                 filteredHadis.map((hadis, index) => (
                   <HadisCard
@@ -115,7 +123,7 @@ export default function Hadis({ initialHadis = [] }) {
                 ))
               ) : (
                 <div className="col-span-full text-center py-10">
-                  <p className="text-gray-600">
+                  <p className="text-[#6c6c6c]">
                     {searchQuery
                       ? "Tidak ada hadis ditemukan dengan pencarian tersebut"
                       : "Tidak ada hadis ditemukan"}

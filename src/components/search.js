@@ -1,3 +1,5 @@
+import { BsSearch } from "react-icons/bs";
+
 export default function Search({
   value,
   onChange,
@@ -10,28 +12,17 @@ export default function Search({
     searchMode === "content" ? "Cari dalam isi hadis..." : placeholder;
 
   return (
-    <div className="relative w-full md:w-[500px] justify-center items-center flex flex-col gap-2">
+    <div className="relative w-full md:w-[300px] justify-center items-center flex flex-col gap-2">
       <div className="relative w-full">
         <input
           type="text"
           placeholder={dynamicPlaceholder}
           value={value}
           onChange={onChange}
-          className="border-[1px] bg-gray-50 border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-full w-full h-[38px] md:h-[44px] pl-12 pr-5 outline-none placeholder-gray-400 text-gray-800"
+          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
         />
-        <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+
+        <BsSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c] w-4 h-4" />
       </div>
 
       {/* Toggle search mode - hanya tampil di halaman yang support content search */}

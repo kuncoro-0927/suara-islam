@@ -1,33 +1,30 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { Poppins, Open_Sans, Plus_Jakarta_Sans } from "next/font/google";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoIosArrowRoundBack,
+} from "react-icons/io";
 import Navbar from "../../../components/navbar";
 import Header from "../../../components/header";
 import Link from "next/link";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
+import { BsSearch } from "react-icons/bs";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
 });
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
+
 
 const bmCache = new Map();
 
 function EnhancedSearch({ value, onChange, onSearch }) {
   return (
-    <div className="relative w-full md:w-[500px] mt-3 justify-center items-center flex flex-col gap-2">
+    <div
+      className={`${jakarta.className}relative w-full md:w-[300px] justify-start items-start flex flex-col gap-2`}
+    >
       <div className="relative w-full">
         <input
           type="text"
@@ -35,23 +32,12 @@ function EnhancedSearch({ value, onChange, onSearch }) {
           value={value}
           onChange={onChange}
           onKeyDown={(e) => e.key === "Enter" && onSearch()}
-          className="border-[1px] bg-gray-50 border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-full w-full h-[38px] md:h-[44px] pl-12 pr-5 outline-none placeholder-gray-400 text-gray-800"
+          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
         />
-        <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+
+        <BsSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c] w-4 h-4" />
       </div>
-      <p className="text-xs text-gray-500">
+      <p className="text-sm text-[#6c6c6c]">
         Contoh: cari &quot;123&quot; untuk hadis nomor 123
       </p>
     </div>
@@ -63,14 +49,16 @@ function HadisCard({ hadis, index = 0 }) {
 
   return (
     <Link href={`/hadis/${hadis.no}?category=Bulughul Maram`}>
-      <div className={`${jakarta.className} flex`}>
-        <div className="flex flex-col text-center justify-center items-center w-full h-[175px] border border-black/20 shadow-md rounded-lg efek-click hover:shadow-xl transition-shadow duration-200 bg-white p-3">
-          <h1 className="font-semibold text-[16px] md:text-[18px] mx-3 mt-3 text-black line-clamp-2">
+      <div className={`${jakarta.className} flex h-full`}>
+        <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
+          {hadis.no && (
+            <p className="text-[12px] text-[#6c6c6c] font-medium">
+              No. {hadis.no}
+            </p>
+          )}
+          <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
             {title}
           </h1>
-          {hadis.no && (
-            <p className="text-[12px] text-gray-500 mt-1">No. {hadis.no}</p>
-          )}
         </div>
       </div>
     </Link>
@@ -244,8 +232,9 @@ export default function HadisBulughulMaram() {
           <div>
             <Navbar />
           </div>
-          <div className="w-full">
+          <div className="w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
             <Header
+              subtitle="Pondasi ajaran Islam"
               Title="Bulughul Maram"
               Description="Koleksi lengkap hadis Bulughul Maram"
             >
@@ -259,17 +248,15 @@ export default function HadisBulughulMaram() {
             </Header>
 
             {/* Back Button */}
-            <div className="mx-5 my-3">
-              <Link href="/hadis">
+            <div className=" w-fit my-6 mt-8">
+              <Link href="/hadis" className="">
                 <button
-                  className="px-3 sm:px-4 md:px-6 
-                          py-1.5 sm:py-2 md:py-2.5 
-                          bg-emerald-600 text-white rounded-md 
-                          hover:bg-emerald-800 transition-colors duration-200 
-                          flex items-center gap-2 
-                          text-xs sm:text-sm md:text-base md:ml-5"
+                  className="s duration-200 
+                          flex items-center gap-1 
+                          text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-800 cursor-pointer
+                          "
                 >
-                  <FaChevronLeft className="text-sm sm:text-base md:text-lg" />
+                  <IoIosArrowRoundBack className="text-xl" />
                   Kembali ke Hadis
                 </button>
               </Link>
@@ -277,12 +264,12 @@ export default function HadisBulughulMaram() {
 
             {/* Error Display */}
             {error && (
-              <div className="mx-5 mb-3 p-4 bg-red-50 border border-red-200 rounded-lg md:ml-5">
-                <p className="text-red-700 text-center mb-3">{error}</p>
+              <div className="mx-5 mb-3 ">
+                <p className="text-red-700 text-center text-sm mb-3">{error}</p>
                 <div className="text-center">
                   <button
                     onClick={handleRetry}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                    className="px-4 py-2.5 text-sm leading-none bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
                   >
                     Coba Lagi
                   </button>
@@ -305,7 +292,7 @@ export default function HadisBulughulMaram() {
             {/* Hadis List */}
             {!loading && !error && (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-5 px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
                   {hadisList.length > 0 ? (
                     hadisList.map((hadis, index) => (
                       <HadisCard
@@ -324,19 +311,22 @@ export default function HadisBulughulMaram() {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2 my-8 px-4">
+                  <div className="flex justify-center items-center gap-2 my-6 mt-12 px-4">
                     {/* Previous Button */}
                     <button
                       onClick={() => handlePageChange(currentPage - 1)}
                       disabled={currentPage === 1}
-                      className={`px-3 py-2 rounded-md flex items-center gap-1 ${
+                      className={`rounded-md mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
                         currentPage === 1
-                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-600 text-white hover:bg-emerald-800"
+                          ? "text-gray-500 cursor-not-allowed"
+                          : "text-emerald-800 cursor-pointer"
                       }`}
                     >
-                      <FaChevronLeft size={12} />
-                      Prev
+                      <IoIosArrowBack
+                        size={12}
+                        className="shrink-0 translate-y-[1.5px]"
+                      />
+                      <span>Prev</span>
                     </button>
 
                     {/* Page Numbers */}
@@ -344,34 +334,33 @@ export default function HadisBulughulMaram() {
                       <button
                         key={page}
                         onClick={() => handlePageChange(page)}
-                        className={`px-4 py-2 rounded-md font-semibold ${
+                        className={`h-8 w-8 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
                           page === currentPage
-                            ? "bg-emerald-800 text-white"
-                            : "bg-emerald-600 text-white hover:bg-emerald-800"
+                            ? "bg-emerald-600 text-white ring-4 ring-emerald-100/70"
+                            : "text-[#6c6c6c] hover:bg-emerald-600 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
                         }`}
                       >
-                        {page}
+                        <span className="-translate-y-px">{page}</span>
                       </button>
                     ))}
-
                     {/* Next Button */}
                     <button
                       onClick={() => handlePageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
-                      className={`px-3 py-2 rounded-md flex items-center gap-1 ${
+                      className={`ml-6 rounded-md text-sm flex items-center gap-1 ${
                         currentPage === totalPages
-                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-600 text-white hover:bg-emerald-800"
+                          ? " text-gray-500 cursor-not-allowed"
+                          : "text-emerald-800 cursor-pointer"
                       }`}
                     >
                       Next
-                      <FaChevronRight size={12} />
+                      <IoIosArrowForward size={12} />
                     </button>
                   </div>
                 )}
 
                 {/* Page Info */}
-                <div className="text-center text-gray-500 text-sm mb-8">
+                <div className="text-center text-gray-500 text-sm">
                   Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
                   {hadisList.length} hadis dari total {totalHadis} hadis
                 </div>

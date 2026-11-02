@@ -2,10 +2,16 @@
 // Semua data sudah tersedia dari server via initialData (SSR/SSG)
 // Navigasi prev/next menggunakan <Link> sehingga tidak butuh useState/useEffect
 
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 export default function DoaContent({ initialData: doa, doaId }) {
   const currentId = parseInt(doaId);
   const canGoPrev = currentId > 1;
@@ -44,115 +50,85 @@ export default function DoaContent({ initialData: doa, doaId }) {
           <Navbar />
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center pt-[72px] md:pt-0">
-          <div className="flex justify-center items-center flex-col h-auto w-[90%] md:w-[950px] mt-25 md:mt-5 border border-black/20 shadow-xl rounded-[10px] py-5 mb-5">
+        <div className="w-full flex flex-col justify-start items-center p-10 bg-white/40 rounded-2xl backdrop-blur-md border border-white my-4 mr-4">
+          <div className="flex w-full justify-center items-center flex-col ">
             {/* Header Navigasi */}
+
             <nav
-              className="primary2 w-[90%] h-[52px] rounded-[10px] flex justify-center items-center"
+              className="flex w-full items-center justify-between"
               aria-label="Navigasi doa"
             >
               {/* Kembali */}
               <Link
                 href="/doaharian"
-                className="flex justify-center items-center w-auto efek-opacity"
-                // style={{ fontFamily: 'var(--font-poppins)' }}
                 aria-label="Kembali ke daftar doa"
+                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-800`}
               >
-                <FaArrowLeft
-                  className="text-white mr-2 ml-3"
+                <IoIosArrowRoundBack
+                  size={22}
+                  className="duration-200 group-hover:scale-110"
                   aria-hidden="true"
                 />
-                <span className="text-white font-normal text-[10px] md:text-[16px]">
-                  Kembali
-                </span>
+                <span className="text-[12px] md:text-[14px]">Kembali</span>
               </Link>
-
-              {/* Judul tengah */}
-              <div
-                className="flex justify-center items-center flex-1"
-                // style={{ fontFamily: 'var(--font-poppins)' }}
-              >
-                <p className="font-semibold text-[12px] text-center w-[70%] md:text-[18px] text-white">
-                  Doa Harian No.{currentId}
-                </p>
-              </div>
 
               {/* Selanjutnya */}
               {canGoNext ? (
                 <Link
                   href={`/doaharian/${currentId + 1}`}
-                  className="flex justify-center items-center w-auto efek-opacity"
-                  // style={{ fontFamily: "var(--font-poppins)" }}
                   aria-label={`Doa selanjutnya, No.${currentId + 1}`}
+                  className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-800`}
                 >
-                  <span className="text-white font-normal text-[10px] md:text-[16px]">
+                  <span className="text-[12px] md:text-[14px]">
                     Selanjutnya
                   </span>
-                  <FaArrowRight
-                    className="text-white ml-2 mr-3"
+                  <IoIosArrowRoundForward
+                    size={22}
+                    className="duration-200 group-hover:scale-110"
                     aria-hidden="true"
                   />
                 </Link>
               ) : (
                 <span
-                  className="flex justify-center items-center w-auto opacity-50 cursor-not-allowed"
-                  // style={{ fontFamily: "var(--font-poppins)" }}
                   aria-disabled="true"
+                  className={`${jakarta.className} flex cursor-not-allowed items-center justify-center gap-1 font-medium text-[#6c6c6c] opacity-50`}
                 >
-                  <span className="text-white font-normal text-[10px] md:text-[16px]">
+                  <span className="text-[12px] md:text-[14px]">
                     Selanjutnya
                   </span>
-                  <FaArrowRight
-                    className="text-white ml-2 mr-3"
-                    aria-hidden="true"
-                  />
+                  <IoIosArrowRoundForward size={22} aria-hidden="true" />
                 </span>
               )}
             </nav>
 
             {/* Konten Doa */}
-            <div
-              className="flex justify-center items-center flex-col text-center px-4"
-              // style={{ fontFamily: "var(--font-poppins)" }}
-            >
-              {/* Satu h1 per halaman — judul doa */}
-              <h1 className="text-black text-[22px] md:text-[36px] font-semibold w-full md:w-[700px] h-auto mt-6 leading-tight">
+            <div className="flex w-full justify-center items-center flex-col text-center my-12 ">
+              <p
+                className={`${jakarta.className} text-[14px] font-semibold text-emerald-800`}
+              >
+                Doa Harian No.{currentId}
+              </p>
+              <h1 className="text-emerald-800 text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
                 {doa.judul}
               </h1>
-              <p className="text-black/50 text-[16px] md:text-[22px] font-semibold h-auto mt-2">
-                Doa Harian
-              </p>
-              <hr className="border border-black/20 w-full md:w-[250px] mt-6 mb-9" />
             </div>
 
             <div
-              className="flex flex-col justify-center items-center text-center w-[350px] md:w-[850px] h-auto px-4"
-              // style={{ fontFamily: "var(--font-poppins)" }}
+              className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-8 border border-black/10 shadow-xs rounded-xl`}
             >
-              {/* Teks Arab — pakai <p> bukan <h1> (sudah ada h1 di atas) */}
+              <span className="text-emerald-800 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
+                {doa.judul}
+              </span>
               <p
-                className="text-[28px] md:text-[40px] mb-6 leading-loose text-right w-[90%]"
+                className="text-[34px] mb-4 leading-loose text-right w-[90%] ml-auto"
                 dir="rtl"
                 lang="ar"
               >
                 {doa.doa}
               </p>
 
-              {/* Latin transliterasi (jika ada) */}
-              {doa.latin && (
-                <p
-                  className="text-[14px] md:text-[18px] leading-relaxed text-center w-[90%] italic text-gray-500 mb-6"
-                  style={{ fontFamily: "var(--font-open-sans)" }}
-                >
-                  {doa.latin}
-                </p>
-              )}
-
               {/* Terjemahan */}
-              <p
-                className="text-[16px] md:text-[20px] leading-relaxed text-justify w-[90%]"
-                style={{ fontFamily: "var(--font-open-sans)" }}
-              >
+              <p className="text-[16px] text-[#6c6c6c] leading-relaxed text-justify">
                 {doa.artinya}
               </p>
             </div>

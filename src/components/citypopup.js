@@ -2,13 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { IconSearch, IconTimes, IconMapMarker } from "./icons";
+import { IconMapMarker } from "./icons";
+import { IoIosClose } from "react-icons/io";
+import Portal from "./portal";
+import { BsSearch } from "react-icons/bs";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
 });
+
+const toTitleCase = (str = "") =>
+  str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+
 export default function CityPopup({
   isOpen,
   onClose,
@@ -39,7 +46,7 @@ export default function CityPopup({
 
     try {
       const response = await fetch(
-        `https://api.myquran.com/v2/sholat/kota/cari/${keyword}`,
+        `https://api.myquran.com/v2/sholat/kota/cari/${encodeURIComponent(keyword)}`,
       );
       const data = await response.json();
 
@@ -74,110 +81,129 @@ export default function CityPopup({
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 px-4"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Pilih kota"
-    >
+    <Portal>
       <div
-        className={`${jakarta.className} bg-white rounded-lg shadow-xl w-full max-w-[500px] max-h-[600px] overflow-hidden`}
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 px-4"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Pilih kota"
+        onClick={handleClose}
       >
-        {/* Header */}
-        <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-emerald-600">
-          <h2 className="text-xl font-semibold text-white">Pilih Kota</h2>
-          <button
-            onClick={handleClose}
-            className="text-white hover:text-gray-200 transition-colors"
-            aria-label="Tutup dialog"
-          >
-            <IconTimes size={20} />
-          </button>
-        </div>
+        <div
+          className={`${jakarta.className} max-h-[600px] w-full max-w-[500px] overflow-hidden rounded-2xl bg-white shadow-xl`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-black/10 px-6 py-4">
+            <div>
+              <h2 className="text-base font-semibold leading-none">
+                Pilih Kota
+              </h2>
+              <span className="text-sm text-[#6c6c6c]">
+                Cari kota untuk melihat jadwal sholat di daerahmu
+              </span>
+            </div>
 
-        {/* Current City */}
-        <div className="p-4 bg-gray-50 border-b border-gray-200">
-          <div className="flex items-center text-gray-600">
-            <IconMapMarker size={14} className="mr-2 text-emerald-600" />
-            <span className="text-sm">Kota saat ini: </span>
-            <span className="font-medium ml-1">{currentCity}</span>
-          </div>
-        </div>
-
-        {/* Search Bar */}
-        <div className="p-6">
-          <div className="relative mb-4">
-            <IconSearch
-              size={16}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            />
-            <input
-              type="text"
-              placeholder="Cari nama kota..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
-            />
+            <button
+              onClick={handleClose}
+              className="transition-colors"
+              aria-label="Tutup dialog"
+            >
+              <IoIosClose
+                size={24}
+                className="cursor-pointer duration-200 hover:scale-110"
+              />
+            </button>
           </div>
 
-          {/* Search Results */}
-          <div className="max-h-[300px] overflow-y-auto">
-            {loading && (
-              <div className="flex justify-center items-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
-              </div>
-            )}
+          {/* Current City */}
+          <div className="flex items-center gap-1 rounded-xl px-6 py-3">
+            <span className="text-sm font-medium">Kota saat ini: </span>
+            <div className="flex items-center">
+              <IconMapMarker size={12} className="text-emerald-600" />
+              <span className="ml-1 text-sm font-semibold text-emerald-800">
+                {toTitleCase(currentCity)}
+              </span>
+            </div>
+          </div>
 
-            {error && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">{error}</p>
-              </div>
-            )}
+          {/* Search Bar */}
+          <div className="mt-3 px-6">
+            <div className="relative mb-4">
+              <BsSearch
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+              <input
+                type="text"
+                placeholder="Cari nama kota..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full rounded-xl border border-gray-300 py-2.5 pl-10 pr-4 text-sm focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-50"
+              />
+            </div>
 
-            {!loading && !error && searchTerm.length < 2 && (
-              <div className="text-center py-8">
-                <p className="text-gray-500">
-                  Masukkan minimal 2 karakter untuk mencari kota
-                </p>
-              </div>
-            )}
-
-            {!loading &&
-              !error &&
-              cities.length === 0 &&
-              searchTerm.length >= 2 && (
-                <div className="text-center py-8">
-                  <p className="text-gray-500">Tidak ada kota yang ditemukan</p>
+            {/* Search Results */}
+            <div className="no-scrollbar max-h-[300px] overflow-y-auto pb-4">
+              {loading && (
+                <div className="flex items-center justify-center py-8">
+                  <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-emerald-600"></div>
                 </div>
               )}
 
-            {!loading && cities.length > 0 && (
-              <div className="space-y-2">
-                {cities.map((city) => (
-                  <button
-                    key={city.id}
-                    onClick={() => handleCitySelect(city)}
-                    className="w-full text-left p-3 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200 hover:border-emerald-600 group"
-                  >
-                    <div className="flex items-center">
-                      <IconMapMarker
-                        size={14}
-                        className="mr-3 text-gray-400 group-hover:text-emerald-600 transition-colors"
-                      />
-                      <div>
-                        <p className="font-medium text-gray-800 group-hover:text-emerald-600 transition-colors">
-                          {city.lokasi}
-                        </p>
-                        <p className="text-sm text-gray-500">ID: {city.id}</p>
+              {error && (
+                <div className="pb-4 text-left">
+                  <p className="text-sm text-[#6c6c6c]">{error}</p>
+                </div>
+              )}
+
+              {!loading && !error && searchTerm.length < 2 && (
+                <div className="pb-4 text-left">
+                  <p className="text-sm text-[#6c6c6c]">
+                    Masukkan minimal 2 karakter untuk mencari kota
+                  </p>
+                </div>
+              )}
+
+              {!loading &&
+                !error &&
+                cities.length === 0 &&
+                searchTerm.length >= 2 && (
+                  <div className="pb-4 text-left">
+                    <p className="text-sm text-[#6c6c6c]">
+                      Tidak ada kota yang ditemukan
+                    </p>
+                  </div>
+                )}
+
+              {!loading && cities.length > 0 && (
+                <div className="space-y-2">
+                  {cities.map((city) => (
+                    <button
+                      key={city.id}
+                      onClick={() => handleCitySelect(city)}
+                      className="group w-full cursor-pointer rounded-lg border border-black/10 p-3 text-left shadow-xs transition-colors hover:border-emerald-600 hover:bg-emerald-100/40"
+                    >
+                      <div className="flex items-center">
+                        <IconMapMarker
+                          size={14}
+                          className="mr-3 text-emerald-600 transition-colors"
+                        />
+                        <div className="flex w-full flex-row items-center justify-between">
+                          <p className="text-sm font-medium text-[#6c6c6c] transition-colors group-hover:text-emerald-800">
+                            {toTitleCase(city.lokasi)}
+                          </p>
+                          <p className="text-xs text-gray-500">ID: {city.id}</p>
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Portal>
   );
 }

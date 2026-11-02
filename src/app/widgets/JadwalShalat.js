@@ -126,20 +126,20 @@ export default function JadwalSholatCard({
 
   return (
     <div className="flex w-full justify-center items-center mt-8 ">
-      <div className="flex flex-col justify-center items-center w-full  h-auto border border-black/10 shadow-md bg-white rounded-2xl px-4 md:p-6 ">
+      <div className="flex flex-col justify-center items-center w-full  h-auto border border-black/10  shadow-sm shadow-gray-200/70 bg-white/40 backdrop-blur-md rounded-3xl p-4 md:p-6 ">
         {/* Kota & Tanggal */}
         <div
           className={`${jakarta.className}  font-normal flex flex-col md:flex-row md:justify-between items-start md:items-center w-full h-auto  rounded-xl gap-2 md:gap-3`}
         >
           <button
-            className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:shadow-sm duration-200 w-fit"
+            className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-800 hover:shadow-sm duration-200 w-fit"
             onClick={() => setIsPopupOpen(true)}
             aria-label={`Pilih kota, saat ini ${selectedCity.lokasi}`}
           >
-            <IconMapMarker size={14} className="text-emerald-600" />
+            <IconMapMarker size={14} className="text-emerald-600 group-hover:scale-110 duration-200" />
             <span className="text-xs font-medium">{selectedCity.lokasi}</span>
 
-            <IoChevronDown className="text-slate-400 group-hover:text-emerald-600" />
+            <IoChevronDown className="text-slate-400 group-hover:text-emerald-800" />
           </button>
 
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-black/10">
@@ -152,7 +152,7 @@ export default function JadwalSholatCard({
         </div>
 
         <div
-          className="w-full my-6 h-px bg-black/5 scale-y-50 origin-center"
+          className="w-full my-6 h-px bg-black/10 scale-y-50 origin-center"
           aria-hidden="true"
         />
         {/* Jadwal Sholat Grid */}
@@ -217,7 +217,7 @@ export default function JadwalSholatCard({
           <ShareEmbedButton
             url={shareUrl}
             embedUrl={embedCode}
-            OverrideStyle="bg-emerald-700/50 hover:bg-emerald-700"
+            OverrideStyle="bg-emerald-600 px-4 py-2.5 text-white drop-shadow-sm drop-shadow-emerald-100 hover:bg-emerald-700 "
           />
         </div>
       </div>
