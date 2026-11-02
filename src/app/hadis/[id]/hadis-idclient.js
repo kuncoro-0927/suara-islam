@@ -134,8 +134,9 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
                   </p>
                   {arabText && (
                     <h2
-                      className="ml-auto text-[30px] md:text-[34px] max-w-[90%] mb-4 leading-loose text-right"
+                      className="mb-4 w-full text-right text-[30px] leading-loose md:text-[34px]"
                       dir="rtl"
+                      lang="ar"
                     >
                       {arabText}
                     </h2>

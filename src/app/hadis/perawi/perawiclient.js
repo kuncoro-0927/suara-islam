@@ -380,7 +380,7 @@ export default function HadisPerawi() {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`rounded-md mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
+                    className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
                       currentPage === 1
                         ? "text-gray-500 cursor-not-allowed"
                         : "text-emerald-800 cursor-pointer"
@@ -398,7 +398,7 @@ export default function HadisPerawi() {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`h-8 w-8 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
+                      className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
                         page === currentPage
                           ? "bg-emerald-600 text-white ring-4 ring-emerald-100/70"
                           : "text-[#6c6c6c] hover:bg-emerald-600 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
@@ -411,7 +411,7 @@ export default function HadisPerawi() {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`ml-6 rounded-md text-sm flex items-center gap-1 ${
+                    className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
                       currentPage === totalPages
                         ? " text-gray-500 cursor-not-allowed"
                         : "text-emerald-800 cursor-pointer"
