@@ -115,7 +115,7 @@ export default function Navbar() {
           aria-label="Menu navigasi"
           aria-hidden={!isMenuOpen}
         >
-          <div className="px-4">
+          <div className="px-6">
             <div className="flex h-16 w-full items-center justify-between border-b border-black/10">
               <div className="flex items-center text-lg font-medium text-emerald-800">
                 <span>Menu</span>
@@ -131,7 +131,7 @@ export default function Navbar() {
           </div>
 
           <nav
-            className="flex flex-col p-4 gap-1"
+            className="flex flex-col px-6 py-4 gap-1"
             aria-label="Menu navigasi mobile"
           >
             {menuItems.map((item, index) => {
@@ -140,16 +140,16 @@ export default function Navbar() {
                 <Link
                   key={index}
                   href={item.href}
-                  className={`flex items-center w-full h-[54px] cursor-pointer rounded-2xl transition-colors ${
+                  className={`flex items-center w-full h-[54px] cursor-pointer rounded-xl transition-colors ${
                     active
-                      ? "bg-emerald-100/40 text-emerald-700 border border-emerald-600"
+                      ? "bg-emerald-100/40 text-emerald-800 border border-emerald-600"
                       : "text-[#6c6c6c] hover:bg-emerald-50 hover:text-emerald-700"
                   }`}
                   onClick={toggleMenu}
                   aria-current={active ? "page" : undefined}
                 >
                   <div
-                    className={`w-[56px] flex justify-center items-center ml-3 ${active ? "text-emerald-600" : "text-[#6c6c6c]"}`}
+                    className={`w-[56px] flex justify-center items-center ml-1.5 ${active ? "text-emerald-600" : "text-[#6c6c6c]"}`}
                   >
                     {item.icon}
                   </div>
@@ -163,6 +163,10 @@ export default function Navbar() {
               );
             })}
           </nav>
+
+          <div className=" mx-6 mt-2 text-center mb-6 flex flex-col gap-3 items-center">
+            <AyatHariIni />
+          </div>
         </aside>
       </Portal>
       <div
