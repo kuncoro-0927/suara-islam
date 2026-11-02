@@ -14,6 +14,7 @@ import {
   IconCalendar,
   IconQuran,
 } from "./icons";
+import { IoIosClose } from "react-icons/io";
 import { PiHeartStraightFill } from "react-icons/pi";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { useRef, useEffect } from "react";
@@ -97,7 +98,6 @@ export default function Navbar() {
         </button>
       </header>
 
-
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-40 md:hidden"
@@ -107,18 +107,22 @@ export default function Navbar() {
       )}
       <Portal>
         <aside
-          className={`${jakarta.className} fixed top-0 right-0 h-full w-72 shadow-2xl transform transition-transform duration-300 bg-white ease-in-out z-50 md:hidden ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`${jakarta.className} fixed inset-x-2 top-2 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-2xl bg-white shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
+            isMenuOpen ? "translate-y-0" : "-translate-y-[calc(100%+0.5rem)]"
           }`}
           aria-label="Menu navigasi"
+          aria-hidden={!isMenuOpen}
         >
-          <div className="w-full h-16 flex items-center justify-end px-4 border-b border-gray-100">
+          <div className="flex justify-between h-16 w-full items-center border-b border-black/10 px-4">
+            <div className=" px-3 font-medium text-emerald-800 flex items-center">
+              <span>Menu</span>
+            </div>
             <button
               onClick={toggleMenu}
-              className="w-10 h-10 flex items-center justify-center text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-emerald-700 transition-colors hover:bg-emerald-50"
               aria-label="Tutup menu navigasi"
             >
-              <IconArrowRight size={20} />
+              <IoIosClose size={28} />
             </button>
           </div>
 
