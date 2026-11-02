@@ -19,11 +19,7 @@ const CityPopup = lazy(() => import("../../components/citypopup"));
 const HijriMonthPopup = lazy(() => import("../../components/hijripopup"));
 const MonthPopup = lazy(() => import("../../components/monthpopup"));
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  display: "swap",
-});
+
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,11 +27,7 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-});
+
 
 export default function Beranda({
   initialJadwal = [],
@@ -424,7 +416,7 @@ export default function Beranda({
           <Navbar />
         </div>
 
-        <div className="w-full p-10 overflow-hidden bg-white/40 backdrop-blur-md my-4 mr-4 rounded-2xl border border-white">
+        <div className="w-full m-2 lg:m-0 mt-[90px] p-4 lg:p-10 overflow-hidden bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl border border-white">
           <Header
             Title="Jadwal Sholat"
             subtitle="Jadwal Sholat Realtime"
@@ -458,12 +450,12 @@ export default function Beranda({
               </button>
             </div>
             {/* Info Bar: City + Month */}
-            <div className="flex flex-col  px-8 py-4 border border-emerald-600 shadow-sm bg-emerald-100/40 backdrop-blur-md rounded-xl mb-8">
-              <div className="flex items-center justify-between">
-                <div>
+            <div className="flex flex-col px-4 lg:px-8 py-4 border border-emerald-600 shadow-sm bg-emerald-100/40 backdrop-blur-md rounded-xl mb-8">
+              <div className="flex items-start lg:items-center justify-between">
+                <div className="">
                   {" "}
                   <p
-                    className={`${jakarta.className} text-emerald-900 font-semibold text-xl  flex items-center flex-wrap`}
+                    className={`${jakarta.className} text-emerald-900 font-semibold text-base lg:text-xl  flex items-center flex-wrap`}
                   >
                     <span>
                       Jadwal Sholat untuk {toTitleCase(selectedCity.lokasi)},{" "}
@@ -473,7 +465,7 @@ export default function Beranda({
                     </span>{" "}
                   </p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 lg:gap-3">
                   <button
                     onClick={
                       mode === "masehi"
@@ -511,7 +503,7 @@ export default function Beranda({
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsPopupOpen(true)}
-                  className="mt-4 flex items-center gap-2 px-4 text-sm py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
                   <BsSearch size={12} />
                   <span> Pilih Kota</span>
@@ -523,7 +515,7 @@ export default function Beranda({
                       ? setIsMonthPopupOpen(true)
                       : setIsHijriPopupOpen(true)
                   }
-                  className="mt-4 flex items-center gap-2 px-4 text-sm py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-800 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
                 >
                   <IconCalendar size={12} />
                   <span> Pilih Bulan</span>

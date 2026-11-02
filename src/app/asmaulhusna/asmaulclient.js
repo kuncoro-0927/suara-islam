@@ -41,7 +41,7 @@ export default function AsmaulhusnaClient({ initialData }) {
             <Navbar />
           </div>
 
-          <div className=" w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+          <div className="min-w-0 flex-1 min-h-screen m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 border border-white rounded-xl lg:rounded-2xl">
             <Header
               Title="Asmaul Husna"
               subtitle="99 nama terbaik milik Allah"
@@ -55,7 +55,7 @@ export default function AsmaulhusnaClient({ initialData }) {
               </div>
             </Header>
 
-            <div className="grid grid-cols-3 gap-6 mt-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 mt-12">
               {filteredAsmaul.map((asmaul) => (
                 <div key={asmaul.id} className="h-full">
                   <div className="flex h-full w-full items-stretch gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">

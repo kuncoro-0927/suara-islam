@@ -50,7 +50,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
           <Navbar />
         </div>
 
-        <div className="w-full flex flex-col justify-start items-center p-10 bg-white/40 rounded-2xl backdrop-blur-md border border-white my-4 mr-4">
+        <div className="min-w-0 flex-1 min-h-screen flex flex-col justify-start items-center m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 rounded-xl lg:rounded-2xl backdrop-blur-md border border-white lg:my-4 lg:mr-4">
           <div className="flex w-full justify-center items-center flex-col ">
             {/* Header Navigasi */}
 
@@ -108,19 +108,19 @@ export default function DoaContent({ initialData: doa, doaId }) {
               >
                 Doa Harian No.{currentId}
               </p>
-              <h1 className="text-emerald-800 text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
+              <h1 className="text-emerald-800 text-[24px] lg:text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
                 {doa.judul}
               </h1>
             </div>
 
             <div
-              className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-8 border border-black/10 shadow-xs rounded-xl`}
+              className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-6 lg:p-8 border border-black/10 shadow-xs rounded-xl`}
             >
               <span className="text-emerald-800 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
                 {doa.judul}
               </span>
               <p
-                className="text-[34px] mb-4 leading-loose text-right w-[90%] ml-auto"
+                className="text-[30px] lg:text-[34px] mb-4 leading-loose text-right w-[90%] ml-auto"
                 dir="rtl"
                 lang="ar"
               >
@@ -128,7 +128,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
               </p>
 
               {/* Terjemahan */}
-              <p className="text-[16px] text-[#6c6c6c] leading-relaxed text-justify">
+              <p className="text-[14px] lg:text-[16px] text-[#6c6c6c] leading-relaxed text-justify">
                 {doa.artinya}
               </p>
             </div>

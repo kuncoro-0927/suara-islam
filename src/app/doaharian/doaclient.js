@@ -13,11 +13,6 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  display: "swap",
-});
 
 export default function DoaHarianClient({ initialData }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,7 +38,7 @@ export default function DoaHarianClient({ initialData }) {
             <Navbar />
           </div>
 
-          <div className="h-full p-10 bg-white/40 rounded-2xl my-4 mr-4 backdrop-blur-md border border-white">
+          <div className="min-w-0 flex-1 min-h-screen h-full m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 backdrop-blur-md border border-white">
             <Header
               Title="Doa Harian"
               subtitle="Doa-doa pilihan sehari-hari"
@@ -59,7 +54,7 @@ export default function DoaHarianClient({ initialData }) {
 
             {/* Doa List */}
             <div
-              className={`${jakarta.className} grid grid-cols-3 gap-6 items-stretch h-full mt-12`}
+              className={`${jakarta.className} grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 items-stretch h-full mt-12`}
             >
               {filteredDoa.map((doa, index) => (
                 <Link key={index} href={`/doaharian/${index + 1}`}>

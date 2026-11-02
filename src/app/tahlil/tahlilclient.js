@@ -43,7 +43,7 @@ export default function TahlilClient({ initialData }) {
           </div>
 
           {/* Content */}
-          <div className="w-full flex flex-col justify-start items-start p-10 bg-white/40 backdrop-blur-md my-4 mr-4 rounded-2xl border border-white">
+          <div className="w-full flex flex-col justify-start items-start m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 rounded-2xl border border-white">
             {/* Header */}
             <div className="mb-8">
               {" "}
@@ -55,16 +55,16 @@ export default function TahlilClient({ initialData }) {
             </div>
 
             {/* Render ayat */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3 lg:gap-5">
               {dataTahlil.map((ayat, index) => (
                 <div
                   key={ayat.id || index}
-                  className="flex flex-col bg-white/40 backdrop-blur-md border border-black/10 shadow-xs rounded-xl w-full h-auto p-8"
+                  className="flex flex-col bg-white/40 backdrop-blur-md border border-black/10 shadow-xs rounded-xl w-full h-auto p-6 lg:p-8"
                 >
                   {/* Title */}
                   {ayat.title && (
                     <div
-                      className={`${openSans.className} text-left text-[14px] md:text-[18px] text-emerald-800 font-semibold mb-3`}
+                      className={`${openSans.className} text-left text-[16px] text-emerald-800 font-semibold mb-3`}
                     >
                       {ayat.title}
                     </div>
@@ -72,7 +72,7 @@ export default function TahlilClient({ initialData }) {
 
                   {/* Arabic Text */}
                   <div
-                    className={`${jakarta.className} text-[30px] leading-[1.8] w-full text-right mt-3 mb-5`}
+                    className={`${jakarta.className} text-[30px] lg:text-[34px] leading-[1.8] w-full text-right mt-3 mb-5`}
                     style={{ direction: "rtl" }}
                   >
                     {ayat.arabic}
@@ -80,7 +80,7 @@ export default function TahlilClient({ initialData }) {
 
                   {/* Translation */}
                   <div
-                    className={`${jakarta.className} text-justify text-[14px] text-[#6c6c6c] font-normal`}
+                    className={`${jakarta.className} text-justify text-[14px] lg:text-[16px] text-[#6c6c6c] font-normal`}
                   >
                     {ayat.translation}
                   </div>
