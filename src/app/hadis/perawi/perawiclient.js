@@ -255,7 +255,7 @@ export default function HadisPerawi() {
             subtitle="Pondasi ajaran Islam"
             Description="Koleksi hadis dari 9 perawi utama"
           >
-            <div className="mt-4">
+            <div className="mt-8">
               <EnhancedSearch
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -359,7 +359,7 @@ export default function HadisPerawi() {
                               No. {hadis.no}
                             </p>
                           )}
-                          <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
+                          <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
                             {hadis.judul || `${hadis.category} No.${hadis.no}`}
                           </h1>
                         </div>

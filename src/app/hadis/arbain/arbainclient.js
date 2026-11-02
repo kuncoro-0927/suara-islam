@@ -250,7 +250,7 @@ export default function HadisArbain() {
                                 No. {hadis.no}
                               </p>
                             )}
-                            <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
+                            <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
                               {hadis.judul || `Arbain No.${hadis.no}`}
                             </h1>
                           </div>

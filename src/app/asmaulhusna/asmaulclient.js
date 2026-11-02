@@ -47,7 +47,7 @@ export default function AsmaulhusnaClient({ initialData }) {
               subtitle="99 nama terbaik milik Allah"
               Description="Asmaul Husna dan Terjemahan"
             >
-              <div className="mt-4">
+              <div className="mt-8">
                 <Search
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -55,7 +55,7 @@ export default function AsmaulhusnaClient({ initialData }) {
               </div>
             </Header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 mt-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 mt-4">
               {filteredAsmaul.map((asmaul) => (
                 <div key={asmaul.id} className="h-full">
                   <div className="flex h-full w-full items-stretch gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">

@@ -237,7 +237,7 @@ export default function HadisBulughulMaram() {
               Title="Bulughul Maram"
               Description="Koleksi lengkap hadis Bulughul Maram"
             >
-              <div className="mt-4">
+              <div className="mt-8">
                 <EnhancedSearch
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}

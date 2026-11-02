@@ -44,7 +44,7 @@ export default function DoaHarianClient({ initialData }) {
               subtitle="Doa-doa pilihan sehari-hari"
               Description="Doa Harian dan Terjemahan"
             >
-              <div className="mt-4">
+              <div className="mt-8">
                 <Search
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -54,17 +54,17 @@ export default function DoaHarianClient({ initialData }) {
 
             {/* Doa List */}
             <div
-              className={`${jakarta.className} grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 items-stretch h-full mt-12`}
+              className={`${jakarta.className} grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 items-stretch h-full mt-4`}
             >
               {filteredDoa.map((doa, index) => (
                 <Link key={index} href={`/doaharian/${index + 1}`}>
-                  <div className="flex flex-col text-left justify-center items-start bg-white/40 backdrop-blur-md rounded-xl shadow-xs h-full px-4 py-2 border-[1px] border-black/20 hover:border-emerald-600 hover:bg-emerald-100/40 duration-200">
+                  <div className="flex flex-col gap-0.5 text-left justify-center items-start bg-white/40 backdrop-blur-md rounded-xl shadow-xs h-full px-4 py-2 border-[1px] border-black/10 hover:border-emerald-600 hover:bg-emerald-100/40 duration-200">
                     <p className="text-[12px] text-[#6c6c6c] font-medium">
                       Doa Harian
                     </p>
-                    <h1 className="font-semibold text-[14px]  text-emerald-800">
+                    <span className="font-semibold text-[14px]  text-emerald-800">
                       {doa.judul}
-                    </h1>
+                    </span>
                   </div>
                 </Link>
               ))}

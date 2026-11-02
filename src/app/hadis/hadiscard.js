@@ -52,7 +52,7 @@ export default function HadisCard({
           {hadis.no && (
             <p className="text-[12px] text-[#6c6c6c] font-medium">No. {hadis.no}</p>
           )}
-          <h1 className="font-semibold text-[12px] md:text-[14px] text-emerald-800 line-clamp-2">
+          <h1 className="font-semibold text-[14px] text-emerald-800 line-clamp-2">
             {searchQuery ? (
               <span
                 dangerouslySetInnerHTML={{
