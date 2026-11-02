@@ -17,7 +17,7 @@ export default function Header({ Title, subtitle, Description, children }) {
       </div>
 
       <h1
-        className={`${jakarta.className} text-xl sm:text-2xl md:text-2xl lg:text-3xl font-extrabold mt-2`}
+        className={`${jakarta.className} text-2xl sm:text-2xl md:text-2xl lg:text-3xl font-extrabold mt-2`}
       >
         {Title}
       </h1>
