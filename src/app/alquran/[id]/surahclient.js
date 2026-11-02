@@ -378,7 +378,7 @@ export default function SurahClient({
                     </span>
 
                     <p
-                      className={`${openSans.className} font-normal  text-[12px] md:text-[14px] text-emerald-800 leading-relaxed`}
+                      className={`${openSans.className} font-normal  text-[14px] md:text-[14px] text-emerald-800 leading-relaxed`}
                     >
                       {suratDetail.tafsir}
                     </p>
@@ -473,7 +473,7 @@ export default function SurahClient({
                 </div>
 
                 <div
-                  className={`${jakarta.className} text-justify flex text-[16px] text-gray-600 font-normal mt-3 leading-relaxed`}
+                  className={`${jakarta.className} text-justify flex text-[14px] md:text-[16px] text-[#6c6c6c] font-normal mt-3 leading-relaxed`}
                 >
                   {ayat.text}
                 </div>
