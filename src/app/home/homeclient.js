@@ -52,7 +52,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
       <div className="flex m-0 p-0">
         <Navbar />
 
-        <div className="md:flex-1 mx-2 mb-2 mt-[90px] bg-white/40 backdrop-blur-md border border-white rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4  min-h-screen p-4 lg:p-10">
+        <div className="md:flex-1 m-2 lg:m-0 mt-[90px] bg-white/40 backdrop-blur-md border border-white rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4  min-h-screen p-4 lg:p-10">
           <Header
             Title="Suara Islam"
             subtitle="Waktu Sholat Realtime"

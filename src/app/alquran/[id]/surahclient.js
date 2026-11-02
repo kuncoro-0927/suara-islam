@@ -262,7 +262,7 @@ export default function SurahClient({
     <main className="min-h-screen">
       <div className="flex">
         <Navbar />
-        <div className="flex-1 p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white my-4 mr-4 rounded-2xl">
+        <div className="flex-1 m-2 lg:mx-0 p-4 mt-[90px] lg:mt-0 lg:p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl">
           {/* Error Display */}
           {error && (
             <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
@@ -362,19 +362,23 @@ export default function SurahClient({
                   </span>
                 </div>
               </div>
-              <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-8 mt-8 rounded-2xl">
-                <div className="flex items-start gap-4">
-                  <div className="bg-emerald-600 w-fit p-2.5 rounded-full">
-                    <BookOpenLightIcon className="text-white" />
+              <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
+                <div className="flex flex-col lg:flex-row items-start gap-4">
+                  <div className=" flex items-center gap-3">
+                    <div className="bg-emerald-600 w-fit p-2.5 rounded-full">
+                      <BookOpenLightIcon className="text-white" />
+                    </div>
+                    <span className="flex md:hidden text-emerald-800 font-medium">
+                      Tafsir Surah {suratDetail.name_id}
+                    </span>
                   </div>
-
                   <div className="flex flex-col gap-2">
-                    <span className="flex text-emerald-800 font-medium">
+                    <span className="hidden md:flex text-emerald-800 font-medium">
                       Tafsir Surah {suratDetail.name_id}
                     </span>
 
                     <p
-                      className={`${openSans.className} font-normal  text-[12px]  md:text-[15px] text-emerald-800 leading-relaxed`}
+                      className={`${openSans.className} font-normal  text-[12px] md:text-[14px] text-emerald-800 leading-relaxed`}
                     >
                       {suratDetail.tafsir}
                     </p>
@@ -392,7 +396,7 @@ export default function SurahClient({
               <article
                 id={`ayat-${ayat.ayah}`}
                 key={ayat.ayah || index}
-                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-3 p-8 transition-colors duration-200 ${
+                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-2 lg:my-3 p-8 transition-colors duration-200 ${
                   isActive
                     ? "bg-emerald-100/40 backdrop-blur-md border-emerald-600"
                     : "bg-white/40 backdrop-blur-md border-black/10"

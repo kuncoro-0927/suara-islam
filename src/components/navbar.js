@@ -18,6 +18,7 @@ import { PiHeartStraightFill } from "react-icons/pi";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { useRef, useEffect } from "react";
 import AyatHariIni from "./ayathariini";
+import Portal from "./portal";
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -96,6 +97,7 @@ export default function Navbar() {
         </button>
       </header>
 
+
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/30 z-40 md:hidden"
@@ -103,55 +105,55 @@ export default function Navbar() {
           aria-hidden="true"
         />
       )}
+      <Portal>
+        <aside
+          className={`${jakarta.className} fixed top-0 right-0 h-full w-72 shadow-2xl transform transition-transform duration-300 bg-white ease-in-out z-50 md:hidden ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          aria-label="Menu navigasi"
+        >
+          <div className="w-full h-16 flex items-center justify-end px-4 border-b border-gray-100">
+            <button
+              onClick={toggleMenu}
+              className="w-10 h-10 flex items-center justify-center text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
+              aria-label="Tutup menu navigasi"
+            >
+              <IconArrowRight size={20} />
+            </button>
+          </div>
 
-      <aside
-        className={`${jakarta.className} fixed top-0 right-0 h-full w-72 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 md:hidden ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-        aria-label="Menu navigasi"
-      >
-        <div className="w-full h-16 flex items-center justify-end px-4 border-b border-gray-100">
-          <button
-            onClick={toggleMenu}
-            className="w-10 h-10 flex items-center justify-center text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
-            aria-label="Tutup menu navigasi"
-          >
-            <IconArrowRight size={20} />
-          </button>
-        </div>
-
-        <nav className="flex flex-col" aria-label="Menu navigasi mobile">
-          {menuItems.map((item, index) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={index}
-                href={item.href}
-                className={`flex items-center w-full h-[64px] border-b border-gray-100 cursor-pointer transition-colors ${
-                  active
-                    ? "bg-emerald-50 text-emerald-700 border-l-4 border-l-emerald-600"
-                    : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700"
-                }`}
-                onClick={toggleMenu}
-                aria-current={active ? "page" : undefined}
-              >
-                <div
-                  className={`w-[56px] flex justify-center items-center ml-3 ${active ? "text-emerald-700" : "text-emerald-600"}`}
+          <nav className="flex flex-col" aria-label="Menu navigasi mobile">
+            {menuItems.map((item, index) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className={`flex items-center w-full h-[64px] border-b border-gray-100 cursor-pointer transition-colors ${
+                    active
+                      ? "bg-emerald-50 text-emerald-700 border-l-4 border-l-emerald-600"
+                      : "text-gray-700 hover:bg-emerald-50 hover:text-emerald-700"
+                  }`}
+                  onClick={toggleMenu}
+                  aria-current={active ? "page" : undefined}
                 >
-                  {item.icon}
-                </div>
-                <span
-                  className={`text-[16px] ${active ? "font-semibold" : "font-medium"} w-full ml-3`}
-                  // style={{ fontFamily: 'var(--font-poppins)' }}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
-      </aside>
-
+                  <div
+                    className={`w-[56px] flex justify-center items-center ml-3 ${active ? "text-emerald-700" : "text-emerald-600"}`}
+                  >
+                    {item.icon}
+                  </div>
+                  <span
+                    className={`text-[16px] ${active ? "font-semibold" : "font-medium"} w-full ml-3`}
+                    // style={{ fontFamily: 'var(--font-poppins)' }}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+      </Portal>
       <div
         ref={sidebarRef}
         className={`${jakarta.className} bg-white/40 backdrop-blur-md hidden md:flex flex-col w-[290px] m-4 shrink-0 self-start h-fit sticky border rounded-2xl p-6 border-white`}
