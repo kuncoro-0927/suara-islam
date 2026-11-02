@@ -90,7 +90,7 @@ export default function Navbar() {
 
         <button
           onClick={toggleMenu}
-          className="w-10 h-10 flex items-center justify-center text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
+          className="w-10 h-10 flex items-center justify-center text-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
           aria-label="Buka menu navigasi"
           aria-expanded={isMenuOpen}
         >
@@ -122,10 +122,10 @@ export default function Navbar() {
               </div>
               <button
                 onClick={toggleMenu}
-                className="rounded-lg p-1 text-emerald-700 transition-colors hover:bg-emerald-50"
+                className="translate-x-2 text-emerald-600 transition-colors hover:bg-emerald-50"
                 aria-label="Tutup menu navigasi"
               >
-                <IoIosClose size={28} />
+                <IoIosClose size={34} />
               </button>
             </div>
           </div>
