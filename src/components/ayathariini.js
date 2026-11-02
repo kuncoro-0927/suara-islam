@@ -69,7 +69,9 @@ export default function AyatHariIni({ className = "" }) {
       </span>
 
       <span className="font-medium text-sm">Ayat hari ini</span>
-      <span className="italic text-xs text-slate-400">"{ayat.teks}"</span>
+      <span className="italic text-xs text-slate-400">
+        &quot;{ayat.teks}&quot;
+      </span>
       <span className="text-emerald-800 bg-emerald-100/60 text-[11px] px-2 py-1 rounded-full font-semibold">
         {ayat.ref}
       </span>
