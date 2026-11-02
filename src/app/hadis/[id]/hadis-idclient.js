@@ -77,7 +77,7 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
           <Navbar />
         </div>
 
-        <div className="w-full flex flex-col justify-start items-center p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+        <div className="w-full flex flex-col justify-start items-center m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 border border-white rounded-xl lg:rounded-2xl">
           <div className="w-full flex justify-center items-center flex-col h-auto ">
             <div className=" w-full flex justify-between items-center">
               <button
@@ -121,13 +121,13 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
                     {title}
                   </p>
 
-                  <h1 className="text-emerald-800 text-[28px] font-semibold w-full h-auto max-w-lg leading-tight">
+                  <h1 className="text-emerald-800 text-[24px] lg:text-[28px] font-semibold w-full h-auto max-w-lg leading-tight">
                     {hadis.judul || title}
                   </h1>
                 </div>
 
                 <div
-                  className={`${jakarta.className} w-full bg-white/40 backdrop-blur-md flex border border-black/10 shadow-xs flex-col items-start p-8 rounded-xl`}
+                  className={`${jakarta.className} w-full bg-white/40 backdrop-blur-md flex border border-black/10 shadow-xs flex-col items-start p-6 lg:p-8 rounded-xl`}
                 >
                   <p className="text-emerald-800 text-[16px] font-semibold text-left leading-none mb-4">
                     {hadis.judul || title}
@@ -141,7 +141,7 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
                     </h2>
                   )}
                   {indoText && (
-                    <p className="text-justify flex text-[16px] text-[#6c6c6c] font-normal  leading-relaxed">
+                    <p className="text-justify flex text-[14px] lg:text-[16px] text-[#6c6c6c] font-normal  leading-relaxed">
                       {indoText}
                     </p>
                   )}

@@ -248,7 +248,7 @@ export default function HadisPerawi() {
         <div>
           <Navbar />
         </div>
-        <div className="w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+        <div className="min-w-0 flex-1 min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
           {/* Header and Search Layout */}
           <Header
             Title="Hadis 9 Perawi"
@@ -345,7 +345,7 @@ export default function HadisPerawi() {
           {/* Hadis List */}
           {!loading && !error && (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 ">
                 {hadisList.length > 0 ? (
                   hadisList.map((hadis, index) => (
                     <Link

@@ -168,7 +168,7 @@ export default function HadisArbain() {
           <div>
             <Navbar />
           </div>
-          <div className="w-full p-10 bg-white/40 backdrop-blur-md rounded-2xl my-4 mr-4 border border-white">
+          <div className="w-full min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
             <Header
               Title="Hadis Arbain"
               subtitle="Pondasi ajaran Islam"
@@ -236,7 +236,7 @@ export default function HadisArbain() {
             {/* Hadis List */}
             {!loading && !error && (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5 mb-5">
                   {hadisList.length > 0 ? (
                     hadisList.map((hadis, index) => (
                       <Link

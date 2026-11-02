@@ -59,7 +59,7 @@ export default function Hadis({ initialHadis = [] }) {
           <div>
             <Navbar />
           </div>
-          <div className="w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+          <div className="min-w-0 min-h-screen flex-1 m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 border border-white rounded-xl lg:rounded-2xl">
             <Header
               subtitle="Hadis dan terjemahan"
               Title="Hadis"
@@ -109,7 +109,7 @@ export default function Hadis({ initialHadis = [] }) {
             </div>
 
             {/* Hadis List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-stretch gap-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-stretch gap-3 lg:gap-5">
               {filteredHadis.length > 0 ? (
                 filteredHadis.map((hadis, index) => (
                   <HadisCard

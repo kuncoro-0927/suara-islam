@@ -14,11 +14,6 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  display: "swap",
-});
 
 export default function AlQuranClient({ initialData }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -67,7 +62,7 @@ export default function AlQuranClient({ initialData }) {
     <main className="min-h-screen">
       <div className="flex">
         <Navbar />
-        <div className="flex-1 bg-white/40 backdrop-blur-md border border-white my-4 mr-4 rounded-2xl min-h-screen p-10">
+        <div className="flex-1 m-2 mt-[90px]  lg:m-0 bg-white/40 backdrop-blur-md border border-white lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl min-h-screen p-4 lg:p-10">
           <Header
             Title="Al - Quran"
             subtitle="114 surah dan terjemahan"
@@ -87,7 +82,7 @@ export default function AlQuranClient({ initialData }) {
           </Header>
 
           <section
-            className="w-full mt-4 grid grid-cols-2 justify-center items-stretch gap-5 pb-6"
+            className="w-full mt-4 grid grid-cols-1 lg:grid-cols-2 justify-center items-stretch gap-3 lg:gap-5"
             aria-label="Daftar surah Al-Quran"
           >
             {filteredSurat.map((surat) => (

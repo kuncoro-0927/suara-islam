@@ -17,7 +17,6 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-
 const bmCache = new Map();
 
 function EnhancedSearch({ value, onChange, onSearch }) {
@@ -232,7 +231,7 @@ export default function HadisBulughulMaram() {
           <div>
             <Navbar />
           </div>
-          <div className="w-full p-10 bg-white/40 backdrop-blur-md my-4 mr-4 border border-white rounded-2xl">
+          <div className="min-w-0 flex-1 min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
             <Header
               subtitle="Pondasi ajaran Islam"
               Title="Bulughul Maram"
@@ -292,7 +291,7 @@ export default function HadisBulughulMaram() {
             {/* Hadis List */}
             {!loading && !error && (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5">
                   {hadisList.length > 0 ? (
                     hadisList.map((hadis, index) => (
                       <HadisCard
@@ -316,7 +315,7 @@ export default function HadisBulughulMaram() {
                     <button
                       onClick={() => handlePageChange(currentPage - 1)}
                       disabled={currentPage === 1}
-                      className={`rounded-md mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
+                      className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
                         currentPage === 1
                           ? "text-gray-500 cursor-not-allowed"
                           : "text-emerald-800 cursor-pointer"
@@ -334,7 +333,7 @@ export default function HadisBulughulMaram() {
                       <button
                         key={page}
                         onClick={() => handlePageChange(page)}
-                        className={`h-8 w-8 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
+                        className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
                           page === currentPage
                             ? "bg-emerald-600 text-white ring-4 ring-emerald-100/70"
                             : "text-[#6c6c6c] hover:bg-emerald-600 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
@@ -347,7 +346,7 @@ export default function HadisBulughulMaram() {
                     <button
                       onClick={() => handlePageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
-                      className={`ml-6 rounded-md text-sm flex items-center gap-1 ${
+                      className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
                         currentPage === totalPages
                           ? " text-gray-500 cursor-not-allowed"
                           : "text-emerald-800 cursor-pointer"
