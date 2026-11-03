@@ -33,7 +33,7 @@ function EnhancedSearch({ value, onChange, onSearch }) {
           value={value}
           onChange={onChange}
           onKeyDown={(e) => e.key === "Enter" && onSearch()}
-          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
+          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2.5 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
         />
 
         <BsSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c] w-4 h-4" />
@@ -303,7 +303,7 @@ export default function HadisPerawi() {
                         className={`block w-full text-left px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 text-sm  transition-colors cursor-pointer ${
                           selectedPerawi === slug
                             ? "bg-emerald-700 text-white rounded-lg "
-                            : "hover:bg-emerald-800 hover:text-white rounded-lg text-[#6c6c6c] "
+                            : "hover:bg-emerald-700 hover:text-white duration-200 transition-all rounded-lg text-[#6c6c6c] "
                         }`}
                       >
                         {info.name}
