@@ -6,7 +6,7 @@ import { IconMapMarker, IconCalendar } from "../../components/icons";
 import Image from "next/image";
 import ShareEmbedButton from "../../components/ShareEmbedButton";
 import { IoChevronDown } from "react-icons/io5";
-
+import { PrayerIcons } from "@/components/data";
 const CityPopup = lazy(() => import("../../components/citypopup"));
 
 const jakarta = Plus_Jakarta_Sans({
@@ -15,6 +15,13 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const getPrayerIcon = (item) => {
+  const key = String(item.icon || item.name || "")
+    .toLowerCase()
+    .replace(/\.svg$/, "")
+    .trim();
+  return PrayerIcons[key] ?? null;
+};
 const formatMasehiFull = () => {
   const today = new Date();
   const bulan = [
@@ -137,7 +144,9 @@ export default function JadwalSholatCard({
               size={14}
               className="text-emerald-700 group-hover:scale-110 duration-200"
             />
-            <span className="text-sm font-medium">{toTitleCase(selectedCity.lokasi)}</span>
+            <span className="text-sm font-medium">
+              {toTitleCase(selectedCity.lokasi)}
+            </span>
 
             <IoChevronDown className="text-[#6c6c6c] group-hover:text-emerald-700" />
           </button>
@@ -163,7 +172,7 @@ export default function JadwalSholatCard({
         >
           {prayers.map((item) => {
             const isNext = item.name === nextName;
-
+            const Icon = getPrayerIcon(item);
             return (
               <div
                 key={item.name}
@@ -193,15 +202,8 @@ export default function JadwalSholatCard({
                     {item.name}
                   </span>
                 </div>
-                <div className="flex-1 flex justify-center items-center">
-                  <Image
-                    width={38}
-                    height={38}
-                    src={`/icons-jadwal/${item.icon}.svg`}
-                    className="w-full h-full object-contain"
-                    alt=""
-                    aria-hidden="true"
-                  />
+                <div className="flex flex-1 items-center justify-center py-2">
+                  {Icon && <Icon size={38} />}
                 </div>
                 <div>
                   <span className="text-[16px] md:text-[18px] font-bold tabular-nums">
