@@ -76,7 +76,7 @@ export default function AlQuranClient({ initialData }) {
                 <ShareEmbedButton
                   url={shareUrl}
                   embedUrl={embedCode}
-                  OverrideStyle="py-2.5 bg-emerald-700 w-fit text-white border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-emerald-800 hover:border-emerald-600"
+                  OverrideStyle="px-2.5 py-2.5 bg-emerald-700 w-fit text-white border border-emerald-700 backdrop-blur-xs shadow-sm hover:bg-emerald-800 hover:border-emerald-600"
                 />
               </div>
             </Header>

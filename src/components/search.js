@@ -19,7 +19,7 @@ export default function Search({
           placeholder={dynamicPlaceholder}
           value={value}
           onChange={onChange}
-          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
+          className="border-[1px] text-sm bg-white/40 backdrop-blur-md border-black/10 shadow-xs focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100/40 rounded-full w-full px-3 py-2.5 pl-12 pr-5 outline-none placeholder-[#6c6c6c] text-[#6c6c6c]"
         />
 
         <BsSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c] w-4 h-4" />

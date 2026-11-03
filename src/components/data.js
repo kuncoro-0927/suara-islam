@@ -1,6 +1,5 @@
 "use client";
-import { PiBookBookmarkFill } from "react-icons/pi";
-import { PiHandsPrayingFill } from "react-icons/pi";
+import { PiBookOpenTextFill, PiBookBookmarkFill } from "react-icons/pi";
 import { useId } from "react";
 
 function Base({ size = 56, className = "", children }) {
@@ -242,6 +241,6 @@ export const SuratUtama = [
     surah: "Tahlil",
     isSpecialPage: true,
     route: "/tahlil",
-    icon: PiHandsPrayingFill,
+    icon: PiBookOpenTextFill,
   },
 ];

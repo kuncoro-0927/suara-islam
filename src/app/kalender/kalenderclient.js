@@ -487,7 +487,7 @@ export default function Beranda({
                   </div>
                 </div>
 
-                <span className="flex items-center gap-2 text-sm text-gray-600">
+                <span className="flex items-center mt-1 gap-2 text-sm text-gray-600">
                   Lokasi terpilih:
                   <IconMapMarker size={12} />{" "}
                   <span className="-translate-y-px -translate-x-1">

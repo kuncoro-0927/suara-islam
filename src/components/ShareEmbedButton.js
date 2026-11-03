@@ -47,7 +47,7 @@ export default function ShareEmbedButton({
       {/* Tombol Bagikan */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`${jakarta.className} flex cursor-pointer items-center gap-2 rounded-full px-3 py-1 text-xs duration-200 ${OverrideStyle}`}
+        className={`${jakarta.className} flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 text-xs duration-200 ${OverrideStyle}`}
         aria-label="Bagikan halaman ini"
       >
         <PiShareNetwork size={14} />

@@ -3,19 +3,15 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { IconScroll, IconStar, IconBars } from "./icons";
 import {
-  IconHome,
-  IconBook,
-  IconScroll,
-  IconPray,
-  IconStar,
-  IconArrowRight,
-  IconBars,
-  IconCalendar,
-  IconQuran,
-} from "./icons";
+  PiHouseFill,
+  PiCalendarBlankFill,
+  PiBookOpenTextFill,
+  PiBookBookmarkFill,
+} from "react-icons/pi";
+import { FaPrayingHands } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
-import { PiHeartStraightFill } from "react-icons/pi";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { useRef, useEffect } from "react";
 import AyatHariIni from "./ayathariini";
@@ -47,10 +43,18 @@ export default function Navbar() {
   };
 
   const menuItems = [
-    { href: "/home", icon: <IconHome size={20} />, label: "Home" },
-    { href: "/alquran", icon: <IconBook size={20} />, label: "Al - Quran" },
+    { href: "/home", icon: <PiHouseFill size={20} />, label: "Home" },
+    {
+      href: "/alquran",
+      icon: <PiBookBookmarkFill size={20} />,
+      label: "Al - Quran",
+    },
     { href: "/hadis", icon: <IconScroll size={20} />, label: "Hadis" },
-    { href: "/doaharian", icon: <IconPray size={20} />, label: "Doa Harian" },
+    {
+      href: "/doaharian",
+      icon: <FaPrayingHands size={20} />,
+      label: "Doa Harian",
+    },
     {
       href: "/asmaulhusna",
       icon: <IconStar size={20} />,
@@ -58,10 +62,14 @@ export default function Navbar() {
     },
     {
       href: "/kalender",
-      icon: <IconCalendar size={20} />,
+      icon: <PiCalendarBlankFill size={20} />,
       label: "Kalender Sholat",
     },
-    { href: "/tahlil", icon: <IconQuran size={20} />, label: "Tahlil" },
+    {
+      href: "/tahlil",
+      icon: <PiBookOpenTextFill size={20} />,
+      label: "Tahlil",
+    },
   ];
 
   return (
@@ -150,7 +158,7 @@ export default function Navbar() {
                     {item.icon}
                   </div>
                   <span
-                    className={`text-[16px] ${active ? "font-medium" : "font-medium"} w-full ml-1.5`}
+                    className={`text-[14px] ${active ? "font-medium" : "font-medium"} w-full ml-1.5`}
                     // style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {item.label}
@@ -203,20 +211,19 @@ export default function Navbar() {
                   href={item.href}
                   className={`group flex items-center transition-all rounded-lg duration-200 py-3 ${
                     active
-                      ? "bg-emerald-700 text-white border border-emerald-200"
+                      ? "bg-emerald-700 text-white border border-emerald-700"
                       : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-700"
                   }`}
 
                   aria-current={active ? "page" : undefined}
                 >
                   <div
-                    className={`w-[48px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-700"}`}
+                    className={`w-[40px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-700"}`}
                   >
                     {item.icon}
                   </div>
                   <span
-                    className={`text-[15px] ${active ? "font-semibold" : "font-medium"} w-full ml-2`}
-                    // style={{ fontFamily: 'var(--font-poppins)' }}
+                    className={`text-[14px] ${active ? "font-medium" : "font-medium"} w-full ml-2`}
                   >
                     {item.label}
                   </span>

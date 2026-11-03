@@ -136,7 +136,7 @@ export default function JadwalSholatCard({
           className={`${jakarta.className}  font-normal flex flex-col sm:flex-row sm:justify-between items-start md:items-center w-full h-auto  rounded-xl gap-2 md:gap-3`}
         >
           <button
-            className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 hover:shadow-sm duration-200 w-fit"
+            className="group flex items-center gap-2 border border-black/10 text-[#6c6c6c] px-3 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 hover:shadow-xs duration-200 w-fit"
             onClick={() => setIsPopupOpen(true)}
             aria-label={`Pilih kota, saat ini ${selectedCity.lokasi}`}
           >
@@ -144,16 +144,16 @@ export default function JadwalSholatCard({
               size={14}
               className="text-emerald-700 group-hover:scale-110 duration-200"
             />
-            <span className="text-sm font-medium">
+            <span className="text-xs font-medium ">
               {toTitleCase(selectedCity.lokasi)}
             </span>
 
             <IoChevronDown className="text-[#6c6c6c] group-hover:text-emerald-700" />
           </button>
 
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-black/10">
+          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-black/10">
             <IconCalendar size={14} className="text-emerald-700" />
-            <span className="text-[13px] md:text-[12px] font-medium text-[#6c6c6c]">
+            <span className="text-[12px] md:text-[12px] font-medium text-[#6c6c6c]">
               {tanggalHijri &&
                 `${tanggalHijri.hari}, ${tanggalHijri.hijri} | ${formatMasehiFull()}`}
             </span>
