@@ -259,7 +259,7 @@ export default function FloatingPlayer({
         <button
           onClick={onClose}
           aria-label="Tutup pemutar"
-          className="ml-1 rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 cursor-pointer"
+          className="ml-1 rounded-full p-2 text-[#6c6c6c] hover:bg-gray-100 hover:text-gray-600 cursor-pointer"
         >
           <CloseIcon />
         </button>

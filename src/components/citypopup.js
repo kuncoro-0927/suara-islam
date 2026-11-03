@@ -132,7 +132,7 @@ export default function CityPopup({
             <div className="relative mb-4">
               <BsSearch
                 size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6c6c6c]"
               />
               <input
                 type="text"

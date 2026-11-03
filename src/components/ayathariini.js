@@ -62,7 +62,7 @@ export default function AyatHariIni({ className = "" }) {
 
   return (
     <div
-      className={`mx-auto bg-emerald-100/40 p-4 rounded-xl border border-emerald-200 text-center flex flex-col gap-3 items-center ${className}`}
+      className={`mx-auto bg-emerald-100/40 p-4 rounded-xl border border-emerald-600/20 text-center flex flex-col gap-3 items-center ${className}`}
     >
       <span className="h-9 w-9 flex items-center justify-center bg-emerald-200/40 rounded-full">
         <PiHeartStraightFill className="text-emerald-700" />

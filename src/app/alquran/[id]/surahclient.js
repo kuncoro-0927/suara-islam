@@ -363,7 +363,7 @@ export default function SurahClient({
                     </span>
                   </div>
                 </div>
-                <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
+                <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600/20 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
                   <div className="flex flex-col lg:flex-row items-start gap-4">
                     <div className=" flex items-center gap-3">
                       <div className="bg-emerald-700 w-fit p-2.5 rounded-full">
@@ -508,7 +508,7 @@ export default function SurahClient({
 
             {/* Infinite Scroll Loader */}
             {nextStart <= suratDetail.number_of_verses && (
-              <div ref={loaderRef} className="py-10 text-gray-400 text-center">
+              <div ref={loaderRef} className="py-10 text-[#6c6c6c] text-center">
                 {loadingMore ? (
                   <div className="flex items-center justify-center">
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-emerald-500 mr-2"></div>

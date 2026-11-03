@@ -139,7 +139,7 @@ export default function JadwalSholatCard({
             />
             <span className="text-sm font-medium">{toTitleCase(selectedCity.lokasi)}</span>
 
-            <IoChevronDown className="text-slate-400 group-hover:text-emerald-700" />
+            <IoChevronDown className="text-[#6c6c6c] group-hover:text-emerald-700" />
           </button>
 
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-black/10">

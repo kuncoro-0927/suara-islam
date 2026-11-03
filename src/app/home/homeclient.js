@@ -101,7 +101,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
               aria-label="Daftar surat Al-Quran"
             >
               {initialSurahList.length === 0 && (
-                <div className="text-gray-400 py-10">
+                <div className="text-[#6c6c6c] py-10">
                   Memuat daftar surat...
                 </div>
               )}

@@ -103,7 +103,7 @@ export default function Navbar() {
       />
       <Portal>
         <aside
-          className={`${jakarta.className} fixed inset-x-2 sm:inset-x-4 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/60 backdrop-blur-md transition-all duration-300 ease-in-out lg:hidden ${
+          className={`${jakarta.className} fixed inset-x-2 sm:inset-x-4 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/80 backdrop-blur-md transition-all duration-300 ease-in-out lg:hidden ${
             isMenuOpen
               ? "translate-y-0 shadow-2xl"
               : "-translate-y-[calc(100%+3rem)] shadow-none"
