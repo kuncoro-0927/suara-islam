@@ -1,10 +1,8 @@
 "use client";
 import { PiBookBookmarkFill } from "react-icons/pi";
 import { PiHandsPrayingFill } from "react-icons/pi";
-
 import { useId } from "react";
 
-// ---------- pembungkus: viewBox 64x48, gradient unik per ikon ----------
 function Base({ size = 56, className = "", children }) {
   const uid = `pi${useId().replace(/:/g, "")}`;
   const ids = {
@@ -12,7 +10,7 @@ function Base({ size = 56, className = "", children }) {
     moon: `${uid}m`,
     cd: `${uid}d`, // awan tua
     cm: `${uid}c`, // awan sedang
-    cp: `${uid}p`, // awan pucat
+    cp: `${uid}p`, // awan terang
   };
 
   return (
@@ -28,19 +26,19 @@ function Base({ size = 56, className = "", children }) {
     >
       <defs>
         <linearGradient id={ids.sun} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#86efac" />
-          <stop offset="1" stopColor="#22c55e" />
+          <stop offset="0" stopColor="#34d399" />
+          <stop offset="1" stopColor="#059669" />
         </linearGradient>
 
         <linearGradient id={ids.moon} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#86efac" />
-          <stop offset="1" stopColor="#22c55e" />
+          <stop offset="0" stopColor="#34d399" />
+          <stop offset="1" stopColor="#059669" />
         </linearGradient>
 
         {[
-          [ids.cd, "#34d399", "#047857"],
-          [ids.cm, "#a7f3d0", "#10b981"],
-          [ids.cp, "#ecfdf5", "#a7f3d0"],
+          [ids.cd, "#059669", "#047857"], // tua: 600 -> 700
+          [ids.cm, "#10b981", "#059669"], // sedang: 500 -> 600
+          [ids.cp, "#34d399", "#10b981"], // terang: 400 -> 500
         ].map(([id, top, bottom]) => (
           <linearGradient
             key={id}
@@ -73,7 +71,7 @@ const Sun = ({ ids, cx, cy, r, r1, r2 }) => (
           y1={(cy + r1 * Math.sin(t)).toFixed(2)}
           x2={(cx + r2 * Math.cos(t)).toFixed(2)}
           y2={(cy + r2 * Math.sin(t)).toFixed(2)}
-          stroke="#4ade80"
+          stroke="#10b981"
           strokeWidth="2.6"
           strokeLinecap="round"
         />
@@ -105,7 +103,7 @@ const Cloud = ({ x, y, s = 1, gid }) => (
 
 const Sparkle = ({ cx, cy, s = 4 }) => (
   <path
-    fill="#4ade80"
+    fill="#10b981"
     d={`M${cx} ${cy - s}Q${cx} ${cy} ${cx + s} ${cy}Q${cx} ${cy} ${cx} ${cy + s}Q${cx} ${cy} ${cx - s} ${cy}Q${cx} ${cy} ${cx} ${cy - s}Z`}
   />
 );
@@ -197,8 +195,10 @@ export const IconIsya = (p) => (
 );
 
 export const PrayerIcons = {
+  imsyak: IconImsyak,
   imsak: IconImsyak,
   subuh: IconSubuh,
+  fajr: IconSubuh,
   terbit: IconTerbit,
   dhuha: IconDhuha,
   dzuhur: IconDzuhur,
@@ -208,6 +208,7 @@ export const PrayerIcons = {
   ashar: IconAsar,
   maghrib: IconMaghrib,
   isya: IconIsya,
+  isha: IconIsya,
 };
 
 export const SuratUtama = [
