@@ -105,7 +105,7 @@ export default function AlQuranClient({ initialData }) {
                         className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                       >
                         <h2 className="text-[14px] font-semibold text-emerald-700">
-                          {surat.name_id} tes
+                          {surat.name_id}
                         </h2>
 
                         <div
