@@ -81,7 +81,7 @@ export default function Beranda({ initialSurahList = [], initialJadwal = {} }) {
                       surat.isSpecialPage ? surat.route : `/alquran/${surat.id}`
                     }
                   >
-                    <div className="flex justify-center items-center px-5 py-2 rounded-full border bg-white/40 backdrop-blur-md shadow-xs border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-700 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
+                    <div className="flex justify-center items-center px-4 py-2 rounded-full border bg-white/40 backdrop-blur-md shadow-xs border-black/10 transition-all duration-200 efek-opacity text-[#6c6c6c] hover:text-emerald-700 hover:bg-emerald-100/40 hover:border-emerald-600 hover:shadow-xs">
                       <div className="flex items-center gap-2">
                         <surat.icon size={18} className="text-emerald-700" />
                         <span
