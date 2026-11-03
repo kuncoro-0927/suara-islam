@@ -263,7 +263,7 @@ export default function SurahClient({
       <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
         <Navbar />
         <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
-          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/80 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
             {/* Error Display */}
             {error && (
               <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
