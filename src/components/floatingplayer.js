@@ -66,6 +66,10 @@ const VolumeIcon = ({ level }) => (
 
 const SKIP_SECONDS = 10;
 
+const sliderClass = `h-1 cursor-pointer appearance-none rounded-full outline-none
+  [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
+  [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700`;
+
 export default function FloatingPlayer({
   audio,
   surahName,
@@ -134,35 +138,86 @@ export default function FloatingPlayer({
   };
 
   const shownVolume = muted ? 0 : volume;
-
   const volumeLevel =
     shownVolume === 0 ? "mute" : shownVolume < 0.5 ? "low" : "high";
   const volumePercent = shownVolume * 100;
+
+  // elemen yang dipakai di dua tempat (mobile: baris atas, desktop: posisi semula)
+  const progressSlider = (
+    <>
+      <span className="w-9 shrink-0 text-right text-[11px] tabular-nums text-gray-500">
+        {formatTime(time)}
+      </span>
+      <input
+        type="range"
+        min={0}
+        max={duration || 0}
+        step="0.1"
+        value={time}
+        onChange={handleSeek}
+        aria-label="Posisi audio"
+        style={{
+          background: `linear-gradient(to right, #059669 ${progress}%, #d1fae5 ${progress}%)`,
+        }}
+        className={`${sliderClass} min-w-0 flex-1`}
+      />
+      <span className="w-9 shrink-0 text-[11px] tabular-nums text-gray-500">
+        {formatTime(duration)}
+      </span>
+    </>
+  );
+
+  const replayButton = (
+    <button
+      onClick={() => skip(-SKIP_SECONDS)}
+      aria-label={`Mundur ${SKIP_SECONDS} detik`}
+      className="cursor-pointer rounded-full p-1 hover:bg-emerald-50"
+    >
+      <RiReplay10Line className="text-xl" />
+    </button>
+  );
+
+  const forwardButton = (
+    <button
+      onClick={() => skip(SKIP_SECONDS)}
+      aria-label={`Maju ${SKIP_SECONDS} detik`}
+      className="cursor-pointer rounded-full p-1 hover:bg-emerald-50"
+    >
+      <RiForward10Fill className="text-xl" />
+    </button>
+  );
+
   return (
     <div
       role="region"
       aria-label="Pemutar audio"
-      className={` ${jakarta.className} fixed bottom-4 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 items-center gap-4 rounded-2xl border border-emerald-600/20 bg-white/40 backdrop-blur-md px-6 py-3 shadow-lg`}
+      className={`${jakarta.className} fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2
+        grid grid-cols-[1fr_auto_1fr] items-center gap-x-2 gap-y-2
+        sm:flex sm:gap-4
+        rounded-2xl border border-emerald-600/20 bg-white/40 px-4 py-3 shadow-lg backdrop-blur-md sm:px-6`}
     >
-      {/* kiri: info + kontrol + progress (mengisi sisa lebar) */}
-      <div className="flex min-w-0 flex-1 justify-center items-center gap-4">
-        <div className=" md:w-28 lg::w-32 mr-auto shrink-0">
-          <p className="truncate text-base font-semibold text-emerald-700 leading-tight mb-1">
+      {/* kiri + tengah: info + kontrol utama (+ progress di desktop).
+          Mobile: `contents` -> anak-anaknya jadi item grid (kolom 1 & 2).
+          sm ke atas: kembali jadi flex seperti semula. */}
+      <div className="contents sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-center sm:gap-4">
+        {/* info surah (kolom 1 di mobile) */}
+        <div className="min-w-0 sm:mr-auto sm:shrink-0 md:w-28 lg:w-32">
+          <p className="mb-1 truncate text-base font-semibold leading-tight text-emerald-700">
             {surahName}
           </p>
-          <p className="text-xs text-[#6c6c6c] font-medium">
+          <p className="text-xs font-medium text-[#6c6c6c]">
             Ayat {ayah}
             {totalAyah ? ` dari ${totalAyah}` : ""}
           </p>
         </div>
 
-        {/* kontrol utama */}
-        <div className="flex shrink-0 items-center gap-1 text-emerald-700 sm:gap-2">
+        {/* kontrol utama (kolom 2 di mobile -> otomatis di tengah) */}
+        <div className="flex shrink-0 items-center gap-1 justify-self-center text-emerald-700 sm:gap-2">
           <button
             onClick={onPrev}
             disabled={!hasPrev}
             aria-label="Ayat sebelumnya"
-            className="rounded-full p-2 hover:bg-emerald-50 disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+            className="cursor-pointer rounded-full p-2 hover:bg-emerald-50 disabled:opacity-30 disabled:hover:bg-transparent"
           >
             <TbPlayerSkipBackFilled />
           </button>
@@ -170,7 +225,7 @@ export default function FloatingPlayer({
           <button
             onClick={onToggle}
             aria-label={isPlaying ? "Jeda" : "Putar"}
-            className="rounded-full bg-emerald-700 p-2.5 text-white hover:bg-emerald-800 cursor-pointer"
+            className="cursor-pointer rounded-full bg-emerald-700 p-2.5 text-white hover:bg-emerald-800"
           >
             {isPlaying ? (
               <TbPlayerPauseFilled size={18} />
@@ -183,56 +238,27 @@ export default function FloatingPlayer({
             onClick={onNext}
             disabled={!hasNext}
             aria-label="Ayat berikutnya"
-            className="rounded-full p-2 hover:bg-emerald-50 disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+            className="cursor-pointer rounded-full p-2 hover:bg-emerald-50 disabled:opacity-30 disabled:hover:bg-transparent"
           >
             <TbPlayerSkipForwardFilled />
           </button>
         </div>
 
-        {/* progress: ambil semua sisa lebar */}
-        <div className="sm:flex hidden min-w-0 flex-1 items-center gap-2">
-          <span className="w-9 shrink-0 text-right text-[11px] tabular-nums text-gray-500">
-            {formatTime(time)}
-          </span>
-          <input
-            type="range"
-            min={0}
-            max={duration || 0}
-            step="0.1"
-            value={time}
-            onChange={handleSeek}
-            aria-label="Posisi audio"
-            style={{
-              background: `linear-gradient(to right, #059669 ${progress}%, #d1fae5 ${progress}%)`,
-            }}
-            className="h-1 min-w-0 flex-1 cursor-pointer appearance-none rounded-full outline-none
-          [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
-          [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700"
-          />
-          <span className="w-9 shrink-0 text-[11px] tabular-nums text-gray-500">
-            {formatTime(duration)}
-          </span>
+        {/* DESKTOP ONLY - progress di samping kontrol */}
+        <div className="hidden min-w-0 flex-1 items-center gap-2 sm:flex">
+          {progressSlider}
         </div>
       </div>
 
-      {/* kanan: skip 10 detik, volume, tutup (lebar tetap) */}
-      <div className="flex shrink-0 items-center gap-1  text-emerald-700">
-        <div className="hidden sm:flex items-center gap-1">
-          <button
-            onClick={() => skip(-SKIP_SECONDS)}
-            aria-label={`Mundur ${SKIP_SECONDS} detik`}
-            className="rounded-full p-1 hover:bg-emerald-50"
-          >
-            <RiReplay10Line className="cursor-pointer text-xl" />
-          </button>
-          <button
-            onClick={() => skip(SKIP_SECONDS)}
-            aria-label={`Maju ${SKIP_SECONDS} detik`}
-            className="rounded-full p-1 hover:bg-emerald-50"
-          >
-            <RiForward10Fill className="cursor-pointer text-xl" />
-          </button>
+      {/* kanan: (desktop: skip 10s) + mute + volume + tutup.
+          Mobile: kolom 3, rata kanan */}
+      <div className="flex shrink-0 items-center gap-1 justify-self-end text-emerald-700">
+        {/* DESKTOP ONLY - skip 10 detik */}
+        <div className="hidden items-center gap-1 sm:flex">
+          {replayButton}
+          {forwardButton}
         </div>
+
         <button
           onClick={toggleMute}
           aria-label={shownVolume === 0 ? "Suarakan" : "Bisukan"}
@@ -240,6 +266,7 @@ export default function FloatingPlayer({
         >
           <VolumeIcon level={volumeLevel} />
         </button>
+
         <input
           type="range"
           min={0}
@@ -251,18 +278,25 @@ export default function FloatingPlayer({
           style={{
             background: `linear-gradient(to right, #059669 ${volumePercent}%, #d1fae5 ${volumePercent}%)`,
           }}
-          className="hidden h-1 w-20 cursor-pointer appearance-none rounded-full outline-none md:block
-        [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
-        [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700"
+          className={`${sliderClass} hidden w-20 md:block`}
         />
 
         <button
           onClick={onClose}
           aria-label="Tutup pemutar"
-          className="ml-1 rounded-full p-2 text-[#6c6c6c] hover:bg-gray-100 hover:text-gray-600 cursor-pointer"
+          className="ml-1 translate-x-1 cursor-pointer rounded-full p-2 text-[#6c6c6c] hover:bg-gray-100 hover:text-gray-600"
         >
           <CloseIcon />
         </button>
+      </div>
+
+      {/* MOBILE ONLY - baris atas: replay 10s | progress | forward 10s */}
+      <div className="col-span-3 flex items-center gap-1 text-emerald-700 sm:hidden">
+        <div className="flex min-w-0 -translate-x-3.5 flex-1 items-center gap-2">
+          {progressSlider}
+        </div>
+        {replayButton}
+        {forwardButton}
       </div>
     </div>
   );
