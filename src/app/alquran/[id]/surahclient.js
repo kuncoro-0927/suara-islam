@@ -337,28 +337,28 @@ export default function SurahClient({
 
                 <div className="flex items-start gap-6 mt-2 text-sm">
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-medium text-[rgb(108,108,108)]">
+                    <span className="font-medium text-[#6c6c6c] whitespace-nowrap">
                       Golongan
                     </span>
-                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                    <span className="text-emerald-700 font-medium text-center text-base lg:text-lg">
                       {suratDetail.revelation_id}
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-medium text-[#6c6c6c]">
+                    <span className="font-medium text-[#6c6c6c] whitespace-nowrap">
                       Arti surah
                     </span>
-                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                    <span className="text-emerald-700 text-center font-medium text-base lg:text-lg">
                       {suratDetail.translation_id}
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-medium text-[#6c6c6c]">
+                    <span className="font-medium text-[#6c6c6c] whitespace-nowrap">
                       Jumlah ayat
                     </span>
-                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                    <span className="text-emerald-700 text-center font-medium text-base lg:text-lg">
                       {suratDetail.number_of_verses}
                     </span>
                   </div>
