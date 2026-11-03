@@ -9,12 +9,6 @@ import { IoChevronDown } from "react-icons/io5";
 
 const CityPopup = lazy(() => import("../../components/citypopup"));
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  display: "swap",
-});
-
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -48,6 +42,9 @@ const toMinutes = (t) => {
   const [h, m] = t.split(":").map(Number);
   return h * 60 + m;
 };
+
+const toTitleCase = (str = "") =>
+  str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
 export default function JadwalSholatCard({
   cityId = "1301",
@@ -129,7 +126,7 @@ export default function JadwalSholatCard({
       <div className="flex flex-col justify-center items-center w-full  h-auto border border-black/10  shadow-sm shadow-gray-200/70 bg-white/40 backdrop-blur-md rounded-3xl p-4 md:p-6 ">
         {/* Kota & Tanggal */}
         <div
-          className={`${jakarta.className}  font-normal flex flex-col md:flex-row md:justify-between items-start md:items-center w-full h-auto  rounded-xl gap-2 md:gap-3`}
+          className={`${jakarta.className}  font-normal flex flex-col sm:flex-row sm:justify-between items-start md:items-center w-full h-auto  rounded-xl gap-2 md:gap-3`}
         >
           <button
             className="group flex items-center gap-2 border border-black/10  px-4 py-2.5 rounded-xl cursor-pointer transition hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700 hover:shadow-sm duration-200 w-fit"
@@ -140,7 +137,7 @@ export default function JadwalSholatCard({
               size={14}
               className="text-emerald-700 group-hover:scale-110 duration-200"
             />
-            <span className="text-xs font-medium">{selectedCity.lokasi}</span>
+            <span className="text-sm font-medium">{toTitleCase(selectedCity.lokasi)}</span>
 
             <IoChevronDown className="text-slate-400 group-hover:text-emerald-700" />
           </button>
@@ -220,7 +217,7 @@ export default function JadwalSholatCard({
           <ShareEmbedButton
             url={shareUrl}
             embedUrl={embedCode}
-            OverrideStyle="bg-emerald-700 px-4 py-2.5 text-white drop-shadow-sm drop-shadow-emerald-100 hover:bg-emerald-700 "
+            OverrideStyle="bg-emerald-700 px-4 py-2.5 text-white drop-shadow-sm drop-shadow-emerald-100 hover:bg-emerald-800 "
           />
         </div>
       </div>

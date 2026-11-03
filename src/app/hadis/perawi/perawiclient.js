@@ -244,194 +244,195 @@ export default function HadisPerawi() {
 
   return (
     <main>
-      <div className="flex m-0 p-0">
-        <div>
-          <Navbar />
-        </div>
-        <div className="min-w-0 flex-1 min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
-          {/* Header and Search Layout */}
-          <Header
-            Title="Hadis 9 Perawi"
-            subtitle="Pondasi ajaran Islam"
-            Description="Koleksi hadis dari 9 perawi utama"
-          >
-            <div className="mt-8">
-              <EnhancedSearch
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onSearch={handleSearch}
-              />
-            </div>
-          </Header>
+      <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+        <Navbar />
+        <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+            {/* Header and Search Layout */}
+            <Header
+              Title="Hadis 9 Perawi"
+              subtitle="Pondasi ajaran Islam"
+              Description="Koleksi hadis dari 9 perawi utama"
+            >
+              <div className="mt-8">
+                <EnhancedSearch
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onSearch={handleSearch}
+                />
+              </div>
+            </Header>
 
-          {/* Back Button and Filter */}
-          <div className="flex flex-row items-center justify-between gap-3">
-            <div className=" w-fit my-6">
-              <Link href="/hadis" className="">
-                <button
-                  className="s duration-200 
+            {/* Back Button and Filter */}
+            <div className="flex flex-row items-center justify-between gap-3">
+              <div className=" w-fit my-6">
+                <Link href="/hadis" className="">
+                  <button
+                    className="s duration-200 
                           flex items-center gap-1 
                           text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
-                >
-                  <IoIosArrowRoundBack className="text-xl" />
-                  Kembali ke Hadis
-                </button>
-              </Link>
-            </div>
+                  >
+                    <IoIosArrowRoundBack className="text-xl" />
+                    Kembali ke Hadis
+                  </button>
+                </Link>
+              </div>
 
-            {/* Filter Perawi */}
-            <div className="relative ">
-              <button
-                onClick={() => setShowPerawiDropdown(!showPerawiDropdown)}
-                className={`pl-5 pr-4 py-2.5  backdrop-blur-md transition-colors duration-200 flex items-center gap-2 border shadow-xs rounded-full justify-between text-sm cursor-pointer
-                   ${showPerawiDropdown ? "border-emerald-600 text-emerald-700 bg-emerald-100/40" : "border-black/10 text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700"}`}
-              >
-                <span>{perawiCategories[selectedPerawi]?.name}</span>
-                {showPerawiDropdown ? (
-                  <IoIosArrowUp className="text-emerald-700" />
-                ) : (
-                  <IoIosArrowDown />
-                )}
-              </button>
-
-              {showPerawiDropdown && (
-                <div className="absolute top-full space-y-1 right-0 mt-2 p-4 w-[200px] bg-white backdrop-blur-2xl rounded-xl border border-black/10 shadow-lg z-40 max-h-60 overflow-y-auto no-scrollbar">
-                  {Object.entries(perawiCategories).map(([slug, info]) => (
-                    <button
-                      key={slug}
-                      onClick={() => handlePerawiChange(slug)}
-                      className={`block w-full text-left px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 text-sm  transition-colors cursor-pointer ${
-                        selectedPerawi === slug
-                          ? "bg-emerald-700 text-white rounded-lg "
-                          : "hover:bg-emerald-700 hover:text-white rounded-lg text-[#6c6c6c] "
-                      }`}
-                    >
-                      {info.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Error Display */}
-          {error && (
-            <div className=" mb-3">
-              <p className="text-red-700 text-center text-sm mb-3">{error}</p>
-              <div className="text-center">
+              {/* Filter Perawi */}
+              <div className="relative ">
                 <button
-                  onClick={handleRetry}
-                  className="px-4 text-sm leading-none py-2.5 cursor-pointer bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                  onClick={() => setShowPerawiDropdown(!showPerawiDropdown)}
+                  className={`pl-5 pr-4 py-2.5  backdrop-blur-md transition-colors duration-200 flex items-center gap-2 border shadow-xs rounded-full justify-between text-sm cursor-pointer
+                   ${showPerawiDropdown ? "border-emerald-600 text-emerald-700 bg-emerald-100/40" : "border-black/10 text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-100/40 hover:text-emerald-700"}`}
                 >
-                  Coba Lagi
+                  <span>{perawiCategories[selectedPerawi]?.name}</span>
+                  {showPerawiDropdown ? (
+                    <IoIosArrowUp className="text-emerald-700" />
+                  ) : (
+                    <IoIosArrowDown />
+                  )}
                 </button>
-              </div>
-            </div>
-          )}
 
-          {/* Loading State */}
-          {loading && (
-            <div className="flex justify-center items-center mt-10 py-10">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
-                <p className="mt-3 text-gray-600">
-                  Memuat hadis {perawiCategories[selectedPerawi]?.name}...
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Hadis List */}
-          {!loading && !error && (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 ">
-                {hadisList.length > 0 ? (
-                  hadisList.map((hadis, index) => (
-                    <Link
-                      key={`perawi-${hadis.id || hadis.no}-${index}`}
-                      href={`/hadis/${hadis.no}?category=${encodeURIComponent(hadis.category)}`}
-                    >
-                      <div className={`${jakarta.className} flex h-full`}>
-                        <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
-                          {hadis.no && (
-                            <p className="text-[12px] text-[#6c6c6c] font-medium">
-                              No. {hadis.no}
-                            </p>
-                          )}
-                          <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
-                            {hadis.judul || `${hadis.category} No.${hadis.no}`}
-                          </h1>
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-10">
-                    <p className="text-gray-600">Tidak ada hadis ditemukan</p>
+                {showPerawiDropdown && (
+                  <div className="absolute top-full space-y-1 right-0 mt-2 p-4 w-[200px] bg-white backdrop-blur-2xl rounded-xl border border-black/10 shadow-lg z-40 max-h-60 overflow-y-auto no-scrollbar">
+                    {Object.entries(perawiCategories).map(([slug, info]) => (
+                      <button
+                        key={slug}
+                        onClick={() => handlePerawiChange(slug)}
+                        className={`block w-full text-left px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 text-sm  transition-colors cursor-pointer ${
+                          selectedPerawi === slug
+                            ? "bg-emerald-700 text-white rounded-lg "
+                            : "hover:bg-emerald-800 hover:text-white rounded-lg text-[#6c6c6c] "
+                        }`}
+                      >
+                        {info.name}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
+            </div>
 
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-2 my-6 mt-12 px-4">
-                  {/* Previous Button */}
+            {/* Error Display */}
+            {error && (
+              <div className=" mb-3">
+                <p className="text-red-700 text-center text-sm mb-3">{error}</p>
+                <div className="text-center">
                   <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
-                      currentPage === 1
-                        ? "text-gray-500 cursor-not-allowed"
-                        : "text-emerald-700 cursor-pointer"
-                    }`}
+                    onClick={handleRetry}
+                    className="px-4 text-sm leading-none py-2.5 cursor-pointer bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                   >
-                    <IoIosArrowBack
-                      size={12}
-                      className="shrink-0 translate-y-[1.5px]"
-                    />
-                    <span>Prev</span>
-                  </button>
-
-                  {/* Page Numbers */}
-                  {generatePageNumbers().map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
-                      className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
-                        page === currentPage
-                          ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
-                          : "text-[#6c6c6c] hover:bg-emerald-700 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
-                      }`}
-                    >
-                      <span className="-translate-y-px">{page}</span>
-                    </button>
-                  ))}
-                  {/* Next Button */}
-                  <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
-                      currentPage === totalPages
-                        ? " text-gray-500 cursor-not-allowed"
-                        : "text-emerald-700 cursor-pointer"
-                    }`}
-                  >
-                    Next
-                    <IoIosArrowForward size={12} />
+                    Coba Lagi
                   </button>
                 </div>
-              )}
-
-              {/* Page Info */}
-              <div className="text-center text-gray-500 text-sm mb-8">
-                Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
-                {hadisList.length} hadis -{" "}
-                {perawiInfo?.name || perawiCategories[selectedPerawi]?.name}
-                {perawiInfo && ` (Total: ${perawiInfo.maxHadis} hadis)`}
               </div>
-            </>
-          )}
+            )}
+
+            {/* Loading State */}
+            {loading && (
+              <div className="flex justify-center items-center mt-10 py-10">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
+                  <p className="mt-3 text-gray-600">
+                    Memuat hadis {perawiCategories[selectedPerawi]?.name}...
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Hadis List */}
+            {!loading && !error && (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 ">
+                  {hadisList.length > 0 ? (
+                    hadisList.map((hadis, index) => (
+                      <Link
+                        key={`perawi-${hadis.id || hadis.no}-${index}`}
+                        href={`/hadis/${hadis.no}?category=${encodeURIComponent(hadis.category)}`}
+                      >
+                        <div className={`${jakarta.className} flex h-full`}>
+                          <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
+                            {hadis.no && (
+                              <p className="text-[12px] text-[#6c6c6c] font-medium">
+                                No. {hadis.no}
+                              </p>
+                            )}
+                            <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
+                              {hadis.judul ||
+                                `${hadis.category} No.${hadis.no}`}
+                            </h1>
+                          </div>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-10">
+                      <p className="text-gray-600">Tidak ada hadis ditemukan</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center gap-2 my-6 mt-12 px-4">
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
+                        currentPage === 1
+                          ? "text-gray-500 cursor-not-allowed"
+                          : "text-emerald-700 cursor-pointer"
+                      }`}
+                    >
+                      <IoIosArrowBack
+                        size={12}
+                        className="shrink-0 translate-y-[1.5px]"
+                      />
+                      <span>Prev</span>
+                    </button>
+
+                    {/* Page Numbers */}
+                    {generatePageNumbers().map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
+                          page === currentPage
+                            ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
+                            : "text-[#6c6c6c] hover:bg-emerald-800 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
+                        }`}
+                      >
+                        <span className="-translate-y-px">{page}</span>
+                      </button>
+                    ))}
+                    {/* Next Button */}
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
+                        currentPage === totalPages
+                          ? " text-gray-500 cursor-not-allowed"
+                          : "text-emerald-700 cursor-pointer"
+                      }`}
+                    >
+                      Next
+                      <IoIosArrowForward size={12} />
+                    </button>
+                  </div>
+                )}
+
+                {/* Page Info */}
+                <div className="text-center text-gray-500 text-sm mb-8">
+                  Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
+                  {hadisList.length} hadis -{" "}
+                  {perawiInfo?.name || perawiCategories[selectedPerawi]?.name}
+                  {perawiInfo && ` (Total: ${perawiInfo.maxHadis} hadis)`}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </main>

@@ -30,23 +30,13 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const sidebarRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const el = sidebarRef.current;
-    if (!el) return;
-
-    const update = () => {
-      el.style.top = `${Math.min(0, window.innerHeight - el.offsetHeight)}px`;
-    };
-
-    update();
-    window.addEventListener("resize", update);
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-
-    return () => {
-      window.removeEventListener("resize", update);
-      ro.disconnect();
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll(); // cek saat pertama muat, kalau halaman dibuka di posisi tengah
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const isActive = (href) =>
@@ -76,7 +66,11 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-2 py-3 top-2 z-49 flex items-center justify-between rounded-xl lg:rounded-2xl border border-white shadow-xs bg-white/40 px-4 backdrop-blur-md md:hidden">
+      <header
+        className={`fixed inset-x-2 top-2 z-[49] flex items-center justify-between rounded-xl border border-white bg-white/40 px-4 py-3 backdrop-blur-md transition-shadow duration-200 sm:inset-x-4 lg:rounded-2xl lg:hidden ${
+          scrolled ? "shadow-md" : "shadow-xs"
+        }`}
+      >
         <div className="flex items-center">
           <Image
             src="/suaraislam.png"
@@ -99,7 +93,7 @@ export default function Navbar() {
       </header>
 
       <div
-        className={`fixed inset-0 z-50 bg-black/5 transition-opacity md:hidden ${
+        className={`fixed inset-0 z-50 bg-black/5 transition-opacity lg:hidden ${
           isMenuOpen
             ? "opacity-100 duration-200 delay-300"
             : "pointer-events-none opacity-0 duration-150 delay-0"
@@ -109,7 +103,7 @@ export default function Navbar() {
       />
       <Portal>
         <aside
-          className={`${jakarta.className} fixed inset-x-2 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/60 backdrop-blur-md transition-all duration-300 ease-in-out md:hidden ${
+          className={`${jakarta.className} fixed inset-x-2 sm:inset-x-4 top-0 z-50 max-h-[calc(100vh-1rem)] overflow-y-auto rounded-b-2xl bg-white/60 backdrop-blur-md transition-all duration-300 ease-in-out lg:hidden ${
             isMenuOpen
               ? "translate-y-0 shadow-2xl"
               : "-translate-y-[calc(100%+3rem)] shadow-none"
@@ -171,65 +165,69 @@ export default function Navbar() {
           </div>
         </aside>
       </Portal>
-      <div
-        ref={sidebarRef}
-        className={`${jakarta.className} bg-white/40 backdrop-blur-md hidden md:flex flex-col w-[290px] m-4 shrink-0 self-start h-fit sticky border rounded-2xl p-6 border-white`}
-      >
-        <div className="w-full flex items-end gap-3">
-          <Link href="/home">
-            <Image
-              src="/suaraislam.png"
-              alt="Suara Islam - Halaman utama"
-              width={200}
-              height={324}
-              className="h-[50px] w-auto object-contain"
-              priority
-            />
-          </Link>
-          <div className="flex flex-col leading-none translate-y-1">
-            <span className="font-bold text-xl leading-tight">Suara Islam</span>
-            <span className="text-sm text-[#6c6c6c] font-medium">
-              Al-Quran & Referensi Islami
-            </span>
-          </div>
-        </div>
-
-        <nav
-          className="flex flex-col gap-2 font-normal mt-8"
-          aria-label="Menu navigasi utama"
+      <div className="hidden lg:block h-dvh w-[322px] shrink-0 overflow-y-auto overscroll-contain no-scrollbar p-4">
+        {/* kartu sidebar: tingginya mengikuti isi */}
+        <div
+          className={`${jakarta.className} flex w-[290px] flex-col rounded-2xl border border-white bg-white/40 p-6 backdrop-blur-md`}
         >
-          {menuItems.map((item, index) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={index}
-                href={item.href}
-                className={`group flex items-center transition-all rounded-lg duration-200 py-3 ${
-                  active
-                    ? "bg-emerald-700 text-white border border-emerald-200"
-                    : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-700"
-                }`}
+          <div className="w-full flex items-end gap-3">
+            <Link href="/home">
+              <Image
+                src="/suaraislam.png"
+                alt="Suara Islam - Halaman utama"
+                width={200}
+                height={324}
+                className="h-[50px] w-auto object-contain"
+                priority
+              />
+            </Link>
+            <div className="flex flex-col leading-none translate-y-1">
+              <span className="font-bold text-xl leading-tight">
+                Suara Islam
+              </span>
+              <span className="text-sm text-[#6c6c6c] font-medium">
+                Al-Quran & Referensi Islami
+              </span>
+            </div>
+          </div>
 
-                aria-current={active ? "page" : undefined}
-              >
-                <div
-                  className={`w-[48px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-700"}`}
-                >
-                  {item.icon}
-                </div>
-                <span
-                  className={`text-[15px] ${active ? "font-semibold" : "font-medium"} w-full ml-2`}
-                  // style={{ fontFamily: 'var(--font-poppins)' }}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
+          <nav
+            className="flex flex-col gap-2 font-normal mt-8"
+            aria-label="Menu navigasi utama"
+          >
+            {menuItems.map((item, index) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className={`group flex items-center transition-all rounded-lg duration-200 py-3 ${
+                    active
+                      ? "bg-emerald-700 text-white border border-emerald-200"
+                      : "text-[#6c6c6c] hover:bg-emerald-100/40 hover:text-emerald-700"
+                  }`}
 
-        <div className="mx-auto mt-14 text-center mb-8 flex flex-col gap-3 items-center">
-          <AyatHariIni />
+                  aria-current={active ? "page" : undefined}
+                >
+                  <div
+                    className={`w-[48px] flex justify-center items-center ml-3 duration-200 transition-all ${active ? "text-white" : "text-[#6c6c6c] group-hover:text-emerald-700"}`}
+                  >
+                    {item.icon}
+                  </div>
+                  <span
+                    className={`text-[15px] ${active ? "font-semibold" : "font-medium"} w-full ml-2`}
+                    // style={{ fontFamily: 'var(--font-poppins)' }}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mx-auto mt-14 text-center mb-8 flex flex-col gap-3 items-center">
+            <AyatHariIni />
+          </div>
         </div>
       </div>
     </>

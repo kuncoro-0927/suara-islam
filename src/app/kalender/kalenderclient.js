@@ -407,124 +407,177 @@ export default function Beranda({
 
   return (
     <main>
-      <div className="flex m-0 p-0">
-        <div>
-          <Navbar />
-        </div>
+      <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+        <Navbar />
 
-        <div className="w-full m-2 lg:m-0 mt-[90px] p-4 lg:p-10 overflow-hidden bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl border border-white">
-          <Header
-            Title="Jadwal Sholat"
-            subtitle="Jadwal Sholat Realtime"
-            Description="Jadwal Sholat Selama Satu Bulan"
-          />
+        <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+            <Header
+              Title="Jadwal Sholat"
+              subtitle="Jadwal Sholat Realtime"
+              Description="Jadwal Sholat Selama Satu Bulan"
+            />
 
-          <div className="mt-8">
-            <div className="flex items-center shadow-xs bg-white/40 backdrop-blur-md gap-0.5 border rounded-lg border-black/10 mb-4 w-fit p-0.5 ">
-              <button
-                className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
-                  mode === "masehi"
-                    ? "text-white bg-emerald-700"
-                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
-                }`}
-                onClick={() => setMode("masehi")}
-              >
-                <PiSunFill />
-                Masehi
-              </button>
-
-              <button
-                className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
-                  mode === "hijriyah"
-                    ? "text-white  bg-emerald-700 "
-                    : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
-                }`}
-                onClick={() => setMode("hijriyah")}
-              >
-                <PiMoonStarsFill />
-                Hijriyah
-              </button>
-            </div>
-            {/* Info Bar: City + Month */}
-            <div className="flex flex-col px-4 lg:px-8 py-4 border border-emerald-600 shadow-sm bg-emerald-100/40 backdrop-blur-md rounded-xl mb-8">
-              <div className="flex items-start lg:items-center justify-between">
-                <div className="">
-                  {" "}
-                  <p
-                    className={`${jakarta.className} text-emerald-900 font-semibold text-base lg:text-xl  flex items-center flex-wrap`}
-                  >
-                    <span>
-                      Jadwal Sholat untuk {toTitleCase(selectedCity.lokasi)},{" "}
-                      {mode === "masehi"
-                        ? getFormattedMonth(selectedMonth)
-                        : `${hijriMonths[hijriMonth - 1]} ${hijriYear} H`}
-                    </span>{" "}
-                  </p>
-                </div>
-                <div className="flex items-center gap-1 lg:gap-3">
-                  <button
-                    onClick={
-                      mode === "masehi"
-                        ? handleDownloadPDF
-                        : handleDownloadPDFHijri
-                    }
-                    className="flex items-center gap-2 px-3 text-xs py-1 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
-                    disabled={
-                      loading ||
-                      (mode === "masehi"
-                        ? jadwal.length === 0
-                        : jadwalHijri.length === 0)
-                    }
-                    aria-label="Download PDF"
-                  >
-                    <IconDownload size={12} />
-                    <span className="hidden sm:inline">PDF</span>
-                  </button>
-                  <ShareEmbedButton
-                    url={shareUrl}
-                    embedUrl={embedCode}
-                    OverrideStyle="bg-white/40 border border-emerald-600 text-emerald-700 shadow-sm hover:bg-white/80"
-                  />
-                </div>
-              </div>
-
-              <span className="flex items-center gap-2 text-sm text-gray-600">
-                Lokasi terpilih:
-                <IconMapMarker size={12} />{" "}
-                <span className="-translate-y-px -translate-x-1">
-                  {toTitleCase(selectedCity.lokasi)}
-                </span>
-              </span>
-
-              <div className="flex items-center gap-3">
+            <div className="mt-8">
+              <div className="flex items-center shadow-xs bg-white/40 backdrop-blur-md gap-0.5 border rounded-lg border-black/10 mb-4 w-fit p-0.5 ">
                 <button
-                  onClick={() => setIsPopupOpen(true)}
-                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
-                >
-                  <BsSearch size={12} />
-                  <span> Pilih Kota</span>
-                </button>
-
-                <button
-                  onClick={() =>
+                  className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
                     mode === "masehi"
-                      ? setIsMonthPopupOpen(true)
-                      : setIsHijriPopupOpen(true)
-                  }
-                  className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                      ? "text-white bg-emerald-700"
+                      : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
+                  }`}
+                  onClick={() => setMode("masehi")}
                 >
-                  <IconCalendar size={12} />
-                  <span> Pilih Bulan</span>
+                  <PiSunFill />
+                  Masehi
+                </button>
+
+                <button
+                  className={`flex items-center rounded-lg gap-2 py-1.5 px-3 text-sm transition-colors cursor-pointer ${
+                    mode === "hijriyah"
+                      ? "text-white  bg-emerald-700 "
+                      : "text-[#6c6c6c]  hover:bg-emerald-100/40 hover:text-emerald-700"
+                  }`}
+                  onClick={() => setMode("hijriyah")}
+                >
+                  <PiMoonStarsFill />
+                  Hijriyah
                 </button>
               </div>
-            </div>
+              {/* Info Bar: City + Month */}
+              <div className="flex flex-col px-4 lg:px-8 py-4 border border-emerald-600 shadow-sm bg-emerald-100/40 backdrop-blur-md rounded-xl mb-8">
+                <div className="flex items-start lg:items-center justify-between">
+                  <div className="">
+                    {" "}
+                    <p
+                      className={`${jakarta.className} text-emerald-900 font-semibold text-base lg:text-xl  flex items-center flex-wrap`}
+                    >
+                      <span>
+                        Jadwal Sholat untuk {toTitleCase(selectedCity.lokasi)},{" "}
+                        {mode === "masehi"
+                          ? getFormattedMonth(selectedMonth)
+                          : `${hijriMonths[hijriMonth - 1]} ${hijriYear} H`}
+                      </span>{" "}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1 lg:gap-3">
+                    <button
+                      onClick={
+                        mode === "masehi"
+                          ? handleDownloadPDF
+                          : handleDownloadPDFHijri
+                      }
+                      className="flex items-center gap-2 px-3 text-xs py-1 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                      disabled={
+                        loading ||
+                        (mode === "masehi"
+                          ? jadwal.length === 0
+                          : jadwalHijri.length === 0)
+                      }
+                      aria-label="Download PDF"
+                    >
+                      <IconDownload size={12} />
+                      <span className="hidden sm:inline">PDF</span>
+                    </button>
+                    <ShareEmbedButton
+                      url={shareUrl}
+                      embedUrl={embedCode}
+                      OverrideStyle="bg-white/40 border border-emerald-600 text-emerald-700 shadow-sm hover:bg-white/80"
+                    />
+                  </div>
+                </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto rounded-xl shadow-sm border border-gray-200">
-              {loading ? (
-                <p className="p-4">Loading...</p>
-              ) : mode === "masehi" ? (
-                jadwal.length > 0 ? (
+                <span className="flex items-center gap-2 text-sm text-gray-600">
+                  Lokasi terpilih:
+                  <IconMapMarker size={12} />{" "}
+                  <span className="-translate-y-px -translate-x-1">
+                    {toTitleCase(selectedCity.lokasi)}
+                  </span>
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsPopupOpen(true)}
+                    className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  >
+                    <BsSearch size={12} />
+                    <span> Pilih Kota</span>
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      mode === "masehi"
+                        ? setIsMonthPopupOpen(true)
+                        : setIsHijriPopupOpen(true)
+                    }
+                    className="mt-4 flex items-center gap-2 px-3 py-1.5 lg:px-4 text-sm lg:py-2 rounded-full bg-white/60 w-fit text-emerald-700 border border-emerald-600 backdrop-blur-xs shadow-sm hover:bg-white/80 duration-200 cursor-pointer"
+                  >
+                    <IconCalendar size={12} />
+                    <span> Pilih Bulan</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div className="overflow-x-auto rounded-xl shadow-sm border border-gray-200">
+                {loading ? (
+                  <p className="p-4">Loading...</p>
+                ) : mode === "masehi" ? (
+                  jadwal.length > 0 ? (
+                    <table className="w-full border-collapse text-center">
+                      <thead>
+                        <tr>
+                          {[
+                            "Tanggal",
+                            "Imsyak",
+                            "Subuh",
+                            "Terbit",
+                            "Dhuha",
+                            "Dzuhur",
+                            "Ashr",
+                            "Maghrib",
+                            "Isya",
+                          ].map((head) => (
+                            <th
+                              key={head}
+                              className="bg-emerald-700 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
+                            >
+                              {head}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {jadwal.map((day, index) => {
+                          const isTodayRow = isToday(day.tanggal);
+                          const cellClass = isTodayRow
+                            ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100/60 font-semibold text-emerald-700 text-sm"
+                            : index % 2
+                              ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
+                              : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";
+
+                          return (
+                            <tr key={index}>
+                              <td className={cellClass}>{day.tanggal}</td>
+                              <td className={cellClass}>{day.imsak}</td>
+                              <td className={cellClass}>{day.subuh}</td>
+                              <td className={cellClass}>{day.terbit}</td>
+                              <td className={cellClass}>{day.dhuha}</td>
+                              <td className={cellClass}>{day.dzuhur}</td>
+                              <td className={cellClass}>{day.ashar}</td>
+                              <td className={cellClass}>{day.maghrib}</td>
+                              <td className={cellClass}>{day.isya}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="p-4 text-red-600">Tidak ada data.</p>
+                  )
+                ) : errorMsg ? (
+                  <p className="p-4 text-red-600">{errorMsg}</p>
+                ) : jadwalHijri.length > 0 ? (
                   <table className="w-full border-collapse text-center">
                     <thead>
                       <tr>
@@ -549,17 +602,28 @@ export default function Beranda({
                       </tr>
                     </thead>
                     <tbody>
-                      {jadwal.map((day, index) => {
+                      {jadwalHijri.map((day, index) => {
                         const isTodayRow = isToday(day.tanggal);
                         const cellClass = isTodayRow
-                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100/60 font-semibold text-emerald-700 text-sm"
+                          ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100 font-semibold text-emerald-700 text-sm"
                           : index % 2
                             ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
                             : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";
 
                         return (
                           <tr key={index}>
-                            <td className={cellClass}>{day.tanggal}</td>
+                            <td className={cellClass}>
+                              {tanggalHijri && tanggalHijri[index] ? (
+                                <>
+                                  {tanggalHijri[index].hijri.month.en},{" "}
+                                  {tanggalHijri[index].hijri.date}
+                                  <br />
+                                  {jadwalHijri[index].tanggal}
+                                </>
+                              ) : (
+                                day.tanggal
+                              )}
+                            </td>
                             <td className={cellClass}>{day.imsak}</td>
                             <td className={cellClass}>{day.subuh}</td>
                             <td className={cellClass}>{day.terbit}</td>
@@ -575,72 +639,8 @@ export default function Beranda({
                   </table>
                 ) : (
                   <p className="p-4 text-red-600">Tidak ada data.</p>
-                )
-              ) : errorMsg ? (
-                <p className="p-4 text-red-600">{errorMsg}</p>
-              ) : jadwalHijri.length > 0 ? (
-                <table className="w-full border-collapse text-center">
-                  <thead>
-                    <tr>
-                      {[
-                        "Tanggal",
-                        "Imsyak",
-                        "Subuh",
-                        "Terbit",
-                        "Dhuha",
-                        "Dzuhur",
-                        "Ashr",
-                        "Maghrib",
-                        "Isya",
-                      ].map((head) => (
-                        <th
-                          key={head}
-                          className="bg-emerald-700 text-white px-3 py-2.5 text-xs md:text-sm font-medium whitespace-nowrap"
-                        >
-                          {head}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {jadwalHijri.map((day, index) => {
-                      const isTodayRow = isToday(day.tanggal);
-                      const cellClass = isTodayRow
-                        ? "border-b border-gray-200 px-3 py-2.5 bg-emerald-100 font-semibold text-emerald-700 text-sm"
-                        : index % 2
-                          ? "border-b border-gray-200 px-3 py-2.5 text-sm text-gray-700"
-                          : "border-b border-gray-200 px-3 py-2.5 bg-gray-50/50 text-sm text-gray-700";
-
-                      return (
-                        <tr key={index}>
-                          <td className={cellClass}>
-                            {tanggalHijri && tanggalHijri[index] ? (
-                              <>
-                                {tanggalHijri[index].hijri.month.en},{" "}
-                                {tanggalHijri[index].hijri.date}
-                                <br />
-                                {jadwalHijri[index].tanggal}
-                              </>
-                            ) : (
-                              day.tanggal
-                            )}
-                          </td>
-                          <td className={cellClass}>{day.imsak}</td>
-                          <td className={cellClass}>{day.subuh}</td>
-                          <td className={cellClass}>{day.terbit}</td>
-                          <td className={cellClass}>{day.dhuha}</td>
-                          <td className={cellClass}>{day.dzuhur}</td>
-                          <td className={cellClass}>{day.ashar}</td>
-                          <td className={cellClass}>{day.maghrib}</td>
-                          <td className={cellClass}>{day.isya}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="p-4 text-red-600">Tidak ada data.</p>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -37,55 +37,54 @@ export default function TahlilClient({ initialData }) {
   return (
     <>
       <main>
-        <div className="flex m-0 p-0">
-          <div>
-            <Navbar />
-          </div>
+        <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+          <Navbar />
 
-          {/* Content */}
-          <div className="w-full flex flex-col justify-start items-start m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 rounded-2xl border border-white">
-            {/* Header */}
-            <div className="mb-8">
-              {" "}
-              <Header
-                Title="Tahlil"
-                subtitle="Tahlil dan Terjemahan"
-                Description="Bacaan tahlil lengkap dan terjemahan"
-              ></Header>
-            </div>
+          <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+            <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+              {/* Header */}
+              <div className="mb-8">
+                {" "}
+                <Header
+                  Title="Tahlil"
+                  subtitle="Tahlil dan Terjemahan"
+                  Description="Bacaan tahlil lengkap dan terjemahan"
+                ></Header>
+              </div>
 
-            {/* Render ayat */}
-            <div className="flex flex-col gap-3 lg:gap-5">
-              {dataTahlil.map((ayat, index) => (
-                <div
-                  key={ayat.id || index}
-                  className="flex flex-col bg-white/40 backdrop-blur-md border border-black/10 shadow-xs rounded-xl w-full h-auto p-6 lg:p-8"
-                >
-                  {/* Title */}
-                  {ayat.title && (
+              {/* Render ayat */}
+              <div className="flex flex-col gap-3 lg:gap-5">
+                {dataTahlil.map((ayat, index) => (
+                  <div
+                    key={ayat.id || index}
+                    className="flex flex-col bg-white/40 backdrop-blur-md border border-black/10 shadow-xs rounded-xl w-full h-auto p-6 lg:p-8"
+                  >
+                    {/* Title */}
+                    {ayat.title && (
+                      <div
+                        className={`${openSans.className} text-left text-[16px] text-emerald-700 font-semibold mb-3`}
+                      >
+                        {ayat.title}
+                      </div>
+                    )}
+
+                    {/* Arabic Text */}
                     <div
-                      className={`${openSans.className} text-left text-[16px] text-emerald-700 font-semibold mb-3`}
+                      className={`${jakarta.className} text-[30px] lg:text-[34px] leading-[1.8] w-full text-right mt-3 mb-5`}
+                      style={{ direction: "rtl" }}
                     >
-                      {ayat.title}
+                      {ayat.arabic}
                     </div>
-                  )}
 
-                  {/* Arabic Text */}
-                  <div
-                    className={`${jakarta.className} text-[30px] lg:text-[34px] leading-[1.8] w-full text-right mt-3 mb-5`}
-                    style={{ direction: "rtl" }}
-                  >
-                    {ayat.arabic}
+                    {/* Translation */}
+                    <div
+                      className={`${jakarta.className} text-justify text-[14px] lg:text-[16px] text-[#6c6c6c] font-normal`}
+                    >
+                      {ayat.translation}
+                    </div>
                   </div>
-
-                  {/* Translation */}
-                  <div
-                    className={`${jakarta.className} text-justify text-[14px] lg:text-[16px] text-[#6c6c6c] font-normal`}
-                  >
-                    {ayat.translation}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

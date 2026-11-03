@@ -36,58 +36,58 @@ export default function AsmaulhusnaClient({ initialData }) {
   return (
     <>
       <main>
-        <div className="flex m-0 p-0">
-          <div>
-            <Navbar />
-          </div>
+        <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+          <Navbar />
 
-          <div className="min-w-0 flex-1 min-h-screen m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 backdrop-blur-md lg:my-4 lg:mr-4 border border-white rounded-xl lg:rounded-2xl">
-            <Header
-              Title="Asmaul Husna"
-              subtitle="99 nama terbaik milik Allah"
-              Description="Asmaul Husna dan Terjemahan"
-            >
-              <div className="mt-8">
-                <Search
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            </Header>
+          <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+            <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+              <Header
+                Title="Asmaul Husna"
+                subtitle="99 nama terbaik milik Allah"
+                Description="Asmaul Husna dan Terjemahan"
+              >
+                <div className="mt-8">
+                  <Search
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </Header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 mt-4">
-              {filteredAsmaul.map((asmaul) => (
-                <div key={asmaul.id} className="h-full">
-                  <div className="flex h-full w-full items-stretch gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
-                    {/* Nomor: selalu di atas */}
-                    <div className="self-start flex justify-center items-center border border-emerald-600 leading-none rounded-full shrink-0 w-6 h-6">
-                      <span
-                        className={`${jakarta.className} text-[12px] font-medium text-emerald-700`}
-                      >
-                        {asmaul.id}
-                      </span>
-                    </div>
-
-                    {/* Teks: setinggi kartu, isi di tengah */}
-                    <div
-                      className={`${jakarta.className} flex gap-2 justify-between items-center text-center leading-[1.3] flex-1 `}
-                    >
-                      <div className="flex flex-col items-start text-left">
-                        <span className="font-semibold text-sm text-emerald-700">
-                          {asmaul.latin}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-4">
+                {filteredAsmaul.map((asmaul) => (
+                  <div key={asmaul.id} className="h-full">
+                    <div className="flex h-full w-full items-stretch gap-4 rounded-xl border border-black/10 shadow-xs bg-white/40 backdrop-blur-md p-4 transition-all duration-200 hover:border-emerald-600 hover:bg-emerald-100/40 hover:shadow-sm cursor-pointer">
+                      {/* Nomor: selalu di atas */}
+                      <div className="self-start flex justify-center items-center border border-emerald-600 leading-none rounded-full shrink-0 w-6 h-6">
+                        <span
+                          className={`${jakarta.className} text-[12px] font-medium text-emerald-700`}
+                        >
+                          {asmaul.id}
                         </span>
-                        <p className="font-medium text-[12px] text-[#6c6c6c]">
-                          {asmaul.indo}
-                        </p>
                       </div>
 
-                      <span className="font-semibold text-[20px] md:text-[27px] text-emerald-700">
-                        {asmaul.arab}
-                      </span>
+                      {/* Teks: setinggi kartu, isi di tengah */}
+                      <div
+                        className={`${jakarta.className} flex gap-2 justify-between items-center text-center leading-[1.3] flex-1 `}
+                      >
+                        <div className="flex flex-col items-start text-left">
+                          <span className="font-semibold text-sm text-emerald-700">
+                            {asmaul.latin}
+                          </span>
+                          <p className="font-medium text-[12px] text-[#6c6c6c]">
+                            {asmaul.indo}
+                          </p>
+                        </div>
+
+                        <span className="font-semibold text-[20px] md:text-[27px] text-emerald-700">
+                          {asmaul.arab}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

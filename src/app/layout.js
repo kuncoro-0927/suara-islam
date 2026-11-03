@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body
-        className={`${geistSans.variable} ${jakarta.variable} ${openSans.variable} antialiased`}
+        className={`${geistSans.variable} ${jakarta.variable} ${openSans.variable} antialiased mx-auto w-full max-w-[1280px]`}
       >
         <a
           href="#main-content"

@@ -83,7 +83,7 @@ export default function HijriMonthPopup({
             <button
               key={month.value}
               onClick={() => handleMonthClick(month.value)}
-              className={`${jakarta.className} p-3 rounded-[8px] border border-gray-300 hover:bg-emerald-700 hover:text-white transition-colors text-[14px] font-medium ${
+              className={`${jakarta.className} p-3 rounded-[8px] border border-gray-300 hover:bg-emerald-800 hover:text-white transition-colors text-[14px] font-medium ${
                 currentMonth === month.value && currentYear === selectedYear
                   ? "bg-emerald-700 text-white"
                   : "bg-white text-gray-700"

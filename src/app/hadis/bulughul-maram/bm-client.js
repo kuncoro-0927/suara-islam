@@ -227,144 +227,149 @@ export default function HadisBulughulMaram() {
   return (
     <>
       <main>
-        <div className="flex m-0 p-0">
-          <div>
-            <Navbar />
-          </div>
-          <div className="min-w-0 flex-1 min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
-            <Header
-              subtitle="Pondasi ajaran Islam"
-              Title="Bulughul Maram"
-              Description="Koleksi lengkap hadis Bulughul Maram"
-            >
-              <div className="mt-8">
-                <EnhancedSearch
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onSearch={handleSearch}
-                />
-              </div>
-            </Header>
+        <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+          <Navbar />
 
-            {/* Back Button */}
-            <div className=" w-fit my-6 mt-8">
-              <Link href="/hadis" className="">
-                <button
-                  className="s duration-200 
+          <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+            <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+              <Header
+                subtitle="Pondasi ajaran Islam"
+                Title="Bulughul Maram"
+                Description="Koleksi lengkap hadis Bulughul Maram"
+              >
+                <div className="mt-8">
+                  <EnhancedSearch
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onSearch={handleSearch}
+                  />
+                </div>
+              </Header>
+
+              {/* Back Button */}
+              <div className=" w-fit my-6 mt-8">
+                <Link href="/hadis" className="">
+                  <button
+                    className="s duration-200 
                           flex items-center gap-1 
                           text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
-                >
-                  <IoIosArrowRoundBack className="text-xl" />
-                  Kembali ke Hadis
-                </button>
-              </Link>
-            </div>
-
-            {/* Error Display */}
-            {error && (
-              <div className="mx-5 mb-3 ">
-                <p className="text-red-700 text-center text-sm mb-3">{error}</p>
-                <div className="text-center">
-                  <button
-                    onClick={handleRetry}
-                    className="px-4 py-2.5 text-sm leading-none bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
                   >
-                    Coba Lagi
+                    <IoIosArrowRoundBack className="text-xl" />
+                    Kembali ke Hadis
                   </button>
-                </div>
+                </Link>
               </div>
-            )}
 
-            {/* Loading */}
-            {loading && (
-              <div className="flex justify-center items-center mt-10 py-10">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
-                  <p className="mt-3 text-gray-600">
-                    Memuat hadis Bulughul Maram...
+              {/* Error Display */}
+              {error && (
+                <div className="mx-5 mb-3 ">
+                  <p className="text-red-700 text-center text-sm mb-3">
+                    {error}
                   </p>
-                </div>
-              </div>
-            )}
-
-            {/* Hadis List */}
-            {!loading && !error && (
-              <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5">
-                  {hadisList.length > 0 ? (
-                    hadisList.map((hadis, index) => (
-                      <HadisCard
-                        key={`bm-${hadis.no}-${index}`}
-                        hadis={hadis}
-                        index={index}
-                        fromPath="/hadis/bulughul-maram"
-                      />
-                    ))
-                  ) : (
-                    <div className="col-span-full text-center py-10">
-                      <p className="text-gray-600">Tidak ada hadis ditemukan</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2 my-6 mt-12 px-4">
-                    {/* Previous Button */}
+                  <div className="text-center">
                     <button
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
-                        currentPage === 1
-                          ? "text-gray-500 cursor-not-allowed"
-                          : "text-emerald-700 cursor-pointer"
-                      }`}
+                      onClick={handleRetry}
+                      className="px-4 py-2.5 text-sm leading-none bg-red-500 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
                     >
-                      <IoIosArrowBack
-                        size={12}
-                        className="shrink-0 translate-y-[1.5px]"
-                      />
-                      <span>Prev</span>
-                    </button>
-
-                    {/* Page Numbers */}
-                    {generatePageNumbers().map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
-                          page === currentPage
-                            ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
-                            : "text-[#6c6c6c] hover:bg-emerald-700 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
-                        }`}
-                      >
-                        <span className="-translate-y-px">{page}</span>
-                      </button>
-                    ))}
-                    {/* Next Button */}
-                    <button
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                      className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
-                        currentPage === totalPages
-                          ? " text-gray-500 cursor-not-allowed"
-                          : "text-emerald-700 cursor-pointer"
-                      }`}
-                    >
-                      Next
-                      <IoIosArrowForward size={12} />
+                      Coba Lagi
                     </button>
                   </div>
-                )}
-
-                {/* Page Info */}
-                <div className="text-center text-gray-500 text-sm">
-                  Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
-                  {hadisList.length} hadis dari total {totalHadis} hadis
                 </div>
-              </>
-            )}
+              )}
+
+              {/* Loading */}
+              {loading && (
+                <div className="flex justify-center items-center mt-10 py-10">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
+                    <p className="mt-3 text-gray-600">
+                      Memuat hadis Bulughul Maram...
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Hadis List */}
+              {!loading && !error && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5">
+                    {hadisList.length > 0 ? (
+                      hadisList.map((hadis, index) => (
+                        <HadisCard
+                          key={`bm-${hadis.no}-${index}`}
+                          hadis={hadis}
+                          index={index}
+                          fromPath="/hadis/bulughul-maram"
+                        />
+                      ))
+                    ) : (
+                      <div className="col-span-full text-center py-10">
+                        <p className="text-gray-600">
+                          Tidak ada hadis ditemukan
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-2 my-6 mt-12 px-4">
+                      {/* Previous Button */}
+                      <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`rounded-md mr-3 lg:mr-6 text-sm leading-none inline-flex items-center justify-center gap-1 ${
+                          currentPage === 1
+                            ? "text-gray-500 cursor-not-allowed"
+                            : "text-emerald-700 cursor-pointer"
+                        }`}
+                      >
+                        <IoIosArrowBack
+                          size={12}
+                          className="shrink-0 translate-y-[1.5px]"
+                        />
+                        <span>Prev</span>
+                      </button>
+
+                      {/* Page Numbers */}
+                      {generatePageNumbers().map((page) => (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`h-8 w-8 shrink-0 mx-0.5 leading-none flex items-center justify-center text-sm rounded-full transition-all cursor-pointer ${
+                            page === currentPage
+                              ? "bg-emerald-700 text-white ring-4 ring-emerald-100/70"
+                              : "text-[#6c6c6c] hover:bg-emerald-800 hover:text-white hover:ring-4 hover:ring-emerald-100/70"
+                          }`}
+                        >
+                          <span className="-translate-y-px">{page}</span>
+                        </button>
+                      ))}
+                      {/* Next Button */}
+                      <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`ml-3 lg:ml-6 rounded-md text-sm flex items-center gap-1 ${
+                          currentPage === totalPages
+                            ? " text-gray-500 cursor-not-allowed"
+                            : "text-emerald-700 cursor-pointer"
+                        }`}
+                      >
+                        Next
+                        <IoIosArrowForward size={12} />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Page Info */}
+                  <div className="text-center text-gray-500 text-sm">
+                    Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
+                    {hadisList.length} hadis dari total {totalHadis} hadis
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </main>

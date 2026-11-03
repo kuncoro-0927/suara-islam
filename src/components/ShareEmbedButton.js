@@ -51,7 +51,7 @@ export default function ShareEmbedButton({
         aria-label="Bagikan halaman ini"
       >
         <PiShareNetwork size={14} />
-        <span className="hidden text-xs font-medium md:inline">Bagikan</span>
+        <span className="hidden text-xs font-medium sm:inline">Bagikan</span>
       </button>
 
       {/* Modal */}
@@ -110,7 +110,7 @@ export default function ShareEmbedButton({
                       className={`flex shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg px-4 py-2 text-xs font-medium text-white transition-colors ${
                         copiedLink
                           ? "bg-emerald-700"
-                          : "bg-emerald-700 hover:bg-emerald-700"
+                          : "bg-emerald-700 hover:bg-emerald-800"
                       }`}
                     >
                       {copiedLink ? (
@@ -144,7 +144,7 @@ export default function ShareEmbedButton({
                       className={`absolute right-2 top-2 cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
                         copiedEmbed
                           ? "border border-transparent bg-emerald-700 text-white"
-                          : "border border-gray-300 bg-white text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-700 hover:text-white"
+                          : "border border-gray-300 bg-white text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-800 hover:text-white"
                       }`}
                     >
                       {copiedEmbed ? (

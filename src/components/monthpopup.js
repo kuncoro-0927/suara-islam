@@ -127,7 +127,7 @@ export default function MonthPopup({
                   className={`cursor-pointer rounded-[8px] border px-3 py-2.5 text-[14px] transition-colors ${
                     isActive
                       ? "border-emerald-600 bg-emerald-700 text-white"
-                      : "border-gray-300 bg-white text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-700 hover:text-white"
+                      : "border-gray-300 bg-white text-[#6c6c6c] hover:border-emerald-600 hover:bg-emerald-800 hover:text-white"
                   }`}
                 >
                   {month.label}

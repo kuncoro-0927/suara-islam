@@ -164,173 +164,176 @@ export default function HadisArbain() {
   return (
     <>
       <main>
-        <div className={`${jakarta.className} flex m-0 p-0`}>
-          <div>
-            <Navbar />
-          </div>
-          <div className="w-full min-h-screen m-2 mt-[90px] lg:m-0 p-4 lg:p-10 bg-white/40 backdrop-blur-md rounded-xl lg:rounded-2xl lg:my-4 lg:mr-4 border border-white">
-            <Header
-              Title="Hadis Arbain"
-              subtitle="Pondasi ajaran Islam"
-              Description="Koleksi 42 Hadis Arbain Nawawi"
-            >
-              <div className="mt-8">
-                <Search
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            </Header>
+        <div
+          className={`${jakarta.className} flex m-0 p-0 lg:h-dvh lg:overflow-hidden`}
+        >
+          <Navbar />
 
-            {/* Back Button */}
-            <div className=" w-fit mt-8">
-              <Link href="/hadis" className="">
-                <button
-                  className="s duration-200 
+          <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+            <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+              <Header
+                Title="Hadis Arbain"
+                subtitle="Pondasi ajaran Islam"
+                Description="Koleksi 42 Hadis Arbain Nawawi"
+              >
+                <div className="mt-8">
+                  <Search
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </Header>
+
+              {/* Back Button */}
+              <div className=" w-fit mt-8">
+                <Link href="/hadis" className="">
+                  <button
+                    className="s duration-200 
                           flex items-center gap-1 
                           text-xs sm:text-sm font-medium text-[#6c6c6c] hover:text-emerald-700 cursor-pointer
                           "
-                >
-                  <IoIosArrowRoundBack className="text-xl" />
-                  Kembali ke Hadis
-                </button>
-              </Link>
-            </div>
-
-            {/* Search Results Info */}
-            {searchQuery && !loading && !error && (
-              <div className="mt-8">
-                <p className="text-sm text-[#6c6c6c]">
-                  {filteredCount > 0
-                    ? `Ditemukan ${filteredCount} hadis untuk pencarian "${searchQuery}"`
-                    : `Tidak ada hadis ditemukan untuk pencarian "${searchQuery}"`}
-                </p>
-              </div>
-            )}
-
-            {/* Error Display */}
-            {error && (
-              <div className="mx-5 mb-3 p-4 bg-red-50 border border-red-200 rounded-lg md:ml-5">
-                <p className="text-red-700 text-center mb-3">{error}</p>
-                <div className="text-center">
-                  <button
-                    onClick={handleRetry}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                   >
-                    Coba Lagi
+                    <IoIosArrowRoundBack className="text-xl" />
+                    Kembali ke Hadis
                   </button>
-                </div>
+                </Link>
               </div>
-            )}
 
-            {/* Loading */}
-            {loading && (
-              <div className="flex justify-center items-center mt-10 py-10">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
-                  <p className="mt-3 text-gray-600">Memuat hadis Arbain...</p>
+              {/* Search Results Info */}
+              {searchQuery && !loading && !error && (
+                <div className="mt-8">
+                  <p className="text-sm text-[#6c6c6c]">
+                    {filteredCount > 0
+                      ? `Ditemukan ${filteredCount} hadis untuk pencarian "${searchQuery}"`
+                      : `Tidak ada hadis ditemukan untuk pencarian "${searchQuery}"`}
+                  </p>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Hadis List */}
-            {!loading && !error && (
-              <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5 mb-5">
-                  {hadisList.length > 0 ? (
-                    hadisList.map((hadis, index) => (
-                      <Link
-                        key={`arbain-${hadis.no}-${index}`}
-                        href={`/hadis/${hadis.no}?category=Arbain`}
-                      >
-                        <div className={`${jakarta.className} flex h-full`}>
-                          <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
-                            {hadis.no && (
-                              <p className="text-[12px] text-[#6c6c6c] font-medium">
-                                No. {hadis.no}
-                              </p>
-                            )}
-                            <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
-                              {hadis.judul || `Arbain No.${hadis.no}`}
-                            </h1>
-                          </div>
-                        </div>
-                      </Link>
-                    ))
-                  ) : (
-                    <div className="col-span-full text-center py-10">
-                      <p className="text-gray-600">
-                        {searchQuery ? "" : "Tidak ada hadis ditemukan"}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2 my-8 px-4">
-                    {/* Previous Button */}
+              {/* Error Display */}
+              {error && (
+                <div className="mx-5 mb-3 p-4 bg-red-50 border border-red-200 rounded-lg md:ml-5">
+                  <p className="text-red-700 text-center mb-3">{error}</p>
+                  <div className="text-center">
                     <button
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className={`px-3 py-2 rounded-md flex items-center gap-1 ${
-                        currentPage === 1
-                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-700 text-white hover:bg-emerald-700"
-                      }`}
+                      onClick={handleRetry}
+                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                     >
-                      <FaChevronLeft size={12} />
-                      Prev
-                    </button>
-
-                    {/* Page Numbers */}
-                    {generatePageNumbers().map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={`px-4 py-2 rounded-md font-semibold ${
-                          page === currentPage
-                            ? "bg-emerald-700 text-white"
-                            : "bg-emerald-700 text-white hover:bg-emerald-700"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ))}
-
-                    {/* Next Button */}
-                    <button
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                      className={`px-3 py-2 rounded-md flex items-center gap-1 ${
-                        currentPage === totalPages
-                          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                          : "bg-emerald-700 text-white hover:bg-emerald-700"
-                      }`}
-                    >
-                      Next
-                      <FaChevronRight size={12} />
+                      Coba Lagi
                     </button>
                   </div>
-                )}
-
-                {/* Page Info */}
-                <div className="text-center text-gray-500 text-sm mt-12">
-                  {searchQuery ? (
-                    <>
-                      Menampilkan hasil pencarian: {hadisList.length} dari{" "}
-                      {filteredCount} hadis
-                    </>
-                  ) : (
-                    <>
-                      Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
-                      {hadisList.length} hadis - Hadis Arbain Nawawi (Total: 42
-                      hadis)
-                    </>
-                  )}
                 </div>
-              </>
-            )}
+              )}
+
+              {/* Loading */}
+              {loading && (
+                <div className="flex justify-center items-center mt-10 py-10">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
+                    <p className="mt-3 text-gray-600">Memuat hadis Arbain...</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Hadis List */}
+              {!loading && !error && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5 mt-5 mb-5">
+                    {hadisList.length > 0 ? (
+                      hadisList.map((hadis, index) => (
+                        <Link
+                          key={`arbain-${hadis.no}-${index}`}
+                          href={`/hadis/${hadis.no}?category=Arbain`}
+                        >
+                          <div className={`${jakarta.className} flex h-full`}>
+                            <div className="flex flex-col gap-1 text-left justify-start items-start w-full h-full px-4 py-3 border border-black/10 bg-white/40 backdrop-blur-md shadow-xs rounded-xl hover:shadow-sm hover:bg-emerald-100/40 hover:border-emerald-600 transition-all duration-200">
+                              {hadis.no && (
+                                <p className="text-[12px] text-[#6c6c6c] font-medium">
+                                  No. {hadis.no}
+                                </p>
+                              )}
+                              <h1 className="font-semibold text-[14px] text-emerald-700 line-clamp-2">
+                                {hadis.judul || `Arbain No.${hadis.no}`}
+                              </h1>
+                            </div>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="col-span-full text-center py-10">
+                        <p className="text-gray-600">
+                          {searchQuery ? "" : "Tidak ada hadis ditemukan"}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-2 my-8 px-4">
+                      {/* Previous Button */}
+                      <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`px-3 py-2 rounded-md flex items-center gap-1 ${
+                          currentPage === 1
+                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                            : "bg-emerald-700 text-white hover:bg-emerald-800"
+                        }`}
+                      >
+                        <FaChevronLeft size={12} />
+                        Prev
+                      </button>
+
+                      {/* Page Numbers */}
+                      {generatePageNumbers().map((page) => (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`px-4 py-2 rounded-md font-semibold ${
+                            page === currentPage
+                              ? "bg-emerald-700 text-white"
+                              : "bg-emerald-700 text-white hover:bg-emerald-800"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      ))}
+
+                      {/* Next Button */}
+                      <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`px-3 py-2 rounded-md flex items-center gap-1 ${
+                          currentPage === totalPages
+                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                            : "bg-emerald-700 text-white hover:bg-emerald-800"
+                        }`}
+                      >
+                        Next
+                        <FaChevronRight size={12} />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Page Info */}
+                  <div className="text-center text-gray-500 text-sm mt-12">
+                    {searchQuery ? (
+                      <>
+                        Menampilkan hasil pencarian: {hadisList.length} dari{" "}
+                        {filteredCount} hadis
+                      </>
+                    ) : (
+                      <>
+                        Halaman {currentPage} dari {totalPages} | Menampilkan:{" "}
+                        {hadisList.length} hadis - Hadis Arbain Nawawi (Total:
+                        42 hadis)
+                      </>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </main>

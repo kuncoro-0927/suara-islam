@@ -145,8 +145,8 @@ export default function FloatingPlayer({
       className={` ${jakarta.className} fixed bottom-4 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 items-center gap-4 rounded-2xl border border-emerald-600/20 bg-white/40 backdrop-blur-md px-6 py-3 shadow-lg`}
     >
       {/* kiri: info + kontrol + progress (mengisi sisa lebar) */}
-      <div className="flex min-w-0 flex-1 items-center gap-4">
-        <div className="w-32 shrink-0">
+      <div className="flex min-w-0 flex-1 justify-center items-center gap-4">
+        <div className=" md:w-28 lg::w-32 shrink-0">
           <p className="truncate text-base font-semibold text-emerald-700 leading-tight mb-1">
             {surahName}
           </p>
@@ -170,7 +170,7 @@ export default function FloatingPlayer({
           <button
             onClick={onToggle}
             aria-label={isPlaying ? "Jeda" : "Putar"}
-            className="rounded-full bg-emerald-700 p-2.5 text-white hover:bg-emerald-700 cursor-pointer"
+            className="rounded-full bg-emerald-700 p-2.5 text-white hover:bg-emerald-800 cursor-pointer"
           >
             {isPlaying ? (
               <TbPlayerPauseFilled size={18} />
@@ -190,7 +190,7 @@ export default function FloatingPlayer({
         </div>
 
         {/* progress: ambil semua sisa lebar */}
-        <div className="flex min-w-0 flex-1 items-center gap-2">
+        <div className="sm:flex hidden min-w-0 flex-1 items-center gap-2">
           <span className="w-9 shrink-0 text-right text-[11px] tabular-nums text-gray-500">
             {formatTime(time)}
           </span>
@@ -217,7 +217,7 @@ export default function FloatingPlayer({
 
       {/* kanan: skip 10 detik, volume, tutup (lebar tetap) */}
       <div className="flex shrink-0 items-center gap-1  text-emerald-700">
-        <div className="flex items-center gap-1">
+        <div className="hidden sm:flex items-center gap-1">
           <button
             onClick={() => skip(-SKIP_SECONDS)}
             aria-label={`Mundur ${SKIP_SECONDS} detik`}
@@ -251,7 +251,7 @@ export default function FloatingPlayer({
           style={{
             background: `linear-gradient(to right, #059669 ${volumePercent}%, #d1fae5 ${volumePercent}%)`,
           }}
-          className="hidden h-1 w-20 cursor-pointer appearance-none rounded-full outline-none sm:block
+          className="hidden h-1 w-20 cursor-pointer appearance-none rounded-full outline-none md:block
         [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-700
         [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-emerald-700"
         />

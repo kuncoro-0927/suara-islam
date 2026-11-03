@@ -260,269 +260,280 @@ export default function SurahClient({
 
   return (
     <main className="min-h-screen">
-      <div className="flex">
+      <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
         <Navbar />
-        <div className="flex-1 m-2 lg:m-0 p-4 mt-[90px]  lg:p-10 min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white/40 backdrop-blur-md border border-white lg:my-4 lg:mr-4 rounded-xl lg:rounded-2xl">
-          {/* Error Display */}
-          {error && (
-            <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
-              <p className="text-red-700 text-center mb-3">{error}</p>
-              <div className="text-center">
-                <button
-                  onClick={handleRetry}
-                  className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                  aria-label="Coba muat ulang ayat"
-                >
-                  Coba Lagi
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Header */}
-          <div className="flex justify-center items-center flex-col w-full rounded-2xl mb-4">
-            <div className=" w-full flex justify-between items-center">
-              <Link href="/alquran" aria-label="Kembali ke daftar surah">
-                <div
-                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
-                >
-                  <IoIosArrowRoundBack
-                    size={22}
-                    className="group-hover:scale-110 duration-200"
-                  />
-                  <span className="text-[12px] md:text-[14px]">Kembali</span>
-                </div>
-              </Link>
-
-              <Link
-                href={`/alquran/${
-                  suratDetail.number < 114
-                    ? parseInt(suratDetail.number) + 1
-                    : 114
-                }`}
-                aria-label="Surah selanjutnya"
-              >
-                <div
-                  className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
-                >
-                  <span className="text-[12px] md:text-[14px]">
-                    Selanjutnya
-                  </span>
-                  <IoIosArrowRoundForward
-                    size={22}
-                    className="group-hover:scale-110 duration-200"
-                  />
-                </div>
-              </Link>
-            </div>
-
-            <div
-              className={`${jakarta.className} flex justify-center text-left items-center flex-col  leading-tight mt-8 w-full`}
-            >
-              <div
-                className={`${jakarta.className} flex justify-center items-center `}
-              >
-                <span className="font-semibold text-[14px] md:text-[14px] leading-tight text-emerald-700">
-                  Surah ke {suratDetail.number}
-                </span>
-              </div>
-
-              <div className="text-[24px] lg:text-[28px] flex items-center gap-2 font-semibold text-emerald-700 mt-6">
-                <span>{suratDetail.name_id}</span> -
-                {/* <span>{suratDetail.translation_id}</span> */}
-                <span className="text-[28px] lg:text-[34px]  leading-none">
-                  {" "}
-                  {suratDetail.name_short}
-                </span>
-              </div>
-
-              <div className="flex items-start gap-6 mt-2 text-sm">
-                <div className="flex flex-col items-center justify-center">
-                  <span className="font-medium text-[rgb(108,108,108)]">
-                    Golongan
-                  </span>
-                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
-                    {suratDetail.revelation_id}
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-center justify-center">
-                  <span className="font-medium text-[#6c6c6c]">Arti surah</span>
-                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
-                    {suratDetail.translation_id}
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-center justify-center">
-                  <span className="font-medium text-[#6c6c6c]">
-                    Jumlah ayat
-                  </span>
-                  <span className="text-emerald-700 font-medium text-base lg:text-lg">
-                    {suratDetail.number_of_verses}
-                  </span>
+        <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+            {/* Error Display */}
+            {error && (
+              <div className="w-full mt-5 p-4 bg-red-50 border border-red-200 rounded-xl">
+                <p className="text-red-700 text-center mb-3">{error}</p>
+                <div className="text-center">
+                  <button
+                    onClick={handleRetry}
+                    className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                    aria-label="Coba muat ulang ayat"
+                  >
+                    Coba Lagi
+                  </button>
                 </div>
               </div>
-              <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
-                <div className="flex flex-col lg:flex-row items-start gap-4">
-                  <div className=" flex items-center gap-3">
-                    <div className="bg-emerald-700 w-fit p-2.5 rounded-full">
-                      <BookOpenLightIcon className="text-white" />
-                    </div>
-                    <span className="flex text-sm md:hidden text-emerald-700 font-medium">
-                      Tafsir Surah {suratDetail.name_id}
-                    </span>
+            )}
+
+            {/* Header */}
+            <div className="flex justify-center items-center flex-col w-full rounded-2xl mb-4">
+              <div className=" w-full flex justify-between items-center">
+                <Link href="/alquran" aria-label="Kembali ke daftar surah">
+                  <div
+                    className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
+                  >
+                    <IoIosArrowRoundBack
+                      size={22}
+                      className="group-hover:scale-110 duration-200"
+                    />
+                    <span className="text-[12px] md:text-[14px]">Kembali</span>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <span className="hidden md:flex text-emerald-700 font-medium">
-                      Tafsir Surah {suratDetail.name_id}
+                </Link>
+
+                <Link
+                  href={`/alquran/${
+                    suratDetail.number < 114
+                      ? parseInt(suratDetail.number) + 1
+                      : 114
+                  }`}
+                  aria-label="Surah selanjutnya"
+                >
+                  <div
+                    className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
+                  >
+                    <span className="text-[12px] md:text-[14px]">
+                      Selanjutnya
                     </span>
-
-                    <p
-                      className={`${openSans.className} font-normal  text-[14px] md:text-[14px] text-emerald-700 leading-relaxed`}
-                    >
-                      {suratDetail.tafsir}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Render ayat */}
-          {suratAyat.map((ayat, index) => {
-            const isActive = audioPlaying === ayat.ayah;
-
-            return (
-              <article
-                id={`ayat-${ayat.ayah}`}
-                key={ayat.ayah || index}
-                className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-2 lg:my-3 p-6 lg:p-8 transition-colors duration-200 ${
-                  isActive
-                    ? "bg-emerald-100/40 backdrop-blur-md border-emerald-600"
-                    : "bg-white/40 backdrop-blur-md border-black/10"
-                }`}
-              >
-                <div className="flex gap-3 items-center">
-                  <div>
-                    <button
-                      onClick={() => handlePlayPause(ayat.ayah)}
-                      aria-label={
-                        isActive
-                          ? `Jeda audio ayat ${ayat.ayah}`
-                          : `Putar audio ayat ${ayat.ayah}`
-                      }
-                      className="p-1 rounded-full bg-emerald-700 hover:ring-5 hover:ring-emerald-50 cursor-pointer transition-colors"
-                    >
-                      {isActive ? (
-                        <TbPlayerPauseFilled size={18} className="text-white" />
-                      ) : (
-                        <TbPlayerPlayFilled size={18} className="text-white" />
-                      )}
-                    </button>
-                    <audio
-                      ref={(el) => (audioRefs.current[ayat.ayah] = el)}
-                      src={audioUrl(surahId, ayat.ayah)}
-                      preload="none"
-                      onEnded={() => handleAudioEnded(ayat.ayah)}
-                      onError={(e) =>
-                        console.error("Audio error:", e.currentTarget.src)
-                      }
+                    <IoIosArrowRoundForward
+                      size={22}
+                      className="group-hover:scale-110 duration-200"
                     />
                   </div>
-                </div>
+                </Link>
+              </div>
 
+              <div
+                className={`${jakarta.className} flex justify-center text-left items-center flex-col  leading-tight mt-8 w-full`}
+              >
                 <div
-                  className={`${jakarta.className} w-full text-right mt-4 text-[30px] md:text-[34px] leading-loose text-gray-800`}
-                  dir="rtl"
-                  lang="ar"
+                  className={`${jakarta.className} flex justify-center items-center `}
                 >
-                  {ayat.arab}
-
-                  <span
-                    className="relative mx-4 inline-flex h-[34px] w-[34px] items-center justify-center align-middle"
-                    aria-label={`Ayat ${ayat.ayah}`}
-                  >
-                    <svg
-                      viewBox="0 0 100 100"
-                      className="absolute inset-0 h-full w-full"
-                      aria-hidden="true"
-                    >
-                      <polygon
-                        points={ayatBadgePoints}
-                        className={`stroke-emerald-700 transition-colors duration-200 ${
-                          isActive ? "fill-emerald-700" : "fill-white"
-                        }`}
-                        strokeWidth="3"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span
-                      className={`${jakarta.className} mt-0.5 relative text-[14px] font-medium leading-none transition-colors duration-200 ${
-                        isActive ? "text-white" : "text-emerald-700"
-                      }`}
-                    >
-                      {toArabicNumber(ayat.ayah)}
-                    </span>
+                  <span className="font-semibold text-[14px] md:text-[14px] leading-tight text-emerald-700">
+                    Surah ke {suratDetail.number}
                   </span>
                 </div>
 
-                <div
-                  className={`${jakarta.className} text-justify flex text-[16px] md:text-[18px] text-emerald-700 font-normal mt-4 italic`}
+                <div className="text-[24px] lg:text-[28px] flex items-center gap-2 font-semibold text-emerald-700 mt-6">
+                  <span>{suratDetail.name_id}</span> -
+                  {/* <span>{suratDetail.translation_id}</span> */}
+                  <span className="text-[28px] lg:text-[34px]  leading-none">
+                    {" "}
+                    {suratDetail.name_short}
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-6 mt-2 text-sm">
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-medium text-[rgb(108,108,108)]">
+                      Golongan
+                    </span>
+                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                      {suratDetail.revelation_id}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-medium text-[#6c6c6c]">
+                      Arti surah
+                    </span>
+                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                      {suratDetail.translation_id}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center">
+                    <span className="font-medium text-[#6c6c6c]">
+                      Jumlah ayat
+                    </span>
+                    <span className="text-emerald-700 font-medium text-base lg:text-lg">
+                      {suratDetail.number_of_verses}
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-emerald-100/40 backdrop-blur-md border border-emerald-600 backdrop-blur-md px-4 py-6 lg:py-8 mt-8 rounded-2xl">
+                  <div className="flex flex-col lg:flex-row items-start gap-4">
+                    <div className=" flex items-center gap-3">
+                      <div className="bg-emerald-700 w-fit p-2.5 rounded-full">
+                        <BookOpenLightIcon className="text-white" />
+                      </div>
+                      <span className="flex text-sm md:hidden text-emerald-700 font-medium">
+                        Tafsir Surah {suratDetail.name_id}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <span className="hidden md:flex text-emerald-700 font-medium">
+                        Tafsir Surah {suratDetail.name_id}
+                      </span>
+
+                      <p
+                        className={`${openSans.className} font-normal  text-[14px] md:text-[14px] text-emerald-700 leading-relaxed`}
+                      >
+                        {suratDetail.tafsir}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Render ayat */}
+            {suratAyat.map((ayat, index) => {
+              const isActive = audioPlaying === ayat.ayah;
+
+              return (
+                <article
+                  id={`ayat-${ayat.ayah}`}
+                  key={ayat.ayah || index}
+                  className={`flex flex-col border shadow-xs rounded-2xl w-full h-auto my-2 lg:my-3 p-6 lg:p-8 transition-colors duration-200 ${
+                    isActive
+                      ? "bg-emerald-100/40 backdrop-blur-md border-emerald-600"
+                      : "bg-white/40 backdrop-blur-md border-black/10"
+                  }`}
                 >
-                  {ayat.latin}
-                </div>
+                  <div className="flex gap-3 items-center">
+                    <div>
+                      <button
+                        onClick={() => handlePlayPause(ayat.ayah)}
+                        aria-label={
+                          isActive
+                            ? `Jeda audio ayat ${ayat.ayah}`
+                            : `Putar audio ayat ${ayat.ayah}`
+                        }
+                        className="p-1 rounded-full bg-emerald-700 hover:ring-5 hover:ring-emerald-50 cursor-pointer transition-colors"
+                      >
+                        {isActive ? (
+                          <TbPlayerPauseFilled
+                            size={18}
+                            className="text-white"
+                          />
+                        ) : (
+                          <TbPlayerPlayFilled
+                            size={18}
+                            className="text-white"
+                          />
+                        )}
+                      </button>
+                      <audio
+                        ref={(el) => (audioRefs.current[ayat.ayah] = el)}
+                        src={audioUrl(surahId, ayat.ayah)}
+                        preload="none"
+                        onEnded={() => handleAudioEnded(ayat.ayah)}
+                        onError={(e) =>
+                          console.error("Audio error:", e.currentTarget.src)
+                        }
+                      />
+                    </div>
+                  </div>
 
-                <div
-                  className={`${jakarta.className} text-justify flex text-[14px] md:text-[16px] text-[#6c6c6c] font-normal mt-3 leading-relaxed`}
-                >
-                  {ayat.text}
-                </div>
-              </article>
-            );
-          })}
+                  <div
+                    className={`${jakarta.className} w-full text-right mt-4 text-[30px] md:text-[34px] leading-loose text-gray-800`}
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    {ayat.arab}
 
-          {currentAyah != null && (
-            <Portal>
-              <FloatingPlayer
-                audio={audioRefs.current[currentAyah]}
-                surahName={suratDetail.name_id}
-                ayah={currentAyah}
-                totalAyah={suratDetail.number_of_verses}
-                isPlaying={audioPlaying === currentAyah}
-                hasPrev={hasPrev}
-                hasNext={hasNext}
-                onToggle={() => handlePlayPause(currentAyah)}
-                onPrev={goPrev}
-                onNext={() => goNext(currentAyah)}
-                onClose={closePlayer}
-              />
-            </Portal>
-          )}
+                    <span
+                      className="relative mx-4 inline-flex h-[34px] w-[34px] items-center justify-center align-middle"
+                      aria-label={`Ayat ${ayat.ayah}`}
+                    >
+                      <svg
+                        viewBox="0 0 100 100"
+                        className="absolute inset-0 h-full w-full"
+                        aria-hidden="true"
+                      >
+                        <polygon
+                          points={ayatBadgePoints}
+                          className={`stroke-emerald-700 transition-colors duration-200 ${
+                            isActive ? "fill-emerald-700" : "fill-white"
+                          }`}
+                          strokeWidth="3"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span
+                        className={`${jakarta.className} mt-0.5 relative text-[14px] font-medium leading-none transition-colors duration-200 ${
+                          isActive ? "text-white" : "text-emerald-700"
+                        }`}
+                      >
+                        {toArabicNumber(ayat.ayah)}
+                      </span>
+                    </span>
+                  </div>
 
-          {/* Infinite Scroll Loader */}
-          {nextStart <= suratDetail.number_of_verses && (
-            <div ref={loaderRef} className="py-10 text-gray-400 text-center">
-              {loadingMore ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-emerald-500 mr-2"></div>
-                  <span>Memuat ayat...</span>
+                  <div
+                    className={`${jakarta.className} text-justify flex text-[16px] md:text-[18px] text-emerald-700 font-normal mt-4 italic`}
+                  >
+                    {ayat.latin}
+                  </div>
+
+                  <div
+                    className={`${jakarta.className} text-justify flex text-[14px] md:text-[16px] text-[#6c6c6c] font-normal mt-3 leading-relaxed`}
+                  >
+                    {ayat.text}
+                  </div>
+                </article>
+              );
+            })}
+
+            {currentAyah != null && (
+              <Portal>
+                <FloatingPlayer
+                  audio={audioRefs.current[currentAyah]}
+                  surahName={suratDetail.name_id}
+                  ayah={currentAyah}
+                  totalAyah={suratDetail.number_of_verses}
+                  isPlaying={audioPlaying === currentAyah}
+                  hasPrev={hasPrev}
+                  hasNext={hasNext}
+                  onToggle={() => handlePlayPause(currentAyah)}
+                  onPrev={goPrev}
+                  onNext={() => goNext(currentAyah)}
+                  onClose={closePlayer}
+                />
+              </Portal>
+            )}
+
+            {/* Infinite Scroll Loader */}
+            {nextStart <= suratDetail.number_of_verses && (
+              <div ref={loaderRef} className="py-10 text-gray-400 text-center">
+                {loadingMore ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-emerald-500 mr-2"></div>
+                    <span>Memuat ayat...</span>
+                  </div>
+                ) : (
+                  <span>Scroll untuk memuat lebih banyak ayat...</span>
+                )}
+              </div>
+            )}
+
+            {/* End Message */}
+            {nextStart > suratDetail.number_of_verses &&
+              suratAyat.length > 0 && (
+                <div className="py-10 text-[#6c6c6c] text-center">
+                  <p className="text-sm">— Selesai —</p>
+                  <p className="text-sm mt-2">
+                    Surah {suratDetail.name_id} ({suratDetail.number_of_verses}{" "}
+                    Ayat)
+                  </p>
                 </div>
-              ) : (
-                <span>Scroll untuk memuat lebih banyak ayat...</span>
               )}
-            </div>
-          )}
-
-          {/* End Message */}
-          {nextStart > suratDetail.number_of_verses && suratAyat.length > 0 && (
-            <div className="py-10 text-[#6c6c6c] text-center">
-              <p className="text-sm">— Selesai —</p>
-              <p className="text-sm mt-2">
-                Surah {suratDetail.name_id} ({suratDetail.number_of_verses}{" "}
-                Ayat)
-              </p>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </main>

@@ -32,7 +32,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
               </p>
               <Link
                 href="/doaharian"
-                className="px-4 py-2 bg-emerald-700 text-white rounded-lg text-[14px] hover:bg-emerald-700 transition-colors"
+                className="px-4 py-2 bg-emerald-700 text-white rounded-lg text-[14px] hover:bg-emerald-800 transition-colors"
               >
                 Kembali ke Doa Harian
               </Link>
@@ -45,92 +45,92 @@ export default function DoaContent({ initialData: doa, doaId }) {
 
   return (
     <main id="main-content">
-      <div className="flex m-0 p-0">
-        <div>
-          <Navbar />
-        </div>
+      <div className="flex m-0 p-0 lg:h-dvh lg:overflow-hidden">
+        <Navbar />
 
-        <div className="min-w-0 flex-1 min-h-screen flex flex-col justify-start items-center m-2 lg:m-0 mt-[90px] p-4 lg:p-10 bg-white/40 rounded-xl lg:rounded-2xl backdrop-blur-md border border-white lg:my-4 lg:mr-4">
-          <div className="flex w-full justify-center items-center flex-col ">
-            {/* Header Navigasi */}
+        <div className="min-w-0 flex-1 lg:h-dvh lg:overflow-y-auto lg:overscroll-contain no-scrollbar lg:py-4 lg:pr-4">
+          <div className="m-2 mt-[90px] sm:mx-4 sm:mb-4 lg:m-0 lg:min-h-[calc(100dvh-2rem)] min-h-screen rounded-xl border border-white bg-white/40 p-4 backdrop-blur-md lg:rounded-2xl lg:p-6">
+            <div className="flex w-full justify-center items-center flex-col ">
+              {/* Header Navigasi */}
 
-            <nav
-              className="flex w-full items-center justify-between"
-              aria-label="Navigasi doa"
-            >
-              {/* Kembali */}
-              <Link
-                href="/doaharian"
-                aria-label="Kembali ke daftar doa"
-                className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
+              <nav
+                className="flex w-full items-center justify-between"
+                aria-label="Navigasi doa"
               >
-                <IoIosArrowRoundBack
-                  size={22}
-                  className="duration-200 group-hover:scale-110"
-                  aria-hidden="true"
-                />
-                <span className="text-[12px] md:text-[14px]">Kembali</span>
-              </Link>
-
-              {/* Selanjutnya */}
-              {canGoNext ? (
+                {/* Kembali */}
                 <Link
-                  href={`/doaharian/${currentId + 1}`}
-                  aria-label={`Doa selanjutnya, No.${currentId + 1}`}
+                  href="/doaharian"
+                  aria-label="Kembali ke daftar doa"
                   className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
                 >
-                  <span className="text-[12px] md:text-[14px]">
-                    Selanjutnya
-                  </span>
-                  <IoIosArrowRoundForward
+                  <IoIosArrowRoundBack
                     size={22}
                     className="duration-200 group-hover:scale-110"
                     aria-hidden="true"
                   />
+                  <span className="text-[12px] md:text-[14px]">Kembali</span>
                 </Link>
-              ) : (
-                <span
-                  aria-disabled="true"
-                  className={`${jakarta.className} flex cursor-not-allowed items-center justify-center gap-1 font-medium text-[#6c6c6c] opacity-50`}
-                >
-                  <span className="text-[12px] md:text-[14px]">
-                    Selanjutnya
+
+                {/* Selanjutnya */}
+                {canGoNext ? (
+                  <Link
+                    href={`/doaharian/${currentId + 1}`}
+                    aria-label={`Doa selanjutnya, No.${currentId + 1}`}
+                    className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
+                  >
+                    <span className="text-[12px] md:text-[14px]">
+                      Selanjutnya
+                    </span>
+                    <IoIosArrowRoundForward
+                      size={22}
+                      className="duration-200 group-hover:scale-110"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                ) : (
+                  <span
+                    aria-disabled="true"
+                    className={`${jakarta.className} flex cursor-not-allowed items-center justify-center gap-1 font-medium text-[#6c6c6c] opacity-50`}
+                  >
+                    <span className="text-[12px] md:text-[14px]">
+                      Selanjutnya
+                    </span>
+                    <IoIosArrowRoundForward size={22} aria-hidden="true" />
                   </span>
-                  <IoIosArrowRoundForward size={22} aria-hidden="true" />
+                )}
+              </nav>
+
+              {/* Konten Doa */}
+              <div className="flex w-full justify-center items-center flex-col text-center my-12 ">
+                <p
+                  className={`${jakarta.className} text-[14px] font-semibold text-emerald-700`}
+                >
+                  Doa Harian No.{currentId}
+                </p>
+                <h1 className="text-emerald-700 text-[24px] lg:text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
+                  {doa.judul}
+                </h1>
+              </div>
+
+              <div
+                className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-6 lg:p-8 border border-black/10 shadow-xs rounded-xl`}
+              >
+                <span className="text-emerald-700 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
+                  {doa.judul}
                 </span>
-              )}
-            </nav>
+                <p
+                  className="text-[30px] lg:text-[34px] mb-4 leading-loose text-right w-full"
+                  dir="rtl"
+                  lang="ar"
+                >
+                  {doa.doa}
+                </p>
 
-            {/* Konten Doa */}
-            <div className="flex w-full justify-center items-center flex-col text-center my-12 ">
-              <p
-                className={`${jakarta.className} text-[14px] font-semibold text-emerald-700`}
-              >
-                Doa Harian No.{currentId}
-              </p>
-              <h1 className="text-emerald-700 text-[24px] lg:text-[28px] font-semibold w-full h-auto mt-2 leading-tight">
-                {doa.judul}
-              </h1>
-            </div>
-
-            <div
-              className={`${jakarta.className} w-full flex flex-col justify-center items-start h-auto bg-white/40 backdrop-blur-md p-6 lg:p-8 border border-black/10 shadow-xs rounded-xl`}
-            >
-              <span className="text-emerald-700 text-[16px] font-semibold w-full h-auto mb-4 leading-tight">
-                {doa.judul}
-              </span>
-              <p
-                className="text-[30px] lg:text-[34px] mb-4 leading-loose text-right w-full"
-                dir="rtl"
-                lang="ar"
-              >
-                {doa.doa}
-              </p>
-
-              {/* Terjemahan */}
-              <p className="text-[14px] lg:text-[16px] text-[#6c6c6c] leading-relaxed text-justify">
-                {doa.artinya}
-              </p>
+                {/* Terjemahan */}
+                <p className="text-[14px] lg:text-[16px] text-[#6c6c6c] leading-relaxed text-justify">
+                  {doa.artinya}
+                </p>
+              </div>
             </div>
           </div>
         </div>
