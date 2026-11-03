@@ -105,11 +105,11 @@ export default function AlQuranClient({ initialData }) {
                         className={`${jakarta.className} flex justify-between w-full items-center text-left h-auto mx-2`}
                       >
                         <h2 className="text-[14px] font-semibold text-emerald-700">
-                          {surat.name_id}
+                          {surat.name_id} tes
                         </h2>
 
                         <div
-                          className="text-[24px] text-emerald-700"
+                          className="text-[24px] text-emerald-700  "
                           aria-hidden="true"
                         >
                           {surat.name_short}
@@ -118,13 +118,13 @@ export default function AlQuranClient({ initialData }) {
 
                       <div className="flex justify-between w-full">
                         <p
-                          className={`${jakarta.className} text-[12px] font-medium text-[#6c6c6c]`}
+                          className={`${jakarta.className} text-[12px] font-medium leading-none text-[#6c6c6c]`}
                         >
                           {`${surat.translation_id} - ${surat.revelation_id} `}
                         </p>
 
                         <p
-                          className={`${jakarta.className} text-[12px] text-right font-medium text-[#6c6c6c]`}
+                          className={`${jakarta.className} text-[12px] text-right  font-medium text-[#6c6c6c]`}
                         >
                           {`${surat.number_of_verses}`} ayat
                         </p>
