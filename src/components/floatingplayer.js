@@ -146,7 +146,7 @@ export default function FloatingPlayer({
     >
       {/* kiri: info + kontrol + progress (mengisi sisa lebar) */}
       <div className="flex min-w-0 flex-1 justify-center items-center gap-4">
-        <div className=" md:w-28 lg::w-32 shrink-0">
+        <div className=" md:w-28 lg::w-32 mr-auto shrink-0">
           <p className="truncate text-base font-semibold text-emerald-700 leading-tight mb-1">
             {surahName}
           </p>
