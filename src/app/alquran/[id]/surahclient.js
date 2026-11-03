@@ -291,7 +291,7 @@ export default function SurahClient({
                       size={22}
                       className="group-hover:scale-110 duration-200"
                     />
-                    <span className="text-[12px] md:text-[14px]">Kembali</span>
+                    <span className="text-[14px]">Kembali</span>
                   </div>
                 </Link>
 
@@ -306,9 +306,7 @@ export default function SurahClient({
                   <div
                     className={`${jakarta.className} group flex gap-1 justify-center items-center font-medium text-[#6c6c6c] hover:text-emerald-700 duration-200`}
                   >
-                    <span className="text-[12px] md:text-[14px]">
-                      Selanjutnya
-                    </span>
+                    <span className="text-[14px]">Selanjutnya</span>
                     <IoIosArrowRoundForward
                       size={22}
                       className="group-hover:scale-110 duration-200"

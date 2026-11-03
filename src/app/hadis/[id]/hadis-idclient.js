@@ -88,7 +88,7 @@ export default function HadisDetail({ initialHadis, id, category, from }) {
                     size={22}
                     className="group-hover:scale-110 duration-200"
                   />
-                  <span className="text-[12px] md:text-[14px]">Kembali</span>
+                  <span className="text-[14px]">Kembali</span>
                 </button>
 
                 <button

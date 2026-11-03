@@ -68,7 +68,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
                     className="duration-200 group-hover:scale-110"
                     aria-hidden="true"
                   />
-                  <span className="text-[12px] md:text-[14px]">Kembali</span>
+                  <span className="text-[14px]">Kembali</span>
                 </Link>
 
                 {/* Selanjutnya */}
@@ -78,9 +78,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
                     aria-label={`Doa selanjutnya, No.${currentId + 1}`}
                     className={`${jakarta.className} group flex items-center justify-center gap-1 font-medium text-[#6c6c6c] duration-200 hover:text-emerald-700`}
                   >
-                    <span className="text-[12px] md:text-[14px]">
-                      Selanjutnya
-                    </span>
+                    <span className="text-[14px]">Selanjutnya</span>
                     <IoIosArrowRoundForward
                       size={22}
                       className="duration-200 group-hover:scale-110"
@@ -92,9 +90,7 @@ export default function DoaContent({ initialData: doa, doaId }) {
                     aria-disabled="true"
                     className={`${jakarta.className} flex cursor-not-allowed items-center justify-center gap-1 font-medium text-[#6c6c6c] opacity-50`}
                   >
-                    <span className="text-[12px] md:text-[14px]">
-                      Selanjutnya
-                    </span>
+                    <span className="text-[14px]">Selanjutnya</span>
                     <IoIosArrowRoundForward size={22} aria-hidden="true" />
                   </span>
                 )}
