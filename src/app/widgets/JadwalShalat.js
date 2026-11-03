@@ -177,7 +177,7 @@ export default function JadwalSholatCard({
               <div
                 key={item.name}
                 role="listitem"
-                className={`${jakarta.className} relative text-center flex justify-center items-center flex-col font-semibold border p-4 rounded-xl cursor-pointer hover:shadow-xs hover:border-emerald-500 transition-colors ${
+                className={`${jakarta.className} relative text-center flex justify-center items-center flex-col font-semibold border p-4 rounded-xl hover:shadow-xs hover:border-emerald-500 transition-colors ${
                   isNext
                     ? "border-emerald-500 bg-emerald-100/40"
                     : "border-black/10"
@@ -202,11 +202,13 @@ export default function JadwalSholatCard({
                     {item.name}
                   </span>
                 </div>
+
                 <div className="flex flex-1 items-center justify-center py-2">
                   {Icon && <Icon size={38} />}
                 </div>
+
                 <div>
-                  <span className="text-[16px] md:text-[18px] font-bold tabular-nums">
+                  <span className="text-[14px] md:text-[16px] font-semibold text-black tabular-nums">
                     {item.value || "--:--"}
                   </span>
                 </div>
