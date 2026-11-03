@@ -196,9 +196,6 @@ export default function FloatingPlayer({
         sm:flex sm:gap-4
         rounded-2xl border border-emerald-600/20 bg-white/60 px-4 py-3 shadow-lg backdrop-blur-md sm:px-6`}
     >
-      {/* kiri + tengah: info + kontrol utama (+ progress di desktop).
-          Mobile: `contents` -> anak-anaknya jadi item grid (kolom 1 & 2).
-          sm ke atas: kembali jadi flex seperti semula. */}
       <div className="contents sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-center sm:gap-4">
         {/* info surah (kolom 1 di mobile) */}
         <div className="min-w-0 sm:mr-auto sm:shrink-0 md:w-28 lg:w-32">
@@ -250,10 +247,7 @@ export default function FloatingPlayer({
         </div>
       </div>
 
-      {/* kanan: (desktop: skip 10s) + mute + volume + tutup.
-          Mobile: kolom 3, rata kanan */}
       <div className="flex shrink-0 items-center gap-1 justify-self-end text-emerald-700">
-        {/* DESKTOP ONLY - skip 10 detik */}
         <div className="hidden items-center gap-1 sm:flex">
           {replayButton}
           {forwardButton}
@@ -290,7 +284,6 @@ export default function FloatingPlayer({
         </button>
       </div>
 
-      {/* MOBILE ONLY - baris atas: replay 10s | progress | forward 10s */}
       <div className="col-span-3 flex items-center gap-1 text-emerald-700 sm:hidden">
         <div className="flex min-w-0 -translate-x-3.5 flex-1 items-center gap-2">
           {progressSlider}
