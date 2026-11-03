@@ -194,7 +194,7 @@ export default function FloatingPlayer({
       className={`${jakarta.className} fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2
         grid grid-cols-[1fr_auto_1fr] items-center gap-x-2 gap-y-2
         sm:flex sm:gap-4
-        rounded-2xl border border-emerald-600/20 bg-white/40 px-4 py-3 shadow-lg backdrop-blur-md sm:px-6`}
+        rounded-2xl border border-emerald-600/20 bg-white/60 px-4 py-3 shadow-lg backdrop-blur-md sm:px-6`}
     >
       {/* kiri + tengah: info + kontrol utama (+ progress di desktop).
           Mobile: `contents` -> anak-anaknya jadi item grid (kolom 1 & 2).
