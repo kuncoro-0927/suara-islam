@@ -1,6 +1,5 @@
 "use client";
 import { PiBookOpenTextFill, PiBookBookmarkFill } from "react-icons/pi";
-import { useId } from "react";
 
 // Keyframes + aturan animasi. Hanya aktif kalau <svg> punya class "pi-on".
 const ANIM_CSS = `
@@ -22,14 +21,15 @@ const ANIM_CSS = `
 }
 `;
 
-function Base({ size = 56, className = "", animated = true, children }) {
-  const uid = `pi${useId().replace(/:/g, "")}`;
+// `name` unik per jenis ikon -> ID gradient stabil di server & client (tanpa useId)
+function Base({ name, size = 56, className = "", animated = true, children }) {
+  const uid = `pi-${name}`;
   const ids = {
-    sun: `${uid}s`,
-    moon: `${uid}m`,
-    cd: `${uid}d`, // awan tua
-    cm: `${uid}c`, // awan sedang
-    cp: `${uid}p`, // awan terang
+    sun: `${uid}-s`,
+    moon: `${uid}-m`,
+    cd: `${uid}-d`, // awan tua
+    cm: `${uid}-c`, // awan sedang
+    cp: `${uid}-p`, // awan terang
   };
 
   return (
@@ -169,8 +169,9 @@ const Sparkle = ({ cx, cy, s = 4, delay = 0 }) => (
 );
 
 // ---------- delapan ikon ----------
+// `name` ditaruh SETELAH {...p} supaya tidak bisa tertimpa dari luar
 export const IconImsyak = (p) => (
-  <Base {...p}>
+  <Base {...p} name="imsyak">
     {(ids) => (
       <>
         <Moon ids={ids} x={10.8} y={4.8} s={1.6} />
@@ -181,7 +182,7 @@ export const IconImsyak = (p) => (
 );
 
 export const IconSubuh = (p) => (
-  <Base {...p}>
+  <Base {...p} name="subuh">
     {(ids) => (
       <>
         <Sun ids={ids} cx={19} cy={17} r={7.5} r1={11} r2={15} />
@@ -192,7 +193,7 @@ export const IconSubuh = (p) => (
 );
 
 export const IconTerbit = (p) => (
-  <Base {...p}>
+  <Base {...p} name="terbit">
     {(ids) => (
       <>
         <Sun ids={ids} cx={19} cy={17} r={7.5} r1={11} r2={15} />
@@ -203,7 +204,7 @@ export const IconTerbit = (p) => (
 );
 
 export const IconDhuha = (p) => (
-  <Base {...p}>
+  <Base {...p} name="dhuha">
     {(ids) => (
       <>
         <Sun ids={ids} cx={19} cy={17} r={7.5} r1={11} r2={15} />
@@ -214,13 +215,13 @@ export const IconDhuha = (p) => (
 );
 
 export const IconDzuhur = (p) => (
-  <Base {...p}>
+  <Base {...p} name="dzuhur">
     {(ids) => <Sun ids={ids} cx={32} cy={24} r={9} r1={13.5} r2={19} />}
   </Base>
 );
 
 export const IconAsar = (p) => (
-  <Base {...p}>
+  <Base {...p} name="asar">
     {(ids) => (
       <>
         <Cloud x={36} y={8} s={0.6} gid={ids.cp} duration={4} reverse />
@@ -231,7 +232,7 @@ export const IconAsar = (p) => (
 );
 
 export const IconMaghrib = (p) => (
-  <Base {...p}>
+  <Base {...p} name="maghrib">
     {(ids) => (
       <>
         <Moon ids={ids} x={30.8} y={2.8} s={1.1} />
@@ -243,7 +244,7 @@ export const IconMaghrib = (p) => (
 );
 
 export const IconIsya = (p) => (
-  <Base {...p}>
+  <Base {...p} name="isya">
     {(ids) => (
       <>
         <Moon ids={ids} x={30.8} y={2.8} s={1.1} />
